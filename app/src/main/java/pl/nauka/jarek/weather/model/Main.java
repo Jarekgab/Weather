@@ -14,16 +14,16 @@ public class Main {
     private float temp;
     @SerializedName("pressure")
     @Expose
-    private Integer pressure;
+    private float pressure;
     @SerializedName("humidity")
     @Expose
-    private Integer humidity;
+    private float humidity;
     @SerializedName("temp_min")
     @Expose
-    private Integer tempMin;
+    private float tempMin;
     @SerializedName("temp_max")
     @Expose
-    private Integer tempMax;
+    private float tempMax;
 
     /**
      * No args constructor for use in serialization
@@ -41,9 +41,8 @@ public class Main {
      * @param tempMin
      */
 
-    //TODO Zmienić temp na typ float
 
-    public Main(float temp, Integer pressure, Integer humidity, Integer tempMin, Integer tempMax) {
+    public Main(float temp, float pressure, float humidity, float tempMin, float tempMax) {
         super();
         this.temp = temp;
         this.pressure = pressure;
@@ -60,7 +59,7 @@ public class Main {
         this.temp = temp;
     }
 
-    public Integer getPressure() {
+    public float getPressure() {
         return pressure;
     }
 
@@ -68,7 +67,7 @@ public class Main {
         this.pressure = pressure;
     }
 
-    public Integer getHumidity() {
+    public float getHumidity() {
         return humidity;
     }
 
@@ -76,7 +75,7 @@ public class Main {
         this.humidity = humidity;
     }
 
-    public Integer getTempMin() {
+    public float getTempMin() {
         return tempMin;
     }
 
@@ -84,7 +83,7 @@ public class Main {
         this.tempMin = tempMin;
     }
 
-    public Integer getTempMax() {
+    public float getTempMax() {
         return tempMax;
     }
 
