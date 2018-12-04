@@ -11,18 +11,14 @@
     <Button
         android:id="@+id/jsonDataButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="432dp"
+        android:layout_height="48dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="15dp"
-        android:text="Odśwież"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Dodaj"
+        app:layout_constraintBottom_toBottomOf="@+id/et_city_search"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/et_city_search"
+        app:layout_constraintTop_toTopOf="@+id/et_city_search" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -113,5 +109,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_hight_temperature"
         app:layout_constraintTop_toTopOf="@+id/tv_hight_temperature" />
+
+    <EditText
+        android:id="@+id/et_city_search"
+        android:layout_width="215dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="25dp"
+        android:ems="10"
+        android:inputType="textCapSentences"
+        android:text="Poznań"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/jsonDataButton"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import pl.nauka.jarek.weather.common.JSONUtil;
+import pl.nauka.jarek.weather.common.UrlGenerator;
 import pl.nauka.jarek.weather.data.CityWeatherData;
 import pl.nauka.jarek.weather.model.CityWeather;
 
@@ -37,6 +39,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     TextView tvCityWeather;
     TextView tvHightTemperature;
     TextView tvLowTemperature;
+
+    EditText etCitySearch;
+    private String name;
 
 
     @Override
@@ -65,26 +70,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tvCityWeather = findViewById(R.id.tv_city_weather);
         tvHightTemperature = findViewById(R.id.tv_hight_temperature);
         tvLowTemperature = findViewById(R.id.tv_low_temperature);
+        etCitySearch = findViewById(R.id.et_city_search);
 
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.INVISIBLE);
 
         jsonDataButton.setOnClickListener(new View.OnClickListener() {
+
+            private String city;
+
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
+
+                city = etCitySearch.getText().toString();
+                name = UrlGenerator.getUrl(city);
+
                 new MyAsyncTask().execute();      //Czekanie na pobranie i zapisanie danych
             }
 
         });
     }
 
+
+
     private class MyAsyncTask extends AsyncTask<Void, Void, List<CityWeather>> {
 
 
         @Override
         protected List<CityWeather> doInBackground(Void... params) {
-            JSONUtil.getUrlData("http://api.openweathermap.org/data/2.5/weather?q=Pozna%C5%84&units=metric&APPID=4b18af8ae81c911d81a965f0804b7845", context);
+            JSONUtil.getUrlData(name, context);
 
             try {
                 Thread.sleep(500);
@@ -108,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 String icon = result.get(0).getWeather().getIcon();
 
-                switch (icon){
+                switch (icon) {
                     case "01d":
                         tvWeatherIcon.setImageResource(R.drawable.ic_01d);
                         break;
