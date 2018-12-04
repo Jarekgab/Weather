@@ -18,32 +18,28 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="15dp"
-        android:text="Button"
+        android:text="Odśwież"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/resultTextView"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginLeft="52dp"
-        android:layout_marginTop="80dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_weather_icon" />
-
     <ProgressBar
         android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
+        style="@style/Widget.AppCompat.ProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        app:layout_constraintBottom_toBottomOf="@+id/resultTextView"
-        app:layout_constraintStart_toEndOf="@+id/resultTextView"
-        app:layout_constraintTop_toTopOf="@+id/resultTextView" />
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:indeterminateTint="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/tv_weather_icon"
@@ -107,8 +103,8 @@
         android:layout_height="60dp"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
         android:fontFamily="sans-serif-condensed"
         android:gravity="center_vertical"
         android:text="10°C"

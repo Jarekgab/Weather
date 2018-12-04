@@ -13,9 +13,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import java.util.List;
+
 import butterknife.ButterKnife;
 import pl.nauka.jarek.weather.common.JSONUtil;
 import pl.nauka.jarek.weather.data.CityWeatherData;
@@ -23,12 +26,17 @@ import pl.nauka.jarek.weather.model.CityWeather;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    Button jsonDataButton;
 
     Context context;
-    private List<CityWeather> list;
-    private TextView resultTextView;
-    private ProgressBar progressBar;
+    List<CityWeather> list;
+
+    Button jsonDataButton;
+    ProgressBar progressBar;
+    ImageView tvWeatherIcon;
+    TextView tvCityName;
+    TextView tvCityWeather;
+    TextView tvHightTemperature;
+    TextView tvLowTemperature;
 
 
     @Override
@@ -51,18 +59,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         context = this;
 
-        Button jsonDataButton = findViewById(R.id.jsonDataButton);
-        resultTextView = findViewById(R.id.resultTextView);
+        jsonDataButton = findViewById(R.id.jsonDataButton);
+        tvWeatherIcon = findViewById(R.id.tv_weather_icon);
+        tvCityName = findViewById(R.id.tv_city_name);
+        tvCityWeather = findViewById(R.id.tv_city_weather);
+        tvHightTemperature = findViewById(R.id.tv_hight_temperature);
+        tvLowTemperature = findViewById(R.id.tv_low_temperature);
+
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.INVISIBLE);
 
         jsonDataButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resultTextView.setText("");
                 progressBar.setVisibility(View.VISIBLE);
                 new MyAsyncTask().execute();      //Czekanie na pobranie i zapisanie danych
-                }
+            }
 
         });
     }
@@ -94,7 +106,88 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             if (result.size() > 0) {
 
-                resultTextView.setText(result.get(0).getName() + "   " + result.get(0).getMain().getTemp() + " °C");
+                String icon = result.get(0).getWeather().getIcon();
+
+                switch (icon){
+                    case "01d":
+                        tvWeatherIcon.setImageResource(R.drawable.ic_01d);
+                        break;
+
+                    case "01n":
+                        tvWeatherIcon.setImageResource(R.drawable.ic_01n);
+                        break;
+
+                    case "02d":
+                        tvWeatherIcon.setImageResource(R.drawable.ic_02d);
+                        break;
+
+                    case "02n":
+                        tvWeatherIcon.setImageResource(R.drawable.ic_02n);
+                        break;
+
+                    case "03d":
+                        tvWeatherIcon.setImageResource(R.drawable.ic_03d);
+                        break;
+
+                    case "03n":
+                        tvWeatherIcon.setImageResource(R.drawable.ic_03n);
+                        break;
+
+                    case "04d":
+                        tvWeatherIcon.setImageResource(R.drawable.ic_04d);
+                        break;
+
+                    case "04n":
+                        tvWeatherIcon.setImageResource(R.drawable.ic_04n);
+                        break;
+
+                    case "09d":
+                        tvWeatherIcon.setImageResource(R.drawable.ic_09d);
+                        break;
+
+                    case "09n":
+                        tvWeatherIcon.setImageResource(R.drawable.ic_09n);
+                        break;
+
+                    case "10d":
+                        tvWeatherIcon.setImageResource(R.drawable.ic_10d);
+                        break;
+
+                    case "10n":
+                        tvWeatherIcon.setImageResource(R.drawable.ic_10n);
+                        break;
+
+                    case "11d":
+                        tvWeatherIcon.setImageResource(R.drawable.ic_11d);
+                        break;
+
+                    case "11n":
+                        tvWeatherIcon.setImageResource(R.drawable.ic_11n);
+                        break;
+
+                    case "13d":
+                        tvWeatherIcon.setImageResource(R.drawable.ic_13d);
+                        break;
+
+                    case "13n":
+                        tvWeatherIcon.setImageResource(R.drawable.ic_13n);
+                        break;
+
+                    case "50d":
+                        tvWeatherIcon.setImageResource(R.drawable.ic_50d);
+                        break;
+
+                    case "50n":
+                        tvWeatherIcon.setImageResource(R.drawable.ic_50n);
+                        break;
+                }
+
+                tvCityName.setText(result.get(0).getName());
+                tvCityWeather.setText(result.get(0).getWeather().getDescription());
+                tvHightTemperature.setText(String.valueOf(result.get(0).getMain().getTempMax()));
+                tvLowTemperature.setText(String.valueOf(result.get(0).getMain().getTempMin()));
+
+
             }
         }
     }
