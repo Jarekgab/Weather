@@ -1,9 +1,9 @@
 package pl.nauka.jarek.weather.data;
 
-import java.util.ArrayList;
-import java.util.List;
+        import java.util.ArrayList;
+        import java.util.List;
 
-import pl.nauka.jarek.weather.model.CityWeather;
+        import pl.nauka.jarek.weather.model.CityWeather;
 
 public class CityWeatherData {
 

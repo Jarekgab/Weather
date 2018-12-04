@@ -1,7 +1,6 @@
 package pl.nauka.jarek.weather.common;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;

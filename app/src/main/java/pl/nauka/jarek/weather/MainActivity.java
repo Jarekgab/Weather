@@ -1,6 +1,7 @@
 package pl.nauka.jarek.weather;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import java.util.List;
 import butterknife.ButterKnife;
@@ -25,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     Context context;
     private List<CityWeather> list;
+    private TextView resultTextView;
+    private ProgressBar progressBar;
 
 
     @Override
@@ -48,25 +52,51 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         context = this;
 
         Button jsonDataButton = findViewById(R.id.jsonDataButton);
-        final TextView resultTextView = findViewById(R.id.resultTextView);
+        resultTextView = findViewById(R.id.resultTextView);
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.INVISIBLE);
 
         jsonDataButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 resultTextView.setText("");
-
-                JSONUtil.getUrlData("http://api.openweathermap.org/data/2.5/weather?q=Pozna%C5%84&units=metric&APPID=4b18af8ae81c911d81a965f0804b7845", context);
-
-                list = CityWeatherData.getList();
-                    for (int i = 0; i < list.size(); i++) {
-                        resultTextView.append(list.get(i).getName() + "   ");
-                        resultTextView.append(list.get(i).getMain().getTemp() + " °C");
-                    }
-
-
+                progressBar.setVisibility(View.VISIBLE);
+                new MyAsyncTask().execute();      //Czekanie na pobranie i zapisanie danych
                 }
 
         });
+    }
+
+    private class MyAsyncTask extends AsyncTask<Void, Void, List<CityWeather>> {
+
+
+        @Override
+        protected List<CityWeather> doInBackground(Void... params) {
+            JSONUtil.getUrlData("http://api.openweathermap.org/data/2.5/weather?q=Pozna%C5%84&units=metric&APPID=4b18af8ae81c911d81a965f0804b7845", context);
+
+            try {
+                Thread.sleep(500);
+
+                //TODO Watek jest opozniany o 0,5s.
+                // Zmienic, zeby czekal za dodaniem pogody do listy (czas oczekiwania dynamiczny)
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return CityWeatherData.getList();
+        }
+
+        @Override
+        protected void onPostExecute(List<CityWeather> result) {
+
+            super.onPostExecute(result);
+            progressBar.setVisibility(View.INVISIBLE);
+
+            if (result.size() > 0) {
+
+                resultTextView.setText(result.get(0).getName() + "   " + result.get(0).getMain().getTemp() + " °C");
+            }
+        }
     }
 
     @Override
@@ -126,3 +156,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 }
+
