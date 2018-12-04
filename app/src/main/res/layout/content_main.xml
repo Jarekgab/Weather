@@ -14,10 +14,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="432dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginBottom="15dp"
         android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,11 +28,11 @@
         android:id="@+id/resultTextView"
         android:layout_width="100dp"
         android:layout_height="40dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginLeft="52dp"
+        android:layout_marginTop="80dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/jsonDataButton" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_weather_icon" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -42,4 +44,78 @@
         app:layout_constraintBottom_toBottomOf="@+id/resultTextView"
         app:layout_constraintStart_toEndOf="@+id/resultTextView"
         app:layout_constraintTop_toTopOf="@+id/resultTextView" />
+
+    <ImageView
+        android:id="@+id/tv_weather_icon"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_01d" />
+
+    <TextView
+        android:id="@+id/tv_city_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:text="Poznań"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        app:layout_constraintStart_toEndOf="@+id/tv_weather_icon"
+        app:layout_constraintTop_toTopOf="@+id/tv_weather_icon"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/tv_city_weather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="5dp"
+        android:text="Description"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_weather_icon"
+        app:layout_constraintStart_toEndOf="@+id/tv_weather_icon"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/tv_hight_temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="center_vertical"
+        android:text="20°C"
+        android:textColor="@color/primaryText"
+        android:textSize="28dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_weather_icon"
+        app:layout_constraintEnd_toStartOf="@+id/tv_low_temperature"
+        app:layout_constraintStart_toEndOf="@+id/tv_weather_icon"
+        app:layout_constraintTop_toTopOf="@+id/tv_weather_icon" />
+
+    <TextView
+        android:id="@+id/tv_low_temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="center_vertical"
+        android:text="10°C"
+        android:textSize="28dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_hight_temperature"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_hight_temperature"
+        app:layout_constraintTop_toTopOf="@+id/tv_hight_temperature" />
+
 </android.support.constraint.ConstraintLayout>
