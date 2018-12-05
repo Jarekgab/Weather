@@ -10,7 +10,7 @@ public class CityWeatherData {
     static final List<CityWeather> list = new ArrayList<>();
 
     public static void addCityWeather(CityWeather weather){
-        list.clear();
+//        list.clear();
         list.add(weather);
     }
 
