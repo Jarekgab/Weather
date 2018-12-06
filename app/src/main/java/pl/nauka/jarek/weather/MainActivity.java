@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onClick(View v) {
+                progressBar.bringToFront();
                 progressBar.setVisibility(View.VISIBLE);
 
                 city = etCitySearch.getText().toString();
