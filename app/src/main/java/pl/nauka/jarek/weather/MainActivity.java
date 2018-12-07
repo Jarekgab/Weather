@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -30,14 +31,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     Context context;
-    List<CityWeather> list;
 
     Button jsonDataButton;
     ProgressBar progressBar;
     ListView lvList;
 
     EditText etCitySearch;
-    private String name;
+    public String url;
+    public String city;
+    public List<String> cityNameList;
 
 
     @Override
@@ -68,9 +70,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.INVISIBLE);
 
-        jsonDataButton.setOnClickListener(new View.OnClickListener() {
+        cityNameList = new ArrayList<>();
 
-            private String city;
+        jsonDataButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -78,7 +80,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 progressBar.setVisibility(View.VISIBLE);
 
                 city = etCitySearch.getText().toString();
-                name = UrlGenerator.getUrl(city);
+                cityNameList.add(city);                //dodanie do listy z szukanymi nazwami miast
+
+                url = UrlGenerator.getUrl(city);
 
                 new MyAsyncTask().execute();      //Czekanie na pobranie i zapisanie danych
             }
@@ -90,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         @Override
         protected List<CityWeather> doInBackground(Void... params) {
-            JSONUtil.getUrlData(name, context);
+            JSONUtil.getUrlData(url, context);
 
             try {
                 Thread.sleep(500);
@@ -141,6 +145,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_refresh) {
+
+            city = null;
+            CityWeatherData.clearCityWeather();
+
+            for (int i = 0; i <= cityNameList.size()-1; i++) {
+
+
+                try {
+                    Thread.sleep(500);
+//                    progressBar.setVisibility(View.VISIBLE);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                city = cityNameList.get(i);
+                url = UrlGenerator.getUrl(city);
+                new MyAsyncTask().execute();      //Czekanie na pobranie i zapisanie danych
+            }
             return true;
         }
 
