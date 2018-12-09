@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public String url;
     public String city;
     public List<String> cityNameList;
+    private WeatherListAdapter adapter;
 
 
     @Override
@@ -84,27 +85,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 url = UrlGenerator.getUrl(city);
 
-                new MyAsyncTask().execute();      //Czekanie na pobranie i zapisanie danych
+                new MyAsyncTask().execute(url);      //Czekanie na pobranie i zapisanie danych
+
+
             }
         });
     }
 
-    private class MyAsyncTask extends AsyncTask<Void, Void, List<CityWeather>> {
+    private class MyAsyncTask extends AsyncTask<String, Void, List<CityWeather>> {
 
 
         @Override
-        protected List<CityWeather> doInBackground(Void... params) {
-            JSONUtil.getUrlData(url, context);
-
-            try {
-                Thread.sleep(500);
-
-                //TODO Watek jest opozniany o 0,5s.
-                // Zmienic, zeby czekal za dodaniem pogody do listy (czas oczekiwania dynamiczny)
-
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        protected List<CityWeather> doInBackground(String... params) {
+//            for (int i = 0; i < params.length; i++) {
+                JSONUtil.getUrlData(params[0], context);
+//            }
+            //TODO czy to nie powinno być w JSONUtil???
+            //Zwraca  liste ale czy czega za wątkiem, ktory dodaje klase do listy?
             return CityWeatherData.getList();
         }
 
@@ -112,10 +109,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         protected void onPostExecute(List<CityWeather> result) {
 
             super.onPostExecute(result);
-            progressBar.setVisibility(View.INVISIBLE);
 
-            WeatherListAdapter adapter = new WeatherListAdapter(context, result);
+            adapter = new WeatherListAdapter(context, result);
             lvList.setAdapter(adapter);
+            progressBar.setVisibility(View.INVISIBLE);
+//            adapter.notifyDataSetChanged();
         }
     }
 
@@ -152,15 +150,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             for (int i = 0; i <= cityNameList.size()-1; i++) {
 
 
-                try {
-                    Thread.sleep(500);
-//                    progressBar.setVisibility(View.VISIBLE);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    Thread.sleep(500);
+////                    progressBar.setVisibility(View.VISIBLE);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
                 city = cityNameList.get(i);
                 url = UrlGenerator.getUrl(city);
-                new MyAsyncTask().execute();      //Czekanie na pobranie i zapisanie danych
+                new MyAsyncTask().execute(url);      //Czekanie na pobranie i zapisanie danych
             }
             return true;
         }

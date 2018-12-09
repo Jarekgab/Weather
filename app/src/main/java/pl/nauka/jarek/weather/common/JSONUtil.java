@@ -39,6 +39,8 @@ public class JSONUtil {
     private static Integer cod;
     private static CityWeather city;
 
+    //TODO zmienne tymczasowe, przeniesc do getUrlData
+
     private static RequestQueue requestQueue;
 
     public static void getUrlData(String jsonUrl, final Context context){
@@ -91,5 +93,6 @@ public class JSONUtil {
                 }
         );
         requestQueue.add(jar);
+
     }
 }
