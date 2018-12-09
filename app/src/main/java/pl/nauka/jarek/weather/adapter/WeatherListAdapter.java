@@ -63,9 +63,9 @@ public class WeatherListAdapter extends BaseAdapter {
             holder.tvHightTemperature = convertView.findViewById(R.id.tv_hight_temperature);
             holder.tvLowTemperature = convertView.findViewById(R.id.tv_low_temperature);
 
-            CityWeather city_weather_pos = list.get(position);
+            CityWeather cityWeatherPos = list.get(position);
 
-            String icon = city_weather_pos.getWeather().getIcon();
+            String icon = cityWeatherPos.getWeather().getIcon();  //TODO zrobić mape wywolan
 
             switch (icon) {
                 case "01d":
@@ -141,10 +141,10 @@ public class WeatherListAdapter extends BaseAdapter {
                     break;
             }
 
-            holder.tvCityName.setText(city_weather_pos.getName());
-            holder.tvCityWeather.setText(city_weather_pos.getWeather().getDescription());
-            holder.tvHightTemperature.setText(String.valueOf(city_weather_pos.getMain().getTempMax()));
-            holder.tvLowTemperature.setText(String.valueOf(city_weather_pos.getMain().getTempMin()));
+            holder.tvCityName.setText(cityWeatherPos.getName());
+            holder.tvCityWeather.setText(cityWeatherPos.getWeather().getDescription());
+            holder.tvHightTemperature.setText(String.valueOf(cityWeatherPos.getMain().getTempMax()));
+            holder.tvLowTemperature.setText(String.valueOf(cityWeatherPos.getMain().getTempMin()));
 
             convertView.setTag(holder);
         }else {

@@ -14,7 +14,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import pl.nauka.jarek.weather.data.CityWeatherData;
 import pl.nauka.jarek.weather.model.CityWeather;
 import pl.nauka.jarek.weather.model.Clouds;
 import pl.nauka.jarek.weather.model.Coord;
@@ -23,23 +22,7 @@ import pl.nauka.jarek.weather.model.Sys;
 import pl.nauka.jarek.weather.model.Weather;
 import pl.nauka.jarek.weather.model.Wind;
 
-public class JSONUtil {
-
-    private static Clouds clouds;
-    private static Coord coord;
-    private static Main main;
-    private static Sys sys;
-    private static Weather weather;
-    private static Wind wind;
-    private static String base;
-    private static Integer visibility;
-    private static Integer dt;
-    private static Integer id;
-    private static String name;
-    private static Integer cod;
-    private static CityWeather city;
-
-    //TODO zmienne tymczasowe, przeniesc do getUrlData
+public class DataDownloader {
 
     private static RequestQueue requestQueue;
 
@@ -66,29 +49,26 @@ public class JSONUtil {
 
                     JSONObject jsonWind = (JSONObject) response.getJSONObject("wind");
 
-                    base = (String) response.get("base");
-                    visibility = (Integer) response.get("visibility");
-                    dt = (Integer) response.get("dt");
-                    id = (Integer) response.get("id");
-                    name = (String) response.get("name");
-                    cod = (Integer) response.get("cod");
+                    String base = (String) response.get("base");
+                    Integer visibility = (Integer) response.get("visibility");
+                    Integer dt = (Integer) response.get("dt");
+                    Integer id = (Integer) response.get("id");
+                    String name = (String) response.get("name");
+                    Integer cod = (Integer) response.get("cod");
 
                     Gson gson = new Gson();
-                    clouds = gson.fromJson(jsonClouds.toString(), Clouds.class);
-                    coord = gson.fromJson(jsonCoord.toString(), Coord.class);
-                    main = gson.fromJson(jsonMain.toString(), Main.class);
-                    sys = gson.fromJson(jsonSys.toString(), Sys.class);
-                    weather = gson.fromJson(jsonWeather.toString(), Weather.class);
-                    wind = gson.fromJson(jsonWind.toString(), Wind.class);
+                    Clouds clouds = gson.fromJson(jsonClouds.toString(), Clouds.class);
+                    Coord coord = gson.fromJson(jsonCoord.toString(), Coord.class);
+                    Main main = gson.fromJson(jsonMain.toString(), Main.class);
+                    Sys sys = gson.fromJson(jsonSys.toString(), Sys.class);
+                    Weather weather = gson.fromJson(jsonWeather.toString(), Weather.class);
+                    Wind wind = gson.fromJson(jsonWind.toString(), Wind.class);
 
-                    city = new CityWeather(coord, weather, base, main, visibility, wind, clouds, dt, sys, id, name, cod);
-
-//                    CityWeatherData.addCityWeather(city);
+                    CityWeather city = new CityWeather(coord, weather, base, main, visibility, wind, clouds, dt, sys, id, name, cod);
 
                     responseCallback.onSuccess(city);
 
                 } catch (JSONException e) {
-//                    e.printStackTrace();
                     responseCallback.onError(e);
                 }
             }
@@ -101,6 +81,5 @@ public class JSONUtil {
                 }
         );
         requestQueue.add(jar);
-
     }
 }

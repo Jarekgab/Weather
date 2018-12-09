@@ -1,7 +1,6 @@
 package pl.nauka.jarek.weather;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -23,13 +22,12 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import pl.nauka.jarek.weather.adapter.WeatherListAdapter;
-import pl.nauka.jarek.weather.common.JSONUtil;
+import pl.nauka.jarek.weather.common.DataDownloader;
 import pl.nauka.jarek.weather.common.UrlGenerator;
 import pl.nauka.jarek.weather.data.CityWeatherData;
 import pl.nauka.jarek.weather.model.CityWeather;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
 
     Context context;
 
@@ -75,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         cityNameList = new ArrayList<>();
 
         jsonDataButton.setOnClickListener(new View.OnClickListener() {
-//asdaskjdhskjhskjdhf
+
             @Override
             public void onClick(View v) {
                 progressBar.bringToFront();
@@ -86,9 +84,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 url = UrlGenerator.getUrl(city);
 
-                //new MyAsyncTask().execute(url);      //Czekanie na pobranie i zapisanie danych
-
-                JSONUtil.getUrlData(url, context, new JSONUtil.CityWeatherResponseCallback() {
+                DataDownloader.getUrlData(url, context, new DataDownloader.CityWeatherResponseCallback() {
                     @Override
                     public void onSuccess(CityWeather data) {
                         CityWeatherData.addCityWeather(data);
@@ -107,31 +103,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
     }
-
-//    private class MyAsyncTask extends AsyncTask<String, Void, List<CityWeather>> {
-//
-//
-//        @Override
-//        protected List<CityWeather> doInBackground(String... params) {
-////            for (int i = 0; i < params.length; i++) {
-//                JSONUtil.getUrlData(params[0], context);
-////            }
-//            //TODO czy to nie powinno być w JSONUtil???
-//            //Zwraca  liste ale czy czega za wątkiem, ktory dodaje klase do listy?
-//            return CityWeatherData.getList();
-//        }
-//
-//        @Override
-//        protected void onPostExecute(List<CityWeather> result) {
-//
-//            super.onPostExecute(result);
-//
-//            adapter = new WeatherListAdapter(context, result);
-//            lvList.setAdapter(adapter);
-//            progressBar.setVisibility(View.INVISIBLE);
-////            adapter.notifyDataSetChanged();
-//        }
-//    }
 
     @Override
     public void onBackPressed() {
