@@ -43,7 +43,12 @@ public class JSONUtil {
 
     private static RequestQueue requestQueue;
 
-    public static void getUrlData(String jsonUrl, final Context context){
+    public interface CityWeatherResponseCallback {
+        void onSuccess(CityWeather data);
+        void onError(Exception exception);
+    }
+
+    public static void getUrlData(String jsonUrl, final Context context, final CityWeatherResponseCallback responseCallback){
 
         requestQueue = Volley.newRequestQueue(context);
 
@@ -78,10 +83,13 @@ public class JSONUtil {
 
                     city = new CityWeather(coord, weather, base, main, visibility, wind, clouds, dt, sys, id, name, cod);
 
-                    CityWeatherData.addCityWeather(city);
+//                    CityWeatherData.addCityWeather(city);
+
+                    responseCallback.onSuccess(city);
 
                 } catch (JSONException e) {
-                    e.printStackTrace();
+//                    e.printStackTrace();
+                    responseCallback.onError(e);
                 }
             }
         },

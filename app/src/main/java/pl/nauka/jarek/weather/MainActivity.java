@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         cityNameList = new ArrayList<>();
 
         jsonDataButton.setOnClickListener(new View.OnClickListener() {
-
+//asdaskjdhskjhskjdhf
             @Override
             public void onClick(View v) {
                 progressBar.bringToFront();
@@ -85,37 +86,52 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 url = UrlGenerator.getUrl(city);
 
-                new MyAsyncTask().execute(url);      //Czekanie na pobranie i zapisanie danych
+                //new MyAsyncTask().execute(url);      //Czekanie na pobranie i zapisanie danych
 
+                JSONUtil.getUrlData(url, context, new JSONUtil.CityWeatherResponseCallback() {
+                    @Override
+                    public void onSuccess(CityWeather data) {
+                        CityWeatherData.addCityWeather(data);
+                        adapter = new WeatherListAdapter(context, CityWeatherData.getList());
+                        lvList.setAdapter(adapter);
+                        progressBar.setVisibility(View.INVISIBLE);
+                    }
 
+                    @Override
+                    public void onError(Exception exception) {
+                        exception.printStackTrace();
+                        progressBar.setVisibility(View.INVISIBLE);
+                        Toast.makeText(context, "Błąd pobierania danych", Toast.LENGTH_LONG);
+                    }
+                });
             }
         });
     }
 
-    private class MyAsyncTask extends AsyncTask<String, Void, List<CityWeather>> {
-
-
-        @Override
-        protected List<CityWeather> doInBackground(String... params) {
-//            for (int i = 0; i < params.length; i++) {
-                JSONUtil.getUrlData(params[0], context);
-//            }
-            //TODO czy to nie powinno być w JSONUtil???
-            //Zwraca  liste ale czy czega za wątkiem, ktory dodaje klase do listy?
-            return CityWeatherData.getList();
-        }
-
-        @Override
-        protected void onPostExecute(List<CityWeather> result) {
-
-            super.onPostExecute(result);
-
-            adapter = new WeatherListAdapter(context, result);
-            lvList.setAdapter(adapter);
-            progressBar.setVisibility(View.INVISIBLE);
-//            adapter.notifyDataSetChanged();
-        }
-    }
+//    private class MyAsyncTask extends AsyncTask<String, Void, List<CityWeather>> {
+//
+//
+//        @Override
+//        protected List<CityWeather> doInBackground(String... params) {
+////            for (int i = 0; i < params.length; i++) {
+//                JSONUtil.getUrlData(params[0], context);
+////            }
+//            //TODO czy to nie powinno być w JSONUtil???
+//            //Zwraca  liste ale czy czega za wątkiem, ktory dodaje klase do listy?
+//            return CityWeatherData.getList();
+//        }
+//
+//        @Override
+//        protected void onPostExecute(List<CityWeather> result) {
+//
+//            super.onPostExecute(result);
+//
+//            adapter = new WeatherListAdapter(context, result);
+//            lvList.setAdapter(adapter);
+//            progressBar.setVisibility(View.INVISIBLE);
+////            adapter.notifyDataSetChanged();
+//        }
+//    }
 
     @Override
     public void onBackPressed() {
@@ -144,22 +160,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_refresh) {
 
-            city = null;
-            CityWeatherData.clearCityWeather();
-
-            for (int i = 0; i <= cityNameList.size()-1; i++) {
-
-
-//                try {
-//                    Thread.sleep(500);
-////                    progressBar.setVisibility(View.VISIBLE);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-                city = cityNameList.get(i);
-                url = UrlGenerator.getUrl(city);
-                new MyAsyncTask().execute(url);      //Czekanie na pobranie i zapisanie danych
-            }
+//            city = null;
+//            CityWeatherData.clearCityWeather();
+//
+//            for (int i = 0; i <= cityNameList.size()-1; i++) {
+//
+//
+////                try {
+////                    Thread.sleep(500);
+//////                    progressBar.setVisibility(View.VISIBLE);
+////                } catch (InterruptedException e) {
+////                    e.printStackTrace();
+////                }
+//                city = cityNameList.get(i);
+//                url = UrlGenerator.getUrl(city);
+//                new MyAsyncTask().execute(url);      //Czekanie na pobranie i zapisanie danych
+//            }
             return true;
         }
 
