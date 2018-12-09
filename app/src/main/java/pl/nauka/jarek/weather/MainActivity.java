@@ -61,16 +61,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         context = this;
+        cityNameList = new ArrayList<>();
 
         jsonDataButton = findViewById(R.id.jsonDataButton);
-
         etCitySearch = findViewById(R.id.et_city_search);
         lvList = findViewById(R.id.lv_list);
-
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.INVISIBLE);
-
-        cityNameList = new ArrayList<>();
 
         jsonDataButton.setOnClickListener(new View.OnClickListener() {
 
@@ -81,13 +78,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 city = etCitySearch.getText().toString();
                 cityNameList.add(city);                //dodanie do listy z szukanymi nazwami miast
-
                 url = UrlGenerator.getUrl(city);
 
                 DataDownloader.getUrlData(url, context, new DataDownloader.CityWeatherResponseCallback() {
                     @Override
                     public void onSuccess(CityWeather data) {
-                        CityWeatherData.addCityWeather(data);
+                        CityWeatherData.addCityWeather(data);   //dodawanie do listy
                         adapter = new WeatherListAdapter(context, CityWeatherData.getList());
                         lvList.setAdapter(adapter);
                         progressBar.setVisibility(View.INVISIBLE);
@@ -103,6 +99,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
     }
+
+
 
     @Override
     public void onBackPressed() {
@@ -123,30 +121,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_refresh) {
 
-//            city = null;
-//            CityWeatherData.clearCityWeather();
-//
-//            for (int i = 0; i <= cityNameList.size()-1; i++) {
-//
-//
-////                try {
-////                    Thread.sleep(500);
-//////                    progressBar.setVisibility(View.VISIBLE);
-////                } catch (InterruptedException e) {
-////                    e.printStackTrace();
-////                }
-//                city = cityNameList.get(i);
-//                url = UrlGenerator.getUrl(city);
-//                new MyAsyncTask().execute(url);      //Czekanie na pobranie i zapisanie danych
-//            }
+            city = null;
+            url = null;
+
+            for (int i = 0; i < cityNameList.size(); i++) {
+
+                progressBar.setVisibility(View.VISIBLE);
+                city = cityNameList.get(i);
+                url = UrlGenerator.getUrl(city);
+
+                final int index = i;
+
+                DataDownloader.getUrlData(url, context, new DataDownloader.CityWeatherResponseCallback() {
+                    @Override
+                    public void onSuccess(CityWeather data) {
+                        CityWeatherData.setCityWeather(index, data);        //nadpisywanie listy
+                        adapter = new WeatherListAdapter(context, CityWeatherData.getList());
+                        lvList.setAdapter(adapter);
+                        progressBar.setVisibility(View.INVISIBLE);
+                    }
+
+                    @Override
+                    public void onError(Exception exception) {
+                        exception.printStackTrace();
+                        progressBar.setVisibility(View.INVISIBLE);
+                        Toast.makeText(context, "Błąd pobierania danych", Toast.LENGTH_LONG);
+                    }
+                });
+            }
+
             return true;
         }
 
