@@ -22,8 +22,12 @@ public class CityWeatherData {
         list.clear();
     }
 
-    public static void setCityWeather(Integer index, CityWeather element){
+    public static void setCityWeather(int index, CityWeather element){
         list.set(index, element);
+    }
+
+    public static void deleteCityWeather(int position){
+        list.remove(position);
     }
 
 }

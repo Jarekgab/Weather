@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -26,6 +27,7 @@ import pl.nauka.jarek.weather.common.DataDownloader;
 import pl.nauka.jarek.weather.common.UrlGenerator;
 import pl.nauka.jarek.weather.data.CityWeatherData;
 import pl.nauka.jarek.weather.model.CityWeather;
+import ru.whalemare.sheetmenu.SheetMenu;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -98,8 +100,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 });
             }
         });
+
+        lvList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                showBottomMenu(position);
+                return false;
+            }
+        });
+
+
     }
 
+    private void showBottomMenu(final int position) {
+        SheetMenu.with(context)
+                .setTitle("Wybierz opcje:")
+                .setMenu(R.menu.bottom_menu)
+                .setClick(new MenuItem.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        if(item.getItemId() == R.id.action_ref){
+                            Toast.makeText(context,"DELL",Toast.LENGTH_LONG);
+                            //TODO zrobić kasownaie wybranego elementu
+
+                        }
+                        else if (item.getItemId() == R.id.action_del){
+                            CityWeatherData.deleteCityWeather(position);
+                            cityNameList.remove(position);
+                            adapter = new WeatherListAdapter(context, CityWeatherData.getList());
+                            lvList.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
+                        }
+                        return true;
+
+                    }
+                }).show();
+    }
 
 
     @Override
@@ -159,6 +196,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         if (id == R.id.action_add) {
+
             return true;
         }
 
