@@ -108,8 +108,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return false;
             }
         });
-
-
     }
 
     private void showBottomMenu(final int position) {
@@ -120,12 +118,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
 
-                        if(item.getItemId() == R.id.action_ref){
-                            Toast.makeText(context,"DELL",Toast.LENGTH_LONG);
-                            //TODO zrobić kasownaie wybranego elementu
+                        if (item.getItemId() == R.id.action_ref) {
+                            city = null;
+                            url = null;
 
-                        }
-                        else if (item.getItemId() == R.id.action_del){
+                            progressBar.setVisibility(View.VISIBLE);
+                            city = cityNameList.get(position);
+                            url = UrlGenerator.getUrl(city);
+
+                            refreshCWD(position);
+
+                        } else if (item.getItemId() == R.id.action_del) {
                             CityWeatherData.deleteCityWeather(position);
                             cityNameList.remove(position);
                             adapter = new WeatherListAdapter(context, CityWeatherData.getList());
@@ -133,11 +136,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             adapter.notifyDataSetChanged();
                         }
                         return true;
-
                     }
                 }).show();
     }
 
+    private void refreshCWD(final int index) {
+        DataDownloader.getUrlData(url, context, new DataDownloader.CityWeatherResponseCallback() {
+            @Override
+            public void onSuccess(CityWeather data) {
+                CityWeatherData.setCityWeather(index, data);        //nadpisywanie listy
+                adapter = new WeatherListAdapter(context, CityWeatherData.getList());
+                lvList.setAdapter(adapter);
+                progressBar.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onError(Exception exception) {
+                exception.printStackTrace();
+                progressBar.setVisibility(View.INVISIBLE);
+                Toast.makeText(context, "Błąd pobierania danych", Toast.LENGTH_LONG);
+            }
+        });
+    }
 
     @Override
     public void onBackPressed() {
@@ -174,22 +194,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 final int index = i;
 
-                DataDownloader.getUrlData(url, context, new DataDownloader.CityWeatherResponseCallback() {
-                    @Override
-                    public void onSuccess(CityWeather data) {
-                        CityWeatherData.setCityWeather(index, data);        //nadpisywanie listy
-                        adapter = new WeatherListAdapter(context, CityWeatherData.getList());
-                        lvList.setAdapter(adapter);
-                        progressBar.setVisibility(View.INVISIBLE);
-                    }
-
-                    @Override
-                    public void onError(Exception exception) {
-                        exception.printStackTrace();
-                        progressBar.setVisibility(View.INVISIBLE);
-                        Toast.makeText(context, "Błąd pobierania danych", Toast.LENGTH_LONG);
-                    }
-                });
+                refreshCWD(index);
             }
 
             return true;

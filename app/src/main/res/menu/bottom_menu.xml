@@ -3,11 +3,11 @@
     <item
         android:id="@+id/action_ref"
         android:icon="@drawable/ic_refresh"
-        android:title="Refresh"/>
+        android:title="Odśwież"/>
 
     <item
         android:id="@+id/action_del"
         android:icon="@drawable/ic_del"
-        android:title="Delete"/>
+        android:title="Usuń"/>
 
 </menu>
