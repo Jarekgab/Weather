@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public List<String> cityNameList;
     private WeatherListAdapter adapter;
 
-    //TODO dodać zbiór Set zamiast zwykłej listy
+    //TODO dodać zapisywanie danych
 
 
     @Override
@@ -201,26 +201,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 progressBar.setVisibility(View.VISIBLE);
 
                 city = etAddCity.getText().toString();
-                cityNameList.add(city);                //dodanie do listy z szukanymi nazwami miast
-                url = UrlGenerator.getUrl(city);
-                dialog.dismiss();
 
-                DataDownloader.getUrlData(url, context, new DataDownloader.CityWeatherResponseCallback() {
-                    @Override
-                    public void onSuccess(CityWeather data) {
-                        CityWeatherData.addCityWeather(data);   //dodawanie do listy
-                        adapter = new WeatherListAdapter(context, CityWeatherData.getList());
-                        lvList.setAdapter(adapter);
-                        progressBar.setVisibility(View.INVISIBLE);
-                    }
+                if (!cityNameList.contains(city)){          //Nie dodawaj tych samych miast
+                    cityNameList.add(city);                //dodanie do listy z szukanymi nazwami miast
+                    url = UrlGenerator.getUrl(city);
+                    dialog.dismiss();
 
-                    @Override
-                    public void onError(Exception exception) {
-                        exception.printStackTrace();
-                        progressBar.setVisibility(View.INVISIBLE);
-                        Toast.makeText(context, "Błąd pobierania danych", Toast.LENGTH_LONG);
-                    }
-                });
+                    DataDownloader.getUrlData(url, context, new DataDownloader.CityWeatherResponseCallback() {
+                        @Override
+                        public void onSuccess(CityWeather data) {
+                            CityWeatherData.addCityWeather(data);   //dodawanie do listy
+                            adapter = new WeatherListAdapter(context, CityWeatherData.getList());
+                            lvList.setAdapter(adapter);
+                            progressBar.setVisibility(View.INVISIBLE);
+                        }
+
+                        @Override
+                        public void onError(Exception exception) {
+                            exception.printStackTrace();
+                            progressBar.setVisibility(View.INVISIBLE);
+                            Toast.makeText(context, "Błąd pobierania danych", Toast.LENGTH_LONG);
+                        }
+                    });
+                }else {
+                    progressBar.setVisibility(View.INVISIBLE);
+                    dialog.dismiss();
+                }
             }
         });
         dialog.show();
