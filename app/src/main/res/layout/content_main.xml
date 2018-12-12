@@ -8,64 +8,30 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <Button
-        android:id="@+id/jsonDataButton"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:text="Dodaj"
-        app:layout_constraintBottom_toBottomOf="@+id/et_city_search"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/et_city_search"
-        app:layout_constraintTop_toTopOf="@+id/et_city_search" />
-
     <ProgressBar
         android:id="@+id/progressBar"
         style="@style/Widget.AppCompat.ProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:indeterminateTint="@color/red"
         android:progress="@android:integer/config_shortAnimTime"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.41000003" />
-
-    <EditText
-        android:id="@+id/et_city_search"
-        android:layout_width="215dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="25dp"
-        android:ems="10"
-        android:inputType="textCapSentences"
-        android:text="Poznań"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/jsonDataButton"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
         android:id="@+id/lv_list"
         style="@style/Widget.AppCompat.Light.ListView.DropDown"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginBottom="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/et_city_search"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

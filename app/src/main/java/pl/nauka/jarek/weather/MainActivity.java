@@ -1,5 +1,6 @@
 package pl.nauka.jarek.weather;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -8,9 +9,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,7 +36,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     Context context;
 
-    Button jsonDataButton;
     ProgressBar progressBar;
     ListView lvList;
 
@@ -42,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public String city;
     public List<String> cityNameList;
     private WeatherListAdapter adapter;
+
+    //TODO dodać zbiór Set zamiast zwykłej listy
 
 
     @Override
@@ -65,41 +69,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         context = this;
         cityNameList = new ArrayList<>();
 
-        jsonDataButton = findViewById(R.id.jsonDataButton);
-        etCitySearch = findViewById(R.id.et_city_search);
+        etCitySearch = findViewById(R.id.et_add_city);
         lvList = findViewById(R.id.lv_list);
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.INVISIBLE);
-
-        jsonDataButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                progressBar.bringToFront();
-                progressBar.setVisibility(View.VISIBLE);
-
-                city = etCitySearch.getText().toString();
-                cityNameList.add(city);                //dodanie do listy z szukanymi nazwami miast
-                url = UrlGenerator.getUrl(city);
-
-                DataDownloader.getUrlData(url, context, new DataDownloader.CityWeatherResponseCallback() {
-                    @Override
-                    public void onSuccess(CityWeather data) {
-                        CityWeatherData.addCityWeather(data);   //dodawanie do listy
-                        adapter = new WeatherListAdapter(context, CityWeatherData.getList());
-                        lvList.setAdapter(adapter);
-                        progressBar.setVisibility(View.INVISIBLE);
-                    }
-
-                    @Override
-                    public void onError(Exception exception) {
-                        exception.printStackTrace();
-                        progressBar.setVisibility(View.INVISIBLE);
-                        Toast.makeText(context, "Błąd pobierania danych", Toast.LENGTH_LONG);
-                    }
-                });
-            }
-        });
 
         lvList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -202,11 +175,55 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.action_add) {
 
+            showBottomDialog();
+
             return true;
         }
-
-
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showBottomDialog() {
+
+        final Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.add_item);
+
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.BOTTOM);
+
+        final EditText etAddCity = (EditText) dialog.findViewById(R.id.et_add_city);
+        Button bAddCity = dialog.findViewById(R.id.b_add_city);
+
+        bAddCity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                progressBar.bringToFront();
+                progressBar.setVisibility(View.VISIBLE);
+
+                city = etAddCity.getText().toString();
+                cityNameList.add(city);                //dodanie do listy z szukanymi nazwami miast
+                url = UrlGenerator.getUrl(city);
+                dialog.dismiss();
+
+                DataDownloader.getUrlData(url, context, new DataDownloader.CityWeatherResponseCallback() {
+                    @Override
+                    public void onSuccess(CityWeather data) {
+                        CityWeatherData.addCityWeather(data);   //dodawanie do listy
+                        adapter = new WeatherListAdapter(context, CityWeatherData.getList());
+                        lvList.setAdapter(adapter);
+                        progressBar.setVisibility(View.INVISIBLE);
+                    }
+
+                    @Override
+                    public void onError(Exception exception) {
+                        exception.printStackTrace();
+                        progressBar.setVisibility(View.INVISIBLE);
+                        Toast.makeText(context, "Błąd pobierania danych", Toast.LENGTH_LONG);
+                    }
+                });
+            }
+        });
+        dialog.show();
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
