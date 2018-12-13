@@ -3,9 +3,11 @@ package pl.nauka.jarek.weather;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     ProgressBar progressBar;
     ListView lvList;
+    SwipeRefreshLayout swipeLayout;
 
     EditText etCitySearch;
     public String url;
@@ -73,6 +76,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         etCitySearch = findViewById(R.id.et_add_city);
         lvList = findViewById(R.id.lv_list);
         progressBar = findViewById(R.id.progressBar);
+        swipeLayout = findViewById(R.id.swipe_container);
+
         progressBar.setVisibility(View.INVISIBLE);
 
         lvList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -82,7 +87,64 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return false;
             }
         });
-    }
+
+            swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+
+                    if (Connectivity.isConnected(context)){
+                        city = null;
+                        url = null;
+
+                        for (int i = 0; i < cityNameList.size(); i++) {
+
+                            progressBar.setVisibility(View.VISIBLE);
+                            city = cityNameList.get(i);
+                            url = UrlGenerator.getUrl(city);
+
+                            final int index = i;
+                            refreshCWD(index);
+                        }
+
+                    }else if (!Connectivity.isConnected(context)){
+                        Toast.makeText(context, "Brak połączenia", Toast.LENGTH_LONG).show();
+                    }
+
+                    // To keep animation for 4 seconds
+
+                    if(CityWeatherData.getList().isEmpty()) {
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Stop animation (This will be after 3 seconds)
+                                swipeLayout.setRefreshing(false);
+                            }
+                        }, 0); // Delay in millis
+                    }
+
+                    if(!CityWeatherData.getList().isEmpty()) {
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Stop animation (This will be after 3 seconds)
+                                swipeLayout.setRefreshing(false);
+                            }
+                        }, 1000); // Delay in millis
+                    }
+                }
+            });
+
+            // Scheme colors for animation
+
+            swipeLayout.setColorSchemeColors(
+//                getResources().getColor(android.R.color.holo_blue_bright),
+//                getResources().getColor(android.R.color.holo_green_light),
+//                getResources().getColor(android.R.color.holo_orange_light),
+                    getResources().getColor(android.R.color.holo_red_light)
+            );
+        }
+
+
 
     private void showBottomMenu(final int position) {
         SheetMenu.with(context)
