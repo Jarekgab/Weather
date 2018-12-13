@@ -26,6 +26,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import pl.nauka.jarek.weather.adapter.WeatherListAdapter;
+import pl.nauka.jarek.weather.common.Connectivity;
 import pl.nauka.jarek.weather.common.DataDownloader;
 import pl.nauka.jarek.weather.common.UrlGenerator;
 import pl.nauka.jarek.weather.data.CityWeatherData;
@@ -92,14 +93,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     public boolean onMenuItemClick(MenuItem item) {
 
                         if (item.getItemId() == R.id.action_ref) {
-                            city = null;
-                            url = null;
 
-                            progressBar.setVisibility(View.VISIBLE);
-                            city = cityNameList.get(position);
-                            url = UrlGenerator.getUrl(city);
+                            if (Connectivity.isConnected(context)){
+                                city = null;
+                                url = null;
 
-                            refreshCWD(position);
+                                progressBar.setVisibility(View.VISIBLE);
+                                city = cityNameList.get(position);
+                                url = UrlGenerator.getUrl(city);
+
+                                refreshCWD(position);
+
+                            }else if(!Connectivity.isConnected(context)){
+                                Toast.makeText(context, "Brak połączenia", Toast.LENGTH_LONG).show();
+                            }
 
                         } else if (item.getItemId() == R.id.action_del) {
                             CityWeatherData.deleteCityWeather(position);
@@ -156,20 +163,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.action_refresh) {
 
-            city = null;
-            url = null;
+            if (Connectivity.isConnected(context)){
+                city = null;
+                url = null;
 
-            for (int i = 0; i < cityNameList.size(); i++) {
+                for (int i = 0; i < cityNameList.size(); i++) {
 
-                progressBar.setVisibility(View.VISIBLE);
-                city = cityNameList.get(i);
-                url = UrlGenerator.getUrl(city);
+                    progressBar.setVisibility(View.VISIBLE);
+                    city = cityNameList.get(i);
+                    url = UrlGenerator.getUrl(city);
 
-                final int index = i;
+                    final int index = i;
+                    refreshCWD(index);
+                }
 
-                refreshCWD(index);
+            }else if (!Connectivity.isConnected(context)){
+                Toast.makeText(context, "Brak połączenia", Toast.LENGTH_LONG).show();
             }
-
             return true;
         }
 
@@ -202,14 +212,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 city = etAddCity.getText().toString();
 
-                if (!cityNameList.contains(city)){          //Nie dodawaj tych samych miast
-                    cityNameList.add(city);                //dodanie do listy z szukanymi nazwami miast
+                if (!cityNameList.contains(city) && Connectivity.isConnected(context)){          //Nie dodawaj tych samych miast i gdy nie ma internetu
                     url = UrlGenerator.getUrl(city);
                     dialog.dismiss();
 
                     DataDownloader.getUrlData(url, context, new DataDownloader.CityWeatherResponseCallback() {
                         @Override
                         public void onSuccess(CityWeather data) {
+                            cityNameList.add(city);                //dodanie do listy z szukanymi nazwami miast
                             CityWeatherData.addCityWeather(data);   //dodawanie do listy
                             adapter = new WeatherListAdapter(context, CityWeatherData.getList());
                             lvList.setAdapter(adapter);
@@ -220,12 +230,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         public void onError(Exception exception) {
                             exception.printStackTrace();
                             progressBar.setVisibility(View.INVISIBLE);
-                            Toast.makeText(context, "Błąd pobierania danych", Toast.LENGTH_LONG);
+                            Toast.makeText(context, "Błąd pobierania danych", Toast.LENGTH_LONG).show();
                         }
                     });
-                }else {
+
+                }else if (cityNameList.contains(city) && Connectivity.isConnected(context)){
                     progressBar.setVisibility(View.INVISIBLE);
                     dialog.dismiss();
+                    Toast.makeText(context, "Miasto o podanej nazwie jest już na liście", Toast.LENGTH_LONG).show();
+
+                }else if (!Connectivity.isConnected(context)){
+                    progressBar.setVisibility(View.INVISIBLE);
+                    dialog.dismiss();
+                    Toast.makeText(context, "Brak połączenia", Toast.LENGTH_LONG).show();
                 }
             }
         });
