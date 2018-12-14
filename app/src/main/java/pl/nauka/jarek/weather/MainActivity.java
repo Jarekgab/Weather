@@ -2,6 +2,7 @@ package pl.nauka.jarek.weather;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -74,6 +75,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         etCitySearch = findViewById(R.id.et_add_city);
         lvList = findViewById(R.id.lv_list);
         swipeLayout = findViewById(R.id.swipe_container);
+
+        lvList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(context, CityWeatherActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         lvList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
