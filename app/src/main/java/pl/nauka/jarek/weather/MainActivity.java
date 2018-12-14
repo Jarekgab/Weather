@@ -20,7 +20,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -39,7 +38,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     Context context;
 
-    ProgressBar progressBar;
     ListView lvList;
     SwipeRefreshLayout swipeLayout;
 
@@ -75,10 +73,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         etCitySearch = findViewById(R.id.et_add_city);
         lvList = findViewById(R.id.lv_list);
-        progressBar = findViewById(R.id.progressBar);
         swipeLayout = findViewById(R.id.swipe_container);
-
-        progressBar.setVisibility(View.INVISIBLE);
 
         lvList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -97,8 +92,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         url = null;
 
                         for (int i = 0; i < cityNameList.size(); i++) {
-
-                            progressBar.setVisibility(View.VISIBLE);
+                            swipeLayout.setRefreshing(true);
                             city = cityNameList.get(i);
                             url = UrlGenerator.getUrl(city);
 
@@ -110,33 +104,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         Toast.makeText(context, "Brak połączenia", Toast.LENGTH_LONG).show();
                     }
 
-                    // To keep animation for 4 seconds
-
-                    if(CityWeatherData.getList().isEmpty()) {
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                // Stop animation (This will be after 3 seconds)
-                                swipeLayout.setRefreshing(false);
-                            }
-                        }, 0); // Delay in millis
-                    }
-
-                    if(!CityWeatherData.getList().isEmpty()) {
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                // Stop animation (This will be after 3 seconds)
-                                swipeLayout.setRefreshing(false);
-                            }
-                        }, 1000); // Delay in millis
+                    if (CityWeatherData.getList().isEmpty()){
+                        setRefreshingDelaySwipeLayout(0);
+                    }else if (!CityWeatherData.getList().isEmpty()){
+                        swipeLayout.setRefreshing(false);
                     }
                 }
             });
 
-            // Scheme colors for animation
+            // Kolory animacji
 
             swipeLayout.setColorSchemeColors(
+                    //Inne kolory
 //                getResources().getColor(android.R.color.holo_blue_bright),
 //                getResources().getColor(android.R.color.holo_green_light),
 //                getResources().getColor(android.R.color.holo_orange_light),
@@ -144,6 +123,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             );
         }
 
+    private void setRefreshingDelaySwipeLayout(int delay) {
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Stop animacji po czasie delay
+                swipeLayout.setRefreshing(false);
+            }
+        }, delay); // Opóźnienie (delay) w ms
+    }
 
 
     private void showBottomMenu(final int position) {
@@ -160,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 city = null;
                                 url = null;
 
-                                progressBar.setVisibility(View.VISIBLE);
+                                swipeLayout.setRefreshing(true);
                                 city = cityNameList.get(position);
                                 url = UrlGenerator.getUrl(city);
 
@@ -171,11 +160,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             }
 
                         } else if (item.getItemId() == R.id.action_del) {
+                            swipeLayout.setRefreshing(true);
                             CityWeatherData.deleteCityWeather(position);
                             cityNameList.remove(position);
                             adapter = new WeatherListAdapter(context, CityWeatherData.getList());
                             lvList.setAdapter(adapter);
                             adapter.notifyDataSetChanged();
+                            setRefreshingDelaySwipeLayout(1000);
                         }
                         return true;
                     }
@@ -189,14 +180,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 CityWeatherData.setCityWeather(index, data);        //nadpisywanie listy
                 adapter = new WeatherListAdapter(context, CityWeatherData.getList());
                 lvList.setAdapter(adapter);
-                progressBar.setVisibility(View.INVISIBLE);
+                setRefreshingDelaySwipeLayout(1000);
             }
 
             @Override
             public void onError(Exception exception) {
                 exception.printStackTrace();
-                progressBar.setVisibility(View.INVISIBLE);
-                Toast.makeText(context, "Błąd pobierania danych", Toast.LENGTH_LONG);
+                setRefreshingDelaySwipeLayout(1000);
             }
         });
     }
@@ -223,28 +213,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         int id = item.getItemId();
 
-        if (id == R.id.action_refresh) {
-
-            if (Connectivity.isConnected(context)){
-                city = null;
-                url = null;
-
-                for (int i = 0; i < cityNameList.size(); i++) {
-
-                    progressBar.setVisibility(View.VISIBLE);
-                    city = cityNameList.get(i);
-                    url = UrlGenerator.getUrl(city);
-
-                    final int index = i;
-                    refreshCWD(index);
-                }
-
-            }else if (!Connectivity.isConnected(context)){
-                Toast.makeText(context, "Brak połączenia", Toast.LENGTH_LONG).show();
-            }
-            return true;
-        }
-
         if (id == R.id.action_add) {
 
             showBottomDialog();
@@ -269,12 +237,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
 
-                progressBar.bringToFront();
-                progressBar.setVisibility(View.VISIBLE);
-
                 city = etAddCity.getText().toString();
 
                 if (!cityNameList.contains(city) && Connectivity.isConnected(context)){          //Nie dodawaj tych samych miast i gdy nie ma internetu
+                    swipeLayout.setRefreshing(true);
                     url = UrlGenerator.getUrl(city);
                     dialog.dismiss();
 
@@ -285,24 +251,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             CityWeatherData.addCityWeather(data);   //dodawanie do listy
                             adapter = new WeatherListAdapter(context, CityWeatherData.getList());
                             lvList.setAdapter(adapter);
-                            progressBar.setVisibility(View.INVISIBLE);
+                            setRefreshingDelaySwipeLayout(500);
                         }
 
                         @Override
                         public void onError(Exception exception) {
                             exception.printStackTrace();
-                            progressBar.setVisibility(View.INVISIBLE);
-                            Toast.makeText(context, "Błąd pobierania danych", Toast.LENGTH_LONG).show();
+                            setRefreshingDelaySwipeLayout(500);
                         }
                     });
 
                 }else if (cityNameList.contains(city) && Connectivity.isConnected(context)){
-                    progressBar.setVisibility(View.INVISIBLE);
                     dialog.dismiss();
                     Toast.makeText(context, "Miasto o podanej nazwie jest już na liście", Toast.LENGTH_LONG).show();
 
                 }else if (!Connectivity.isConnected(context)){
-                    progressBar.setVisibility(View.INVISIBLE);
                     dialog.dismiss();
                     Toast.makeText(context, "Brak połączenia", Toast.LENGTH_LONG).show();
                 }

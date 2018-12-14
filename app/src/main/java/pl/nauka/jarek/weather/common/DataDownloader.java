@@ -69,6 +69,7 @@ public class DataDownloader {
                     responseCallback.onSuccess(city);
 
                 } catch (JSONException e) {
+                    Toast.makeText(context, "Błąd pobierania danych", Toast.LENGTH_LONG).show();
                     responseCallback.onError(e);
                 }
             }
@@ -76,7 +77,8 @@ public class DataDownloader {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, "Błąd połączenia", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Błędna nazwa", Toast.LENGTH_LONG).show();
+                        responseCallback.onError(error);
                     }
                 }
         );
