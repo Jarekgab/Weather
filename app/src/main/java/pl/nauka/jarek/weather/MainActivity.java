@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 showBottomMenu(position);
-                return false;
+                return true;
             }
         });
 
