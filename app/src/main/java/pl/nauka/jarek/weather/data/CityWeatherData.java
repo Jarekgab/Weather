@@ -1,32 +1,34 @@
 package pl.nauka.jarek.weather.data;
 
-        import java.util.ArrayList;
-        import java.util.List;
-
-        import pl.nauka.jarek.weather.model.CityWeather;
+import java.util.ArrayList;
+import java.util.List;
+import pl.nauka.jarek.weather.model.CityWeather;
 
 public class CityWeatherData {
 
-    static final List<CityWeather> list = new ArrayList<>();
+    static List<CityWeather> list = new ArrayList<>();
 
-    public static void addCityWeather(CityWeather weather){
+    public static void changeCityWeather(List<CityWeather> newList) {
+        list = newList;
+    }
+
+    public static void addCityWeather(CityWeather weather) {
         list.add(weather);
     }
 
-    public static List<CityWeather> getList(){
+    public static List<CityWeather> getList() {
         return list;
-
     }
 
-    public static void clearCityWeather(){
+    public static void clearCityWeather() {
         list.clear();
     }
 
-    public static void setCityWeather(int index, CityWeather element){
+    public static void setCityWeather(int index, CityWeather element) {
         list.set(index, element);
     }
 
-    public static void deleteCityWeather(int position){
+    public static void deleteCityWeather(int position) {
         list.remove(position);
     }
 

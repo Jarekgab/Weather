@@ -30,6 +30,7 @@ import butterknife.ButterKnife;
 import pl.nauka.jarek.weather.adapter.WeatherListAdapter;
 import pl.nauka.jarek.weather.common.Connectivity;
 import pl.nauka.jarek.weather.common.DataDownloader;
+import pl.nauka.jarek.weather.common.SharedPreferencesSaver;
 import pl.nauka.jarek.weather.common.UrlGenerator;
 import pl.nauka.jarek.weather.data.CityWeatherData;
 import pl.nauka.jarek.weather.model.CityWeather;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public String url;
     public String city;
     public List<String> cityNameList;
+    public List<CityWeather> newList;
     private WeatherListAdapter adapter;
 
     //TODO dodać zapisywanie danych
@@ -75,6 +77,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         etCitySearch = findViewById(R.id.et_add_city);
         lvList = findViewById(R.id.lv_list);
         swipeLayout = findViewById(R.id.swipe_container);
+
+
+        //Przywracanie zapisanych list
+
+        newList = new ArrayList<>();
+        newList = SharedPreferencesSaver.loadList(getPreferences(MODE_PRIVATE));
+        List<String> newCityNameList = SharedPreferencesSaver.loadCityNameList(getPreferences(MODE_PRIVATE));
+
+        if (newList != null) {
+            CityWeatherData.changeCityWeather(newList);
+        }
+
+        if (newCityNameList != null) {
+            cityNameList = newCityNameList;
+        }
+
+        adapter = new WeatherListAdapter(context, CityWeatherData.getList());
+        lvList.setAdapter(adapter);
 
         lvList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -132,6 +152,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     getResources().getColor(android.R.color.holo_red_light)
             );
         }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferencesSaver.saveTo(CityWeatherData.getList(), cityNameList, getPreferences(MODE_PRIVATE));       //Zapisywanie list
+    }
 
     private void setRefreshingDelaySwipeLayout(int delay) {
 
