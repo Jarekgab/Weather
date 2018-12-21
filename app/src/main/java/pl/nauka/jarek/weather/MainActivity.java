@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public List<String> cityNameList;
     public List<CityWeather> newList;
     private WeatherListAdapter adapter;
+    public static String LIST_WEATHER_POSITION = "LIST_WEATHER_POSITION";
 
 
     @Override
@@ -97,7 +98,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         lvList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 Intent intent = new Intent(context, CityWeatherActivity.class);
+                intent.putExtra(LIST_WEATHER_POSITION, position);
                 startActivity(intent);
             }
         });
