@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingBottom="25dp"
+        android:background="#F2F2F2">
+        android:background="#F2F2F2">
+
+        <TextView
+            android:id="@+id/tv_low_temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center_vertical"
+            android:text="Noc 10°C"
+            android:textColor="@color/primaryText"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_hight_temperature"
+            app:layout_constraintEnd_toEndOf="@+id/tv_temperature"
+            app:layout_constraintStart_toEndOf="@+id/tv_hight_temperature"
+            app:layout_constraintTop_toTopOf="@+id/tv_hight_temperature" />
+
+        <TextView
+            android:id="@+id/tv_hight_temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center_vertical"
+            android:text="Dzień 20°C"
+            android:textColor="@color/primaryText"
+            android:textSize="16dp"
+            app:layout_constraintStart_toStartOf="@+id/tv_temperature"
+            app:layout_constraintTop_toBottomOf="@+id/tv_temperature" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
+            android:text="Październik 21, 21:37"
+            android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
+            app:layout_constraintBottom_toTopOf="@+id/tv_temperature"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_weather_icon"
+            android:layout_width="118dp"
+            android:layout_height="124dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_temperature"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_date"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/ic_01d" />
+
+
+        <TextView
+            android:id="@+id/tv_temperature"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center_vertical|center"
+            android:text="20°C"
+            android:textColor="@color/primaryText"
+            android:textSize="50dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/tv_date"
+            app:layout_constraintStart_toStartOf="@+id/tv_date"
+            app:layout_constraintTop_toBottomOf="@+id/tv_date" />
+
+        <TextView
+            android:id="@+id/tv_city_weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_low_temperature"
+            app:layout_constraintEnd_toEndOf="@+id/iv_weather_icon"
+            app:layout_constraintStart_toStartOf="@+id/iv_weather_icon"
+            app:layout_constraintTop_toTopOf="@+id/tv_low_temperature" />
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>

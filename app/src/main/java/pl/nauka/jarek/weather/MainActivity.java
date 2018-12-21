@@ -50,8 +50,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public List<CityWeather> newList;
     private WeatherListAdapter adapter;
 
-    //TODO dodać zapisywanie danych
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -35,8 +35,8 @@ public class CityWeatherActivity extends AppCompatActivity {
 
     private void setupViewPages(ViewPager viewPager){
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
-        adapter.addFragment(new Tab1Fragment(), "TAB1");
-        adapter.addFragment(new Tab2Fragment(), "TAB2");
+        adapter.addFragment(new DetailActivity(), "DZISIAJ");
+        adapter.addFragment(new Tab2Fragment(), "7 DNI");
         viewPager.setAdapter(adapter);
     }
 
