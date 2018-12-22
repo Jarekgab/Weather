@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import pl.nauka.jarek.weather.R;
+import pl.nauka.jarek.weather.data.WeatherIcon;
 import pl.nauka.jarek.weather.model.CityWeather;
 
 public class WeatherListAdapter extends BaseAdapter {
@@ -66,80 +67,8 @@ public class WeatherListAdapter extends BaseAdapter {
             CityWeather cityWeatherPos = list.get(position);
 
             String icon = cityWeatherPos.getWeather().getIcon();  //TODO zrobić mape wywolan
-
-            switch (icon) {
-                case "01d":
-                    holder.ivWeatherIcon.setImageResource(R.drawable.ic_01d);
-                    break;
-
-                case "01n":
-                    holder.ivWeatherIcon.setImageResource(R.drawable.ic_01n);
-                    break;
-
-                case "02d":
-                    holder.ivWeatherIcon.setImageResource(R.drawable.ic_02d);
-                    break;
-
-                case "02n":
-                    holder.ivWeatherIcon.setImageResource(R.drawable.ic_02n);
-                    break;
-
-                case "03d":
-                    holder.ivWeatherIcon.setImageResource(R.drawable.ic_03d);
-                    break;
-
-                case "03n":
-                    holder.ivWeatherIcon.setImageResource(R.drawable.ic_03n);
-                    break;
-
-                case "04d":
-                    holder.ivWeatherIcon.setImageResource(R.drawable.ic_04d);
-                    break;
-
-                case "04n":
-                    holder.ivWeatherIcon.setImageResource(R.drawable.ic_04n);
-                    break;
-
-                case "09d":
-                    holder.ivWeatherIcon.setImageResource(R.drawable.ic_09d);
-                    break;
-
-                case "09n":
-                    holder.ivWeatherIcon.setImageResource(R.drawable.ic_09n);
-                    break;
-
-                case "10d":
-                    holder.ivWeatherIcon.setImageResource(R.drawable.ic_10d);
-                    break;
-
-                case "10n":
-                    holder.ivWeatherIcon.setImageResource(R.drawable.ic_10n);
-                    break;
-
-                case "11d":
-                    holder.ivWeatherIcon.setImageResource(R.drawable.ic_11d);
-                    break;
-
-                case "11n":
-                    holder.ivWeatherIcon.setImageResource(R.drawable.ic_11n);
-                    break;
-
-                case "13d":
-                    holder.ivWeatherIcon.setImageResource(R.drawable.ic_13d);
-                    break;
-
-                case "13n":
-                    holder.ivWeatherIcon.setImageResource(R.drawable.ic_13n);
-                    break;
-
-                case "50d":
-                    holder.ivWeatherIcon.setImageResource(R.drawable.ic_50d);
-                    break;
-
-                case "50n":
-                    holder.ivWeatherIcon.setImageResource(R.drawable.ic_50n);
-                    break;
-            }
+            int weatherIconFromResource = WeatherIcon.getWeatherIconFromResource(icon);
+            holder.ivWeatherIcon.setImageResource(weatherIconFromResource);
 
             holder.tvCityName.setText(cityWeatherPos.getName());
             holder.tvCityWeather.setText(cityWeatherPos.getWeather().getDescription());
