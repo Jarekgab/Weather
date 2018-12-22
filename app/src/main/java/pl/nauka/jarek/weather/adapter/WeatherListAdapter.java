@@ -13,7 +13,7 @@ import java.util.List;
 import pl.nauka.jarek.weather.R;
 import pl.nauka.jarek.weather.common.StringFromResourcesByName;
 import pl.nauka.jarek.weather.data.WeatherIcon;
-import pl.nauka.jarek.weather.model.CityWeather;
+import pl.nauka.jarek.weather.model.current.CityWeather;
 
 public class WeatherListAdapter extends BaseAdapter {
 

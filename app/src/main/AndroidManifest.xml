@@ -30,6 +30,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="pl.nauka.jarek.weather.MainActivity" />
         </activity>
+        <activity
+            android:name=".AboutActivity"
+            android:label="O aplikacji"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="pl.nauka.jarek.weather.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

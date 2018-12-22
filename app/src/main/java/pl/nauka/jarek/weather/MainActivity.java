@@ -33,7 +33,7 @@ import pl.nauka.jarek.weather.common.DataDownloader;
 import pl.nauka.jarek.weather.common.SharedPreferencesSaver;
 import pl.nauka.jarek.weather.common.UrlGenerator;
 import pl.nauka.jarek.weather.data.CityWeatherData;
-import pl.nauka.jarek.weather.model.CityWeather;
+import pl.nauka.jarek.weather.model.current.CityWeather;
 import ru.whalemare.sheetmenu.SheetMenu;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -314,21 +314,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        if (id == R.id.nav_info) {
+            Intent intent = new Intent(context, AboutActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -1,5 +1,5 @@
 
-package pl.nauka.jarek.weather.model;
+package pl.nauka.jarek.weather.model.forecast;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -9,12 +9,12 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class Coord {
 
-    @SerializedName("lon")
-    @Expose
-    private Double lon;
     @SerializedName("lat")
     @Expose
     private Double lat;
+    @SerializedName("lon")
+    @Expose
+    private Double lon;
 
     /**
      * No args constructor for use in serialization
@@ -28,17 +28,9 @@ public class Coord {
      * @param lon
      * @param lat
      */
-    public Coord(Double lon, Double lat) {
+    public Coord(Double lat, Double lon) {
         super();
-        this.lon = lon;
         this.lat = lat;
-    }
-
-    public Double getLon() {
-        return lon;
-    }
-
-    public void setLon(Double lon) {
         this.lon = lon;
     }
 
@@ -50,9 +42,17 @@ public class Coord {
         this.lat = lat;
     }
 
+    public Double getLon() {
+        return lon;
+    }
+
+    public void setLon(Double lon) {
+        this.lon = lon;
+    }
+
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("lon", lon).append("lat", lat).toString();
+        return new ToStringBuilder(this).append("lat", lat).append("lon", lon).toString();
     }
 
     @Override

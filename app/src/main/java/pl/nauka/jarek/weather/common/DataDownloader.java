@@ -14,13 +14,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import pl.nauka.jarek.weather.model.CityWeather;
-import pl.nauka.jarek.weather.model.Clouds;
-import pl.nauka.jarek.weather.model.Coord;
-import pl.nauka.jarek.weather.model.Main;
-import pl.nauka.jarek.weather.model.Sys;
-import pl.nauka.jarek.weather.model.Weather;
-import pl.nauka.jarek.weather.model.Wind;
+import pl.nauka.jarek.weather.model.current.CityWeather;
+import pl.nauka.jarek.weather.model.current.Clouds;
+import pl.nauka.jarek.weather.model.current.Coord;
+import pl.nauka.jarek.weather.model.current.Main;
+import pl.nauka.jarek.weather.model.current.Sys;
+import pl.nauka.jarek.weather.model.current.Weather;
+import pl.nauka.jarek.weather.model.current.Wind;
 
 public class DataDownloader {
 

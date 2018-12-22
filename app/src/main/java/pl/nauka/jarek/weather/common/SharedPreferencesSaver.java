@@ -7,7 +7,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
 
-import pl.nauka.jarek.weather.model.CityWeather;
+import pl.nauka.jarek.weather.model.current.CityWeather;
 
 public class SharedPreferencesSaver {
 

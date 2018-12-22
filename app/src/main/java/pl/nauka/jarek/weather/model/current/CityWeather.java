@@ -1,7 +1,6 @@
 
-package pl.nauka.jarek.weather.model;
+package pl.nauka.jarek.weather.model.current;
 
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang.builder.EqualsBuilder;

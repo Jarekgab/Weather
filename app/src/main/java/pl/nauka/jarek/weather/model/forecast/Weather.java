@@ -1,5 +1,5 @@
 
-package pl.nauka.jarek.weather.model;
+package pl.nauka.jarek.weather.model.forecast;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

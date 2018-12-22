@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class Tab2Fragment extends Fragment {
-//    private static String TAG = "Tab2Fragment";
 
     @Nullable
     @Override

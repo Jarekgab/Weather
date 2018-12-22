@@ -15,7 +15,7 @@ import java.util.Calendar;
 import pl.nauka.jarek.weather.common.StringFromResourcesByName;
 import pl.nauka.jarek.weather.data.CityWeatherData;
 import pl.nauka.jarek.weather.data.WeatherIcon;
-import pl.nauka.jarek.weather.model.CityWeather;
+import pl.nauka.jarek.weather.model.current.CityWeather;
 
 public class DetailActivity extends Fragment {
 
