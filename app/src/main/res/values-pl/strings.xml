@@ -7,4 +7,81 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+
+    <!--https://openweathermap.org/weather-conditions-->
+    <!--Group 2xx: Thunderstorm-->
+    <string name="thunderstorm_with_light_rain">burza z lekkim deszczem</string>
+    <string name="thunderstorm_with_rain">burza z deszczem</string>
+    <string name="thunderstorm_with_heavy_rain">burza z ulewnymi deszczami</string>
+    <string name="light_thunderstorm">lekka burza z piorunami</string>
+    <string name="thunderstorm">burza z piorunami</string>
+    <string name="heavy_thunderstorm">ciężka burza z piorunami</string>
+    <string name="ragged_thunderstorm">niewyrównana burza z piorunami</string>
+    <string name="thunderstorm_with_light_drizzle">burza z lekką mżawką</string>
+    <string name="thunderstorm_with_drizzle">burza z mżawką</string>
+    <string name="thunderstorm_with_heavy_drizzle">burza z piorunami</string>
+    <!--Group 3xx: Drizzle-->
+    <string name="light_intensity_drizzle">lekko intensywna mżawka</string>
+    <string name="drizzle">mżawka</string>
+    <string name="heavy_intensity_drizzle">intensywna mżawka</string>
+    <string name="light_intensity_drizzle_rain">lekko intensywny deszcz, mżawka</string>
+    <string name="drizzle_rain">mżawkowy deszcz</string>
+    <string name="heavy_intensity_drizzle_rain">intensywny deszcz, mżawka</string>
+    <string name="shower_rain_and_drizzle">deszcz i mżawka</string>
+    <string name="heavy_shower_rain_and_drizzle">ulewny deszcz i mżawka</string>
+    <string name="shower_drizzle">mżawka</string>
+    <!--Group 5xx: Drizzle-->
+    <string name="light_rain">lekki deszcz</string>
+    <string name="moderate_rain">umiarkowane opady</string>
+    <string name="heavy_intensity_rain">intensywny deszcz</string>
+    <string name="very_heavy_rain">bardzo ulewny deszcz</string>
+    <string name="extreme_rain">ekstremalny deszcz</string>
+    <string name="freezing_rain">marznący deszcz</string>
+    <string name="light_intensity_shower_rain">lekko intensywny deszcz</string>
+    <string name="shower_rain">intensywny deszcz</string>
+    <string name="heavy_intensity_shower_rain">bardzo intensywny deszcz</string>
+    <string name="ragged_shower_rain">nierówny deszcz</string>
+    <!--Group 6xx: Snow-->
+    <string name="light_snow">lekkie opady śniegu</string>
+    <string name="snow">śnieg</string>
+    <string name="heavy_snow">duże opady śniegu</string>
+    <string name="sleet">śnieg z deszczem</string>
+    <string name="shower_sleet">deszcz ze śniegiem</string>
+    <string name="light_rain_and_snow">lekki deszcz i śnieg</string>
+    <string name="rain_and_snow">deszcz i śnieg</string>
+    <string name="light_shower_snow">lekkie opady śniegu</string>
+    <string name="shower_snow">śnieg</string>
+    <string name="heavy_shower_snow">duże opady śniegu</string>
+    <!--Group 7xx: Atmosphere-->
+    <string name="mist">zamglenie</string>
+    <string name="smoke">smog</string>
+    <string name="haze">mgła</string>
+    <string name="sand_dust_whirls">piasek, wiry kurzu</string>
+    <string name="fog">mgła</string>
+    <string name="sand">piasek</string>
+    <string name="dust">kurz</string>
+    <string name="volcanic_ash">pył wulkaniczny</string>
+    <string name="squalls">szkwały</string>
+    <string name="tornado">tornado</string>
+    <!--Group 800: Clear-->
+    <string name="clear_sky">czyste niebo</string>
+    <!--Group 80x: Clouds-->
+    <string name="few_clouds">kilka chmur</string>
+    <string name="scattered_clouds">rozproszone chmury</string>
+    <string name="broken_clouds">rozbite chmury</string>
+    <string name="overcast_clouds">zachmurzone chmury</string>
+
+    <!--Months-->
+    <string name="month_1">Styczeń</string>
+    <string name="month_2">Luty</string>
+    <string name="month_3">Marzec</string>
+    <string name="month_4">Kwiecień</string>
+    <string name="month_5">Maj</string>
+    <string name="month_6">Czerwiec</string>
+    <string name="month_7">Lipiec</string>
+    <string name="month_8">Sierpień</string>
+    <string name="month_9">Wrzesień</string>
+    <string name="month_10">Październik</string>
+    <string name="month_11">Listopadr</string>
+    <string name="month_12">Grudzień</string>
 </resources>

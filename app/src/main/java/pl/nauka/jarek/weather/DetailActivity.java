@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import java.util.Calendar;
 
+import pl.nauka.jarek.weather.common.StringFromResourcesByName;
 import pl.nauka.jarek.weather.data.CityWeatherData;
 import pl.nauka.jarek.weather.data.WeatherIcon;
 import pl.nauka.jarek.weather.model.CityWeather;
@@ -72,7 +73,11 @@ public class DetailActivity extends Fragment {
         holder.tvTemperature.setText(String.valueOf(weather.getMain().getTemp()) + "°C");
         holder.tvHightTemperature.setText("Dzień " + String.valueOf(weather.getMain().getTempMax()) + "°C");
         holder.tvLowTemperature.setText("Noc " + String.valueOf(weather.getMain().getTempMin()) + "°C");
-        holder.tvCityWeather.setText(weather.getWeather().getDescription());
+
+        String description = weather.getWeather().getDescription();
+        //zmiana "description" na odpowiednia postac stringa aby moc pobrac z Resources, dalej tłumaczenie
+        String translatedDescription = StringFromResourcesByName.getStringFromResourcesByName(description, getContext());
+        holder.tvCityWeather.setText(translatedDescription);
 
         //secondary_weather_info.xml
         holder.tvPressure.setText(String.valueOf(weather.getMain().getPressure()) + " hPa");
@@ -88,25 +93,28 @@ public class DetailActivity extends Fragment {
         Calendar calendar = Calendar.getInstance();
 
         int monthInt = calendar.get(Calendar.MONTH) + 1;
-        String monthStringPL = "";
+        String monthString = "";
 
-        if (monthInt == 1){monthStringPL = "Styczeń";}
-        if (monthInt == 2){monthStringPL = "Luty";}
-        if (monthInt == 3){monthStringPL = "Marzec";}
-        if (monthInt == 4){monthStringPL = "Kwiecień";}
-        if (monthInt == 5){monthStringPL = "Maj";}
-        if (monthInt == 6){monthStringPL = "Czerwiec";}
-        if (monthInt == 7){monthStringPL = "Lipiec";}
-        if (monthInt == 8){monthStringPL = "Sierpień";}
-        if (monthInt == 9){monthStringPL = "Wrzesień";}
-        if (monthInt == 10){monthStringPL = "Październik";}
-        if (monthInt == 11){monthStringPL = "Listopad";}
-        if (monthInt == 12){monthStringPL = "Grudzień";}
+        if (monthInt == 1){monthString = "month_1";}
+        if (monthInt == 2){monthString = "month_2";}
+        if (monthInt == 3){monthString = "month_3";}
+        if (monthInt == 4){monthString = "month_4";}
+        if (monthInt == 5){monthString = "month_5";}
+        if (monthInt == 6){monthString = "month_6";}
+        if (monthInt == 7){monthString = "month_7";}
+        if (monthInt == 8){monthString = "month_8";}
+        if (monthInt == 9){monthString = "month_9";}
+        if (monthInt == 10){monthString = "month_10";}
+        if (monthInt == 11){monthString = "month_11";}
+        if (monthInt == 12){monthString = "month_12";}
+
+        //tłumaczenie nazw miesiecy
+        monthString = StringFromResourcesByName.getStringFromResourcesByName(monthString, getContext());
 
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
 
-        return monthStringPL + " " + day + ", " + hour + ":" + minute;
+        return monthString + " " + day + ", " + hour + ":" + minute;
     }
 }

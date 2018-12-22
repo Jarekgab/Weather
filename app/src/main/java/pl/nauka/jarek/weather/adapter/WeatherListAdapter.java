@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import pl.nauka.jarek.weather.R;
+import pl.nauka.jarek.weather.common.StringFromResourcesByName;
 import pl.nauka.jarek.weather.data.WeatherIcon;
 import pl.nauka.jarek.weather.model.CityWeather;
 
@@ -71,7 +72,12 @@ public class WeatherListAdapter extends BaseAdapter {
             holder.ivWeatherIcon.setImageResource(weatherIconFromResource);
 
             holder.tvCityName.setText(cityWeatherPos.getName());
-            holder.tvCityWeather.setText(cityWeatherPos.getWeather().getDescription());
+
+            String description = cityWeatherPos.getWeather().getDescription();
+            //zmiana "description" na odpowiednia postac stringa aby moc pobrac z Resources, dalej tłumaczenie
+            String translatedDescription = StringFromResourcesByName.getStringFromResourcesByName(description, context);
+            holder.tvCityWeather.setText(translatedDescription);
+
             holder.tvHightTemperature.setText(String.valueOf(cityWeatherPos.getMain().getTempMax()));
             holder.tvLowTemperature.setText(String.valueOf(cityWeatherPos.getMain().getTempMin()));
 

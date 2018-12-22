@@ -6,6 +6,81 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_city_weather">CityWeatherActivity</string>
-    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!--https://openweathermap.org/weather-conditions-->
+    <!--Group 2xx: Thunderstorm-->
+    <string name="thunderstorm_with_light_rain">thunderstorm with light rain</string>
+    <string name="thunderstorm_with_rain">thunderstorm with rain</string>
+    <string name="thunderstorm_with_heavy_rain">thunderstorm with heavy rain</string>
+    <string name="light_thunderstorm">light thunderstorm</string>
+    <string name="thunderstorm">thunderstorm</string>
+    <string name="heavy_thunderstorm">heavy thunderstorm</string>
+    <string name="ragged_thunderstorm">ragged thunderstorm</string>
+    <string name="thunderstorm_with_light_drizzle">thunderstorm with light drizzle</string>
+    <string name="thunderstorm_with_drizzle">thunderstorm with drizzle</string>
+    <string name="thunderstorm_with_heavy_drizzle">thunderstorm with heavy drizzle</string>
+    <!--Group 3xx: Drizzle-->
+    <string name="light_intensity_drizzle">light intensity drizzle</string>
+    <string name="drizzle">drizzle</string>
+    <string name="heavy_intensity_drizzle">heavy intensity drizzle</string>
+    <string name="light_intensity_drizzle_rain">light intensity drizzle rain</string>
+    <string name="drizzle_rain">drizzle rain</string>
+    <string name="heavy_intensity_drizzle_rain">heavy intensity drizzle rain</string>
+    <string name="shower_rain_and_drizzle">shower rain and drizzle</string>
+    <string name="heavy_shower_rain_and_drizzle">heavy shower rain and drizzle</string>
+    <string name="shower_drizzle">shower drizzle</string>
+    <!--Group 5xx: Drizzle-->
+    <string name="light_rain">light rain</string>
+    <string name="moderate_rain">moderate rain</string>
+    <string name="heavy_intensity_rain">heavy intensity rain</string>
+    <string name="very_heavy_rain">very heavy rain</string>
+    <string name="extreme_rain">extreme rain</string>
+    <string name="freezing_rain">freezing rain</string>
+    <string name="light_intensity_shower_rain">light intensity shower rain</string>
+    <string name="shower_rain">shower rain</string>
+    <string name="heavy_intensity_shower_rain">heavy intensity shower rain</string>
+    <string name="ragged_shower_rain">ragged shower rain</string>
+    <!--Group 6xx: Snow-->
+    <string name="light_snow">light snow</string>
+    <string name="snow">snow</string>
+    <string name="heavy_snow">heavy snow</string>
+    <string name="sleet">sleet</string>
+    <string name="shower_sleet">shower sleet</string>
+    <string name="light_rain_and_snow">light rain and snow</string>
+    <string name="rain_and_snow">rain and snow</string>
+    <string name="light_shower_snow">light shower snow</string>
+    <string name="shower_snow">shower snow</string>
+    <string name="heavy_shower_snow">heavy shower snow</string>
+    <!--Group 7xx: Atmosphere-->
+    <string name="mist">mist</string>
+    <string name="smoke">smoke</string>
+    <string name="haze">haze</string>
+    <string name="sand_dust_whirls">sand, dust whirls</string>
+    <string name="fog">fog</string>
+    <string name="sand">sand</string>
+    <string name="dust">dust</string>
+    <string name="volcanic_ash">volcanic ash</string>
+    <string name="squalls">squalls</string>
+    <string name="tornado">tornado</string>
+    <!--Group 800: Clear-->
+    <string name="clear_sky">clear sky</string>
+    <!--Group 80x: Clouds-->
+    <string name="few_clouds">few clouds</string>
+    <string name="scattered_clouds">scattered clouds</string>
+    <string name="broken_clouds">broken clouds</string>
+    <string name="overcast_clouds">overcast clouds</string>
+
+    <!--Months-->
+    <string name="month_1">January</string>
+    <string name="month_2">February</string>
+    <string name="month_3">March</string>
+    <string name="month_4">April</string>
+    <string name="month_5">May</string>
+    <string name="month_6">June</string>
+    <string name="month_7">July</string>
+    <string name="month_8">August</string>
+    <string name="month_9">September</string>
+    <string name="month_10">October</string>
+    <string name="month_11">November</string>
+    <string name="month_12">December</string>
 </resources>
