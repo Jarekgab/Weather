@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#F3F6FE"
@@ -16,32 +17,28 @@
         android:foreground="?android:attr/selectableItemBackground">
 
         <android.support.constraint.ConstraintLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/tv_low_temperature"
                 android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginEnd="25dp"
-                android:layout_marginRight="25dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="8dp"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center_vertical"
-                android:text="10°C"
-                android:textSize="28dp"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_hight_temperature"
+                android:text="10,88°C"
+                android:textSize="26dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tv_hight_temperature"
-                app:layout_constraintTop_toTopOf="@+id/tv_hight_temperature" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_hight_temperature" />
 
             <TextView
                 android:id="@+id/tv_city_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginLeft="15dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
                 android:text="Poznań"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
@@ -63,27 +60,25 @@
             <TextView
                 android:id="@+id/tv_hight_temperature"
                 android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:layout_marginStart="150dp"
-                android:layout_marginLeft="150dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="30dp"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center_vertical"
-                android:text="20°C"
+                android:text="20,77°C"
                 android:textColor="@color/primaryText"
-                android:textSize="28dp"
+                android:textSize="26dp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/iv_weather_icon"
-                app:layout_constraintEnd_toStartOf="@+id/tv_low_temperature"
-                app:layout_constraintStart_toEndOf="@+id/iv_weather_icon"
-                app:layout_constraintTop_toTopOf="@+id/iv_weather_icon" />
+                app:layout_constraintBottom_toTopOf="@+id/tv_low_temperature"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
 
             <TextView
                 android:id="@+id/tv_city_weather"
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="2dp"
                 android:text="Description"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -91,6 +86,28 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/iv_weather_icon"
                 app:layout_constraintTop_toBottomOf="@+id/tv_city_name" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginEnd="8dp"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_hight_temperature"
+                app:layout_constraintEnd_toStartOf="@+id/tv_hight_temperature"
+                app:layout_constraintTop_toTopOf="@+id/tv_hight_temperature"
+                app:srcCompat="@drawable/baseline_arrow_upward_24" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginEnd="8dp"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_low_temperature"
+                app:layout_constraintEnd_toStartOf="@+id/tv_low_temperature"
+                app:layout_constraintTop_toBottomOf="@+id/tv_hight_temperature"
+                app:srcCompat="@drawable/baseline_arrow_downward_24" />
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 

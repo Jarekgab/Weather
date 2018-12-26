@@ -3,6 +3,7 @@ package pl.nauka.jarek.weather;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -90,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         if (newCityNameList != null) {
+            cityNameList = null;
             cityNameList = newCityNameList;
         }
 
@@ -154,6 +156,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     getResources().getColor(android.R.color.holo_red_light)
             );
         }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+    }
 
     @Override
     protected void onPause() {

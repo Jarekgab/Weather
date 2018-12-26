@@ -78,8 +78,8 @@ public class WeatherListAdapter extends BaseAdapter {
             String translatedDescription = StringFromResourcesByName.getStringFromResourcesByName(description, context);
             holder.tvCityWeather.setText(translatedDescription);
 
-            holder.tvHightTemperature.setText(String.valueOf(cityWeatherPos.getMain().getTempMax()));
-            holder.tvLowTemperature.setText(String.valueOf(cityWeatherPos.getMain().getTempMin()));
+            holder.tvHightTemperature.setText(String.valueOf(cityWeatherPos.getMain().getTempMax()) + "°C");
+            holder.tvLowTemperature.setText(String.valueOf(cityWeatherPos.getMain().getTempMin()) + "°C");
 
             convertView.setTag(holder);
         }else {
