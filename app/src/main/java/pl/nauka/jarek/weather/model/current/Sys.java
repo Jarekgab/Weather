@@ -11,10 +11,10 @@ public class Sys {
 
     @SerializedName("type")
     @Expose
-    private Integer type;
+    private float type;
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private float id;
     @SerializedName("message")
     @Expose
     private Double message;
@@ -23,10 +23,10 @@ public class Sys {
     private String country;
     @SerializedName("sunrise")
     @Expose
-    private Integer sunrise;
+    private float sunrise;
     @SerializedName("sunset")
     @Expose
-    private Integer sunset;
+    private float sunset;
 
     /**
      * No args constructor for use in serialization
@@ -44,7 +44,7 @@ public class Sys {
      * @param type
      * @param country
      */
-    public Sys(Integer type, Integer id, Double message, String country, Integer sunrise, Integer sunset) {
+    public Sys(float type, float id, Double message, String country, float sunrise, float sunset) {
         super();
         this.type = type;
         this.id = id;
@@ -54,7 +54,7 @@ public class Sys {
         this.sunset = sunset;
     }
 
-    public Integer getType() {
+    public float getType() {
         return type;
     }
 
@@ -62,7 +62,7 @@ public class Sys {
         this.type = type;
     }
 
-    public Integer getId() {
+    public float getId() {
         return id;
     }
 
@@ -86,7 +86,7 @@ public class Sys {
         this.country = country;
     }
 
-    public Integer getSunrise() {
+    public float getSunrise() {
         return sunrise;
     }
 
@@ -94,7 +94,7 @@ public class Sys {
         this.sunrise = sunrise;
     }
 
-    public Integer getSunset() {
+    public float getSunset() {
         return sunset;
     }
 

@@ -9,6 +9,7 @@ public class CityWeatherData {
     static List<CityWeather> list = new ArrayList<>();
 
     public static void changeCityWeather(List<CityWeather> newList) {
+        list = null;
         list = newList;
     }
 

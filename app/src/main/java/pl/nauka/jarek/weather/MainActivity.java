@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public String url;
     public String city;
     public List<String> cityNameList;
+    private List<String> newCityNameList;
     public List<CityWeather> newList;
     private WeatherListAdapter adapter;
     public static String LIST_WEATHER_POSITION = "LIST_WEATHER_POSITION";
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         newList = new ArrayList<>();
         newList = SharedPreferencesSaver.loadList(getPreferences(MODE_PRIVATE));
-        List<String> newCityNameList = SharedPreferencesSaver.loadCityNameList(getPreferences(MODE_PRIVATE));
+        newCityNameList = SharedPreferencesSaver.loadCityNameList(getPreferences(MODE_PRIVATE));
 
         if (newList != null) {
             CityWeatherData.changeCityWeather(newList);

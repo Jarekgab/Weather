@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "535227191668",
+    "firebase_url": "https://weather-c7318.firebaseio.com",
+    "project_id": "weather-c7318",
+    "storage_bucket": "weather-c7318.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:535227191668:android:ea351c3abbac8e76",
+        "android_client_info": {
+          "package_name": "pl.nauka.jarek.weather"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "535227191668-h7sf1c7jr1bj9aig9rb06n6n2o77k0b8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUK3F6wLzL_YPNE6yBhs0BLkM4LRJgT1g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

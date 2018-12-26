@@ -11,7 +11,7 @@ public class Clouds {
 
     @SerializedName("all")
     @Expose
-    private Integer all;
+    private float all;
 
     /**
      * No args constructor for use in serialization
@@ -24,12 +24,12 @@ public class Clouds {
      * 
      * @param all
      */
-    public Clouds(Integer all) {
+    public Clouds(float all) {
         super();
         this.all = all;
     }
 
-    public Integer getAll() {
+    public float getAll() {
         return all;
     }
 

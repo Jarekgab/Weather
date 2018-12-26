@@ -11,7 +11,7 @@ public class Weather {
 
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private float id;
     @SerializedName("main")
     @Expose
     private String main;
@@ -36,7 +36,7 @@ public class Weather {
      * @param description
      * @param main
      */
-    public Weather(Integer id, String main, String description, String icon) {
+    public Weather(float id, String main, String description, String icon) {
         super();
         this.id = id;
         this.main = main;
@@ -44,7 +44,7 @@ public class Weather {
         this.icon = icon;
     }
 
-    public Integer getId() {
+    public float getId() {
         return id;
     }
 

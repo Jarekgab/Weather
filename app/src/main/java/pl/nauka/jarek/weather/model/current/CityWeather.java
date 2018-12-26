@@ -23,7 +23,7 @@ public class CityWeather {
     private Main main;
     @SerializedName("visibility")
     @Expose
-    private Integer visibility;
+    private float visibility;
     @SerializedName("wind")
     @Expose
     private Wind wind;
@@ -32,19 +32,19 @@ public class CityWeather {
     private Clouds clouds;
     @SerializedName("dt")
     @Expose
-    private Integer dt;
+    private float dt;
     @SerializedName("sys")
     @Expose
     private Sys sys;
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private float id;
     @SerializedName("name")
     @Expose
     private String name;
     @SerializedName("cod")
     @Expose
-    private Integer cod;
+    private float cod;
 
     /**
      * No args constructor for use in serialization
@@ -62,7 +62,7 @@ public class CityWeather {
      * @param weather
      * @param main
      */
-    public CityWeather(Coord coord, Weather weather, String base, Main main, Integer visibility, Wind wind, Clouds clouds, Integer dt, Sys sys, Integer id, String name, Integer cod) {
+    public CityWeather(Coord coord, Weather weather, String base, Main main, float visibility, Wind wind, Clouds clouds, float dt, Sys sys, float id, String name, float cod) {
         super();
         this.coord = coord;
         this.weather = weather;
@@ -110,7 +110,7 @@ public class CityWeather {
         this.main = main;
     }
 
-    public Integer getVisibility() {
+    public float getVisibility() {
         return visibility;
     }
 
@@ -134,7 +134,7 @@ public class CityWeather {
         this.clouds = clouds;
     }
 
-    public Integer getDt() {
+    public float getDt() {
         return dt;
     }
 
@@ -150,7 +150,7 @@ public class CityWeather {
         this.sys = sys;
     }
 
-    public Integer getId() {
+    public float getId() {
         return id;
     }
 
@@ -166,7 +166,7 @@ public class CityWeather {
         this.name = name;
     }
 
-    public Integer getCod() {
+    public float getCod() {
         return cod;
     }
 
