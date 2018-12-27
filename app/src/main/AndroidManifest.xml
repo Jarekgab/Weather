@@ -39,6 +39,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="pl.nauka.jarek.weather.MainActivity" />
         </activity>
+        <activity
+            android:name=".LicenseActivity"
+            android:label="Licencje"
+            android:parentActivityName=".AboutActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="pl.nauka.jarek.weather.AboutActivity" />
+        </activity>
     </application>
 
 </manifest>

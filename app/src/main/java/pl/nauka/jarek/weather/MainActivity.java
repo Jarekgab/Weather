@@ -3,7 +3,6 @@ package pl.nauka.jarek.weather;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -33,6 +32,7 @@ import pl.nauka.jarek.weather.adapter.WeatherListAdapter;
 import pl.nauka.jarek.weather.common.Connectivity;
 import pl.nauka.jarek.weather.common.DataDownloader;
 import pl.nauka.jarek.weather.common.SharedPreferencesSaver;
+import pl.nauka.jarek.weather.common.LettersConverter;
 import pl.nauka.jarek.weather.common.UrlGenerator;
 import pl.nauka.jarek.weather.data.CityWeatherData;
 import pl.nauka.jarek.weather.model.current.CityWeather;
@@ -158,10 +158,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             );
         }
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-    }
 
     @Override
     protected void onPause() {
@@ -283,7 +279,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
 
-                city = etAddCity.getText().toString();
+                city = LettersConverter.makeSmallLetters(etAddCity.getText().toString());
 
                 if (!cityNameList.contains(city) && Connectivity.isConnected(context)){          //Nie dodawaj tych samych miast i gdy nie ma internetu
                     swipeLayout.setRefreshing(true);

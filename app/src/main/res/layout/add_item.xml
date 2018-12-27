@@ -15,7 +15,6 @@
         android:layout_marginBottom="10dp"
         android:ems="10"
         android:inputType="textCapSentences"
-        android:text="Poznań"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/b_add_city"
         app:layout_constraintStart_toStartOf="parent"

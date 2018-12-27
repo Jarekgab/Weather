@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:paddingBottom="25dp"
         android:background="#F2F2F2">
-        android:background="#F2F2F2">
+
 
         <TextView
             android:id="@+id/tv_low_temperature"
