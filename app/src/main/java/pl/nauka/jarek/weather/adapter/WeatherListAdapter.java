@@ -55,7 +55,6 @@ public class WeatherListAdapter extends BaseAdapter {
         ViewHolder holder = null;
         LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        if (convertView == null){
             convertView = mInflater.inflate(R.layout.list_item, null);
             holder = new ViewHolder();
 
@@ -82,9 +81,7 @@ public class WeatherListAdapter extends BaseAdapter {
             holder.tvLowTemperature.setText(String.valueOf(cityWeatherPos.getMain().getTempMin()) + "°C");
 
             convertView.setTag(holder);
-        }else {
-            holder = (ViewHolder) convertView.getTag();
-        }
+
         return convertView;
     }
 }
