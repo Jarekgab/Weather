@@ -22,7 +22,7 @@ import pl.nauka.jarek.weather.model.current.Sys;
 import pl.nauka.jarek.weather.model.current.Weather;
 import pl.nauka.jarek.weather.model.current.Wind;
 
-public class DataDownloader {
+public class CurrentDataDownloader {
 
     private static RequestQueue requestQueue;
 

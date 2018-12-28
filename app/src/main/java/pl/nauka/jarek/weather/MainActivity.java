@@ -30,7 +30,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import pl.nauka.jarek.weather.adapter.WeatherListAdapter;
 import pl.nauka.jarek.weather.common.Connectivity;
-import pl.nauka.jarek.weather.common.DataDownloader;
+import pl.nauka.jarek.weather.common.CurrentDataDownloader;
 import pl.nauka.jarek.weather.common.SharedPreferencesSaver;
 import pl.nauka.jarek.weather.common.LettersConverter;
 import pl.nauka.jarek.weather.common.UrlGenerator;
@@ -216,7 +216,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void refreshCWD(final int index) {
-        DataDownloader.getUrlData(url, context, new DataDownloader.CityWeatherResponseCallback() {
+        CurrentDataDownloader.getUrlData(url, context, new CurrentDataDownloader.CityWeatherResponseCallback() {
             @Override
             public void onSuccess(CityWeather data) {
                 CityWeatherData.setCityWeather(index, data);        //nadpisywanie listy
@@ -286,7 +286,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     url = UrlGenerator.getUrl(city);
                     dialog.dismiss();
 
-                    DataDownloader.getUrlData(url, context, new DataDownloader.CityWeatherResponseCallback() {
+                    CurrentDataDownloader.getUrlData(url, context, new CurrentDataDownloader.CityWeatherResponseCallback() {
                         @Override
                         public void onSuccess(CityWeather data) {
                             cityNameList.add(city);                //dodanie do listy z szukanymi nazwami miast

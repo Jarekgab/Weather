@@ -11,13 +11,13 @@ public class List {
 
     @SerializedName("dt")
     @Expose
-    private Integer dt;
+    private float dt;
     @SerializedName("main")
     @Expose
     private Main main;
     @SerializedName("weather")
     @Expose
-    private java.util.List<Weather> weather = null;
+    private Weather weather = null;
     @SerializedName("clouds")
     @Expose
     private Clouds clouds;
@@ -56,7 +56,7 @@ public class List {
      * @param rain
      * @param main
      */
-    public List(Integer dt, Main main, java.util.List<Weather> weather, Clouds clouds, Wind wind, Rain rain, Sys sys, String dtTxt, Snow snow) {
+    public List(float dt, Main main, Weather weather, Clouds clouds, Wind wind, Rain rain, Sys sys, String dtTxt) {
         super();
         this.dt = dt;
         this.main = main;
@@ -85,11 +85,11 @@ public class List {
         this.main = main;
     }
 
-    public java.util.List<Weather> getWeather() {
+    public Weather getWeather() {
         return weather;
     }
 
-    public void setWeather(java.util.List<Weather> weather) {
+    public void setWeather (Weather weather) {
         this.weather = weather;
     }
 
