@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.support.design.widget.TabLayout;
 
 import pl.nauka.jarek.weather.adapter.SectionsPageAdapter;
@@ -43,8 +41,8 @@ public class CityWeatherActivity extends AppCompatActivity {
 
     private void setupViewPages(ViewPager viewPager){
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
-        adapter.addFragment(new DetailActivity(), "DZISIAJ");
-        adapter.addFragment(new Tab2Fragment(), "5 DNI");
+        adapter.addFragment(new DetailFragmentActivity(), "DZISIAJ");
+        adapter.addFragment(new ForecastFragmentActivity(), "5 DNI");
         viewPager.setAdapter(adapter);
     }
 

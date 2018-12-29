@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         for (int i = 0; i < cityNameList.size(); i++) {
                             swipeLayout.setRefreshing(true);
                             city = cityNameList.get(i);
-                            url = UrlGenerator.getUrl(city);
+                            url = UrlGenerator.getCurrentUrl(city);
 
                             final int index = i;
                             refreshCWD(index);
@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                                 swipeLayout.setRefreshing(true);
                                 city = cityNameList.get(position);
-                                url = UrlGenerator.getUrl(city);
+                                url = UrlGenerator.getCurrentUrl(city);
 
                                 refreshCWD(position);
 
@@ -283,7 +283,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 if (!cityNameList.contains(city) && Connectivity.isConnected(context)){          //Nie dodawaj tych samych miast i gdy nie ma internetu
                     swipeLayout.setRefreshing(true);
-                    url = UrlGenerator.getUrl(city);
+                    url = UrlGenerator.getCurrentUrl(city);
                     dialog.dismiss();
 
                     CurrentDataDownloader.getUrlData(url, context, new CurrentDataDownloader.CityWeatherResponseCallback() {

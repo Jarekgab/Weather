@@ -57,8 +57,21 @@ public class ForecastDataDownloader {
                         Integer dt = (Integer) allList.getInt("dt");
 
                         //Klasa main
-                        Object objectMain = allList.get("main");
-                        Main main = gson.fromJson(objectMain.toString(), Main.class);
+                        Main main;
+                        try{
+                            Object objectMain = allList.get("main");
+                            main = gson.fromJson(objectMain.toString(), Main.class);
+                        } catch (JSONException e) {
+                            //temp min/max opcjonalnie
+//                            Double temp = (Double) allList.getJSONObject("main").getDouble("temp");
+//                            Double pressure = (Double) allList.getJSONObject("main").getDouble("pressure");
+//                            Double seaLevel = (Double) allList.getJSONObject("main").getDouble("sea_level");
+//                            Double grndLevel = (Double) allList.getJSONObject("main").getDouble("grnd_level");
+//                            Double humidity = (Double) allList.getJSONObject("main").getDouble("humidity");
+//                            Double tempKf = (Double) allList.getJSONObject("main").getDouble("temp_kf");
+//                            main = new Main(temp, 0.0, 0.0, pressure, seaLevel, grndLevel, humidity, tempKf);
+                            main = new Main();
+                        }
 
                         //Klasa weather
                         JSONObject objectWeather = (JSONObject) allList.getJSONArray("weather").get(0);
@@ -73,12 +86,18 @@ public class ForecastDataDownloader {
                         Wind wind = gson.fromJson(objectWind.toString(), Wind.class);
 
                         //Klasa rain
-                        Object objectRain = allList.get("rain");
-                        Rain rain = gson.fromJson(objectRain.toString(), Rain.class);
+                        Rain rain;
+                        try {
+                            Object objectRain = allList.get("rain");
+                            rain = gson.fromJson(objectRain.toString(), Rain.class);
+
+                        } catch (JSONException e) {
+                            rain = new Rain();
+                        }
 
                         //Klasa sys
                         Object objectSys = allList.get("sys");
-                        Sys sys = gson.fromJson(objectRain.toString(), Sys.class);
+                        Sys sys = gson.fromJson(objectSys.toString(), Sys.class);
 
                         //Stala dtTxt
                         String dtTxt = (String) allList.getString("dt_txt");

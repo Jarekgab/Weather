@@ -10,10 +10,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 import pl.nauka.jarek.weather.common.ForecastDataDownloader;
+import pl.nauka.jarek.weather.common.UrlGenerator;
+import pl.nauka.jarek.weather.data.CityWeatherData;
+import pl.nauka.jarek.weather.model.current.CityWeather;
 import pl.nauka.jarek.weather.model.forecast.ForecastCityWeather;
 
+import static pl.nauka.jarek.weather.CityWeatherActivity.listPosition;
 
-public class Tab2Fragment extends Fragment {
+
+public class ForecastFragmentActivity extends Fragment {
 
     Button forecast;
 
@@ -24,13 +29,19 @@ public class Tab2Fragment extends Fragment {
 
         forecast = view.findViewById(R.id.b_forecast);
 
+        //Pobieranie nazwy miasta wybranej z listy
+        String cityName = CityWeatherData.getList().get(listPosition).getName();
+        final String url = UrlGenerator.getForecastUrl(cityName);
+
         forecast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ForecastDataDownloader.getUrlData("http://api.openweathermap.org/data/2.5/forecast?q=Pozna%C5%84&units=metric&APPID=4b18af8ae81c911d81a965f0804b7845", getContext(), new ForecastDataDownloader.CityWeatherResponseCallback() {
+                ForecastDataDownloader.getUrlData(url, getContext(), new ForecastDataDownloader.CityWeatherResponseCallback() {
                     @Override
                     public void onSuccess(ForecastCityWeather data) {
-                        String hh = data.getList().get(0).getWeather().getDescription();
+                        Toast.makeText(getContext(), "Miasto : " + data.getCity().getName(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "Opis: " + data.getList().get(0).getWeather().getDescription(), Toast.LENGTH_LONG).show();
+//                        String hh = data.getList().get(0).getWeather().getDescription();
                     }
 
                     @Override

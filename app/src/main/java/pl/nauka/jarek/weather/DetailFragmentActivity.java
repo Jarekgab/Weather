@@ -17,7 +17,7 @@ import pl.nauka.jarek.weather.data.CityWeatherData;
 import pl.nauka.jarek.weather.data.WeatherIcon;
 import pl.nauka.jarek.weather.model.current.CityWeather;
 
-public class DetailActivity extends Fragment {
+public class DetailFragmentActivity extends Fragment {
 
     @Nullable
     @Override
@@ -62,6 +62,7 @@ public class DetailActivity extends Fragment {
         holder.tvVisibility = view.findViewById(R.id.tv_visibility);
         holder.tvWindSpeed = view.findViewById(R.id.tv_wind_speed);
 
+        //Pobieranie pogody dla wybranego miasta z listy
         CityWeather weather = CityWeatherData.getList().get(CityWeatherActivity.listPosition);
 
         String icon = weather.getWeather().getIcon();  //TODO zrobić mape wywolan
@@ -114,6 +115,8 @@ public class DetailActivity extends Fragment {
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
+        //TODO zmienic wyswietalnie minut. Dla 0-9 dodac "0" z przodu
+
 
         return monthString + " " + day + ", " + hour + ":" + minute;
     }
