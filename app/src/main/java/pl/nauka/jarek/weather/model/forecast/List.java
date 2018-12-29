@@ -69,7 +69,7 @@ public class List {
         this.snow = snow;
     }
 
-    public Integer getDt() {
+    public float getDt() {
         return dt;
     }
 
