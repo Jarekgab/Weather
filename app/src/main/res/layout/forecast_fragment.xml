@@ -34,18 +34,16 @@
                 tools:layout_editor_absoluteY="6dp" />
 
             <ListView
-                android:id="@+id/lv_forecast_day"
+                android:id="@+id/lv_forecast_hour"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dip"
-                android:background="@drawable/list_view_styl_1">
+                android:layout_marginTop="10dip">
 
             </ListView>
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="1sp"
-                android:layout_marginTop="20dp"
                 android:background="#1976d2"
                 android:paddingBottom="20dp" />
 
@@ -64,11 +62,10 @@
                 tools:layout_editor_absoluteY="6dp" />
 
             <ListView
-                android:id="@+id/lv_forecast_day2"
+                android:id="@+id/lv_forecast_day"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dip"
-                android:background="@drawable/list_view_styl_2">
+                android:layout_marginTop="10dip">
 
             </ListView>
         </LinearLayout>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#4A9C67">
+    android:background="#B29090">
 
     <ImageView
         android:id="@+id/iv_weather_icon"
@@ -12,8 +12,8 @@
         android:layout_height="65dp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_description"
         app:layout_constraintEnd_toStartOf="@+id/tv_temperature"
-        app:layout_constraintStart_toEndOf="@+id/tv_day"
-        app:layout_constraintTop_toTopOf="@+id/tv_day"
+        app:layout_constraintStart_toEndOf="@+id/tv_hour"
+        app:layout_constraintTop_toTopOf="@+id/tv_hour"
         app:srcCompat="@drawable/ic_01d" />
 
     <TextView
@@ -21,7 +21,6 @@
         android:layout_width="96dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="2dp"
         android:layout_marginEnd="10dp"
         android:fontFamily="sans-serif-condensed"
         android:gravity="center_vertical"
@@ -40,7 +39,7 @@
         android:id="@+id/tv_description"
         android:layout_width="110dp"
         android:layout_height="35dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:text="Description"
         android:textAlignment="viewStart"
@@ -48,17 +47,17 @@
         android:textColor="@color/common_google_signin_btn_text_dark_default"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/tv_day"
-        app:layout_constraintStart_toStartOf="@+id/tv_day"
-        app:layout_constraintTop_toBottomOf="@+id/tv_day" />
+        app:layout_constraintEnd_toEndOf="@+id/tv_hour"
+        app:layout_constraintStart_toStartOf="@+id/tv_hour"
+        app:layout_constraintTop_toBottomOf="@+id/tv_hour" />
 
     <TextView
-        android:id="@+id/tv_day"
+        android:id="@+id/tv_hour"
         android:layout_width="110dp"
         android:layout_height="42dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
-        android:text="Poniedziałek"
+        android:text="15:00"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         android:textColor="@color/common_google_signin_btn_text_dark_default"
         android:textSize="18sp"

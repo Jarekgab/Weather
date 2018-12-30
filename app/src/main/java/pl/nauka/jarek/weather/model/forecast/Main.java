@@ -11,28 +11,28 @@ public class Main {
 
     @SerializedName("temp")
     @Expose
-    private Double temp;
+    private float temp;
     @SerializedName("temp_min")
     @Expose
-    private Double tempMin;
+    private float tempMin;
     @SerializedName("temp_max")
     @Expose
-    private Double tempMax;
+    private float tempMax;
     @SerializedName("pressure")
     @Expose
-    private Double pressure;
+    private float pressure;
     @SerializedName("sea_level")
     @Expose
-    private Double seaLevel;
+    private float seaLevel;
     @SerializedName("grnd_level")
     @Expose
-    private Double grndLevel;
+    private float grndLevel;
     @SerializedName("humidity")
     @Expose
-    private Double humidity;
+    private float humidity;
     @SerializedName("temp_kf")
     @Expose
-    private Double tempKf;
+    private float tempKf;
 
     /**
      * No args constructor for use in serialization
@@ -52,7 +52,7 @@ public class Main {
      * @param tempKf
      * @param tempMin
      */
-    public Main(Double temp, Double tempMin, Double tempMax, Double pressure, Double seaLevel, Double grndLevel, Double humidity, Double tempKf) {
+    public Main(float temp, float tempMin, float tempMax, float pressure, float seaLevel, float grndLevel, float humidity, float tempKf) {
         super();
         this.temp = temp;
         this.tempMin = tempMin;
@@ -64,67 +64,67 @@ public class Main {
         this.tempKf = tempKf;
     }
 
-    public Double getTemp() {
+    public float getTemp() {
         return temp;
     }
 
-    public void setTemp(Double temp) {
+    public void setTemp(float temp) {
         this.temp = temp;
     }
 
-    public Double getTempMin() {
+    public float getTempMin() {
         return tempMin;
     }
 
-    public void setTempMin(Double tempMin) {
+    public void setTempMin(float tempMin) {
         this.tempMin = tempMin;
     }
 
-    public Double getTempMax() {
+    public float getTempMax() {
         return tempMax;
     }
 
-    public void setTempMax(Double tempMax) {
+    public void setTempMax(float tempMax) {
         this.tempMax = tempMax;
     }
 
-    public Double getPressure() {
+    public float getPressure() {
         return pressure;
     }
 
-    public void setPressure(Double pressure) {
+    public void setPressure(float pressure) {
         this.pressure = pressure;
     }
 
-    public Double getSeaLevel() {
+    public float getSeaLevel() {
         return seaLevel;
     }
 
-    public void setSeaLevel(Double seaLevel) {
+    public void setSeaLevel(float seaLevel) {
         this.seaLevel = seaLevel;
     }
 
-    public Double getGrndLevel() {
+    public float getGrndLevel() {
         return grndLevel;
     }
 
-    public void setGrndLevel(Double grndLevel) {
+    public void setGrndLevel(float grndLevel) {
         this.grndLevel = grndLevel;
     }
 
-    public Double getHumidity() {
+    public float getHumidity() {
         return humidity;
     }
 
-    public void setHumidity(Double humidity) {
+    public void setHumidity(float humidity) {
         this.humidity = humidity;
     }
 
-    public Double getTempKf() {
+    public float getTempKf() {
         return tempKf;
     }
 
-    public void setTempKf(Double tempKf) {
+    public void setTempKf(float tempKf) {
         this.tempKf = tempKf;
     }
 

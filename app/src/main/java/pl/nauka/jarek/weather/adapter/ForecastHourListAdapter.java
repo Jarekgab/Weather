@@ -7,25 +7,27 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import java.util.List;
+
 import pl.nauka.jarek.weather.R;
 import pl.nauka.jarek.weather.common.StringFromResourcesByName;
 import pl.nauka.jarek.weather.data.WeatherIcon;
 
-public class ForecastDayListAdapter extends BaseAdapter {
+public class ForecastHourListAdapter extends BaseAdapter {
 
     Context context;
     List<pl.nauka.jarek.weather.model.forecast.List> list;
-    int number = 7;
+    int number = 0;
 
-    public ForecastDayListAdapter(Context context, List<pl.nauka.jarek.weather.model.forecast.List> list) {
+    public ForecastHourListAdapter(Context context, List<pl.nauka.jarek.weather.model.forecast.List> list) {
         this.context = context;
         this.list = list;
     }
 
     @Override
     public int getCount() {
-        return 4;
+        return 8;
     }
 
     @Override
@@ -41,7 +43,7 @@ public class ForecastDayListAdapter extends BaseAdapter {
     private class ViewHolder {
 
         ImageView ivWeatherIcon;
-        TextView tvDay;
+        TextView tvHour;
         TextView tvDescription;
         TextView tvTemperature;
     }
@@ -52,16 +54,16 @@ public class ForecastDayListAdapter extends BaseAdapter {
         ViewHolder holder = null;
         LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            convertView = mInflater.inflate(R.layout.forecast_day_list_item, null);
+            convertView = mInflater.inflate(R.layout.forecast_hour_list_item, null);
             holder = new ViewHolder();
 
             holder.ivWeatherIcon = convertView.findViewById(R.id.iv_weather_icon);
-            holder.tvDay = convertView.findViewById(R.id.tv_day);
+            holder.tvHour = convertView.findViewById(R.id.tv_hour);
             holder.tvDescription = convertView.findViewById(R.id.tv_description);
             holder.tvTemperature = convertView.findViewById(R.id.tv_temperature);
 
             pl.nauka.jarek.weather.model.forecast.List day = list.get(number);
-            number = number + 8;
+            number = number + 1;
 
             //zabezpiecza przed przekroczeniem wielkosci listy
             if (number == 39){
@@ -73,7 +75,7 @@ public class ForecastDayListAdapter extends BaseAdapter {
             holder.ivWeatherIcon.setImageResource(weatherIconFromResource);
 
             holder.tvTemperature.setText(String.valueOf(day.getMain().getTemp()) + "°C");
-            holder.tvDay.setText(String.valueOf(day.getDtTxt()));
+            holder.tvHour.setText(String.valueOf(day.getDtTxt()));
 
             String description = day.getWeather().getDescription();
             //zmiana "description" na odpowiednia postac stringa aby moc pobrac z Resources, dalej tłumaczenie
