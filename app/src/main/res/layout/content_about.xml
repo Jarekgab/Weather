@@ -52,7 +52,7 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="1sp"
-                        android:background="#1976d2"/>
+                        android:background="@color/colorPrimaryDark" />
 
 
                     <LinearLayout
@@ -83,7 +83,7 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="1sp"
-                        android:background="#1976d2"/>
+                        android:background="@color/colorPrimaryDark" />
 
                     <LinearLayout
                         android:id="@+id/ll_licenses"

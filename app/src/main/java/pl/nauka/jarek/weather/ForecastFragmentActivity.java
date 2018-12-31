@@ -75,7 +75,6 @@ public class ForecastFragmentActivity extends Fragment {
 
             //TODO Pobieranie zapisanego pliku
         }
-
         return view;
     }
 }

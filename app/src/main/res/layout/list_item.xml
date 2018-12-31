@@ -19,7 +19,8 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient">
 
             <TextView
                 android:id="@+id/tv_low_temperature"
@@ -30,6 +31,7 @@
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center_vertical"
                 android:text="-30°C"
+                android:textColor="@color/common_google_signin_btn_text_dark_default"
                 android:textSize="26dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/imageView3"
@@ -43,6 +45,7 @@
                 android:layout_marginTop="5dp"
                 android:text="Poznań"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="@color/common_google_signin_btn_text_dark_default"
                 android:textSize="18sp"
                 app:layout_constraintStart_toEndOf="@+id/iv_weather_icon"
                 app:layout_constraintTop_toTopOf="@+id/iv_weather_icon" />
@@ -67,7 +70,7 @@
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center_vertical"
                 android:text="-20°C"
-                android:textColor="@color/primaryText"
+                android:textColor="@color/common_google_signin_btn_text_dark_default"
                 android:textSize="26dp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/tv_low_temperature"
@@ -83,6 +86,7 @@
                 android:layout_marginTop="2dp"
                 android:text="Description"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/common_google_signin_btn_text_dark_default"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/iv_weather_icon"
