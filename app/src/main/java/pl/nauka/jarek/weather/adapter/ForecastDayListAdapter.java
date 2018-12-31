@@ -14,9 +14,9 @@ import pl.nauka.jarek.weather.data.WeatherIcon;
 
 public class ForecastDayListAdapter extends BaseAdapter {
 
-    Context context;
-    List<pl.nauka.jarek.weather.model.forecast.List> list;
-    int number = 7;
+    private Context context;
+    private List<pl.nauka.jarek.weather.model.forecast.List> list;
+    private int number = 8;
 
     public ForecastDayListAdapter(Context context, List<pl.nauka.jarek.weather.model.forecast.List> list) {
         this.context = context;
@@ -64,15 +64,17 @@ public class ForecastDayListAdapter extends BaseAdapter {
             number = number + 8;
 
             //zabezpiecza przed przekroczeniem wielkosci listy
-            if (number == 39){
-                number = 0;
+            if (number >= 40){
+                number = 8;
             }
 
             String icon = day.getWeather().getIcon();
             int weatherIconFromResource = WeatherIcon.getWeatherIconFromResource(icon);
             holder.ivWeatherIcon.setImageResource(weatherIconFromResource);
 
-            holder.tvTemperature.setText(String.valueOf(day.getMain().getTemp()) + "°C");
+            short temp = (short) Math.round(day.getMain().getTemp());
+            holder.tvTemperature.setText(String.valueOf(temp + "°C"));
+
             holder.tvDay.setText(String.valueOf(day.getDtTxt()));
 
             String description = day.getWeather().getDescription();

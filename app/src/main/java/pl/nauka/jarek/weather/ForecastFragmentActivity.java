@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import pl.nauka.jarek.weather.adapter.ForecastDayListAdapter;
 import pl.nauka.jarek.weather.adapter.ForecastHourListAdapter;
+import pl.nauka.jarek.weather.common.Connectivity;
 import pl.nauka.jarek.weather.common.ForecastDataDownloader;
 import pl.nauka.jarek.weather.common.ListUtils;
 import pl.nauka.jarek.weather.common.UrlGenerator;
@@ -46,27 +47,34 @@ public class ForecastFragmentActivity extends Fragment {
         String cityName = CityWeatherData.getList().get(listPosition).getName();
         final String url = UrlGenerator.getForecastUrl(cityName);
 
-        ForecastDataDownloader.getUrlData(url, getContext(), new ForecastDataDownloader.CityWeatherResponseCallback() {
-            @Override
-            public void onSuccess(ForecastCityWeather data) {
-                list = data.getList();
+        if (Connectivity.isConnected(getContext())) {
+            ForecastDataDownloader.getUrlData(url, getContext(), new ForecastDataDownloader.CityWeatherResponseCallback() {
+                @Override
+                public void onSuccess(ForecastCityWeather data) {
+                    list = data.getList();
 
-                hourAdapter = new ForecastHourListAdapter(getContext(), list);
-                lvForecastHour.setAdapter(hourAdapter);
+                    hourAdapter = new ForecastHourListAdapter(getContext(), list);
+                    lvForecastHour.setAdapter(hourAdapter);
 
-                dayAdapter = new ForecastDayListAdapter(getContext(), list);
-                lvForecastDay.setAdapter(dayAdapter);
+                    dayAdapter = new ForecastDayListAdapter(getContext(), list);
+                    lvForecastDay.setAdapter(dayAdapter);
 
-                ListUtils.setDynamicHeight(lvForecastHour);
-                ListUtils.setDynamicHeight(lvForecastDay);
-            }
+                    ListUtils.setDynamicHeight(lvForecastHour);
+                    ListUtils.setDynamicHeight(lvForecastDay);
 
-            @Override
-            public void onError(Exception exception) {
-                //TODO zmienic komunikat
-                Toast.makeText(getContext(), "NIE DZIAŁA", Toast.LENGTH_LONG).show();
-            }
-        });
+                    //TODO Zapisywanie pobranego pliku
+                }
+
+                @Override
+                public void onError(Exception exception) {
+                    exception.printStackTrace();
+                }
+            });
+        } else if (!Connectivity.isConnected(getContext())) {
+            Toast.makeText(getContext(), "Brak połączenia", Toast.LENGTH_LONG).show();
+
+            //TODO Pobieranie zapisanego pliku
+        }
 
         return view;
     }

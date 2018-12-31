@@ -41,12 +41,6 @@
 
             </ListView>
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1sp"
-                android:background="#1976d2"
-                android:paddingBottom="20dp" />
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

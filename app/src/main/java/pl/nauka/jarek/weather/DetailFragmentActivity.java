@@ -71,9 +71,15 @@ public class DetailFragmentActivity extends Fragment {
 
         //primary_weather_info.xml
         holder.tvDate.setText(getCurrentlyDate());
-        holder.tvTemperature.setText(String.valueOf(weather.getMain().getTemp()) + "°C");
-        holder.tvHightTemperature.setText("Dzień " + String.valueOf(weather.getMain().getTempMax()) + "°C");
-        holder.tvLowTemperature.setText("Noc " + String.valueOf(weather.getMain().getTempMin()) + "°C");
+
+        //zaokraglenie temp
+        short temp = (short) Math.round(weather.getMain().getTemp());
+        short tempHight = (short) Math.round(weather.getMain().getTempMax());
+        short tempLow = (short) Math.round(weather.getMain().getTempMin());
+
+        holder.tvTemperature.setText(String.valueOf(temp) + "°C");
+        holder.tvHightTemperature.setText("Dzień " + String.valueOf(tempHight) + "°C");
+        holder.tvLowTemperature.setText("Noc " + String.valueOf(tempLow) + "°C");
 
         String description = weather.getWeather().getDescription();
         //zmiana "description" na odpowiednia postac stringa aby moc pobrac z Resources, dalej tłumaczenie
