@@ -77,7 +77,9 @@ public class ForecastHourListAdapter extends BaseAdapter {
             short temp = (short) Math.round(day.getMain().getTemp());
             holder.tvTemperature.setText(String.valueOf(temp + "°C"));
 
-            holder.tvHour.setText(String.valueOf(day.getDtTxt()));
+            String dtTxt = String.valueOf(day.getDtTxt());
+            String hour = dtTxt.substring(11, 16);
+            holder.tvHour.setText(hour);
 
             String description = day.getWeather().getDescription();
             //zmiana "description" na odpowiednia postac stringa aby moc pobrac z Resources, dalej tłumaczenie

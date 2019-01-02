@@ -84,4 +84,13 @@
     <string name="month_10">Październik</string>
     <string name="month_11">Listopadr</string>
     <string name="month_12">Grudzień</string>
+
+    <!--DAYS-->
+    <string name="day_1">Niedziela</string>
+    <string name="day_2">Poniedziałek</string>
+    <string name="day_3">Wtorek</string>
+    <string name="day_4">Środa</string>
+    <string name="day_5">Czwartek</string>
+    <string name="day_6">Piątek</string>
+    <string name="day_7">Sobota</string>
 </resources>

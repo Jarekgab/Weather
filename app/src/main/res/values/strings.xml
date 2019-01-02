@@ -83,4 +83,13 @@
     <string name="month_10">October</string>
     <string name="month_11">November</string>
     <string name="month_12">December</string>
+
+    <!--DAYS-->
+    <string name="day_1">Sunday</string>
+    <string name="day_2">Monday</string>
+    <string name="day_3">Tuesday</string>
+    <string name="day_4">Wednesday</string>
+    <string name="day_5">Thursday</string>
+    <string name="day_6">Friday</string>
+    <string name="day_7">Saturday</string>
 </resources>
