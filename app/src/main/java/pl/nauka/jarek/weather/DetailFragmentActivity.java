@@ -8,16 +8,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.Calendar;
 
+import pl.nauka.jarek.weather.adapter.ForecastHourListAdapter;
+import pl.nauka.jarek.weather.common.ListUtils;
 import pl.nauka.jarek.weather.common.StringFromResourcesByName;
 import pl.nauka.jarek.weather.data.CityWeatherData;
 import pl.nauka.jarek.weather.data.WeatherIcon;
 import pl.nauka.jarek.weather.model.current.CityWeather;
 
 public class DetailFragmentActivity extends Fragment {
+
+    private ForecastHourListAdapter hourAdapter2;
 
     @Nullable
     @Override
@@ -42,6 +47,9 @@ public class DetailFragmentActivity extends Fragment {
             TextView tvHumidity;
             TextView tvVisibility;
             TextView tvWindSpeed;
+
+            //list
+            ListView lvForecastHour2;
         }
 
         ViewHolder holder = null;
@@ -61,6 +69,14 @@ public class DetailFragmentActivity extends Fragment {
         holder.tvHumidity = view.findViewById(R.id.tv_humidity);
         holder.tvVisibility = view.findViewById(R.id.tv_visibility);
         holder.tvWindSpeed = view.findViewById(R.id.tv_wind_speed);
+
+        //list
+        holder.lvForecastHour2 = view.findViewById(R.id.lv_forecast_hour2);
+
+        hourAdapter2 = new ForecastHourListAdapter(getContext(), CityWeatherActivity.list);
+        holder.lvForecastHour2.setAdapter(hourAdapter2);
+        ListUtils.setDynamicHeight(holder.lvForecastHour2);
+
 
         //Pobieranie pogody dla wybranego miasta z listy
         CityWeather weather = CityWeatherData.getList().get(CityWeatherActivity.listPosition);
