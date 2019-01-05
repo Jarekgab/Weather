@@ -26,7 +26,7 @@ android:layout_height="match_parent">
                 android:layout_height="wrap_content" />
 
             <include
-                layout="@layout/list_fragment"
+                layout="@layout/list_weather_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
