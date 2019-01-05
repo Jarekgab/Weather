@@ -22,7 +22,7 @@ import pl.nauka.jarek.weather.model.current.CityWeather;
 
 public class DetailFragmentActivity extends Fragment {
 
-    private ForecastHourListAdapter hourAdapter2;
+    private ForecastHourListAdapter hourAdapter;
 
     @Nullable
     @Override
@@ -49,7 +49,7 @@ public class DetailFragmentActivity extends Fragment {
             TextView tvWindSpeed;
 
             //list
-            ListView lvForecastHour2;
+            ListView lvForecastHour;
         }
 
         ViewHolder holder = null;
@@ -71,11 +71,11 @@ public class DetailFragmentActivity extends Fragment {
         holder.tvWindSpeed = view.findViewById(R.id.tv_wind_speed);
 
         //list
-        holder.lvForecastHour2 = view.findViewById(R.id.lv_forecast_hour2);
+        holder.lvForecastHour = view.findViewById(R.id.lv_forecast_hour);
 
-        hourAdapter2 = new ForecastHourListAdapter(getContext(), CityWeatherActivity.list);
-        holder.lvForecastHour2.setAdapter(hourAdapter2);
-        ListUtils.setDynamicHeight(holder.lvForecastHour2);
+        hourAdapter = new ForecastHourListAdapter(getContext(), CityWeatherActivity.list);
+        holder.lvForecastHour.setAdapter(hourAdapter);
+        ListUtils.setDynamicHeight(holder.lvForecastHour);
 
 
         //Pobieranie pogody dla wybranego miasta z listy

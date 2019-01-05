@@ -20,7 +20,7 @@
             android:padding="10dp">
 
             <ListView
-                android:id="@+id/lv_forecast_hour2"
+                android:id="@+id/lv_forecast_hour"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dip">
