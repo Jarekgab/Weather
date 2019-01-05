@@ -5,11 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-
 import net.yslibrary.licenseadapter.LicenseAdapter;
 import net.yslibrary.licenseadapter.LicenseEntry;
 import net.yslibrary.licenseadapter.Licenses;
-
 import java.util.ArrayList;
 import java.util.List;
 

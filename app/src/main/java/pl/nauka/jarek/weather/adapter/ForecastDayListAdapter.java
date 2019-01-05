@@ -86,8 +86,8 @@ public class ForecastDayListAdapter extends BaseAdapter {
         String data = dtTxt.substring(0, 10);
 
         //Przypisanie dnia tygodnia jako String
-        String dayOfMonth = getDayOfMonth(data);
-        holder.tvDay.setText(dayOfMonth);
+        String dayOfWeek = getDayOfWeek(data);
+        holder.tvDay.setText(dayOfWeek);
 
         String description = day.getWeather().getDescription();
         //zmiana "description" na odpowiednia postac stringa aby moc pobrac z Resources, dalej tłumaczenie
@@ -101,7 +101,7 @@ public class ForecastDayListAdapter extends BaseAdapter {
     }
 
     @NonNull
-    private String getDayOfMonth(String data) {
+    private String getDayOfWeek(String data) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date formatDate = null;
         try {
@@ -112,16 +112,16 @@ public class ForecastDayListAdapter extends BaseAdapter {
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(formatDate);
-        int dayOfMonthInt = calendar.get(Calendar.DAY_OF_WEEK);
-        String dayOfMonth = "";
+        int dayOfWeekInt = calendar.get(Calendar.DAY_OF_WEEK);
+        String dayOfWeek = "";
 
-        if (dayOfMonthInt == 1){dayOfMonth = context.getString(R.string.day_1);}
-        if (dayOfMonthInt == 2){dayOfMonth = context.getString(R.string.day_2);}
-        if (dayOfMonthInt == 3){dayOfMonth = context.getString(R.string.day_3);}
-        if (dayOfMonthInt == 4){dayOfMonth = context.getString(R.string.day_4);}
-        if (dayOfMonthInt == 5){dayOfMonth = context.getString(R.string.day_5);}
-        if (dayOfMonthInt == 6){dayOfMonth = context.getString(R.string.day_6);}
-        if (dayOfMonthInt == 7){dayOfMonth = context.getString(R.string.day_7);}
-        return dayOfMonth;
+        if (dayOfWeekInt == 1){dayOfWeek = context.getString(R.string.day_1);}
+        if (dayOfWeekInt == 2){dayOfWeek = context.getString(R.string.day_2);}
+        if (dayOfWeekInt == 3){dayOfWeek = context.getString(R.string.day_3);}
+        if (dayOfWeekInt == 4){dayOfWeek = context.getString(R.string.day_4);}
+        if (dayOfWeekInt == 5){dayOfWeek = context.getString(R.string.day_5);}
+        if (dayOfWeekInt == 6){dayOfWeek = context.getString(R.string.day_6);}
+        if (dayOfWeekInt == 7){dayOfWeek = context.getString(R.string.day_7);}
+        return dayOfWeek;
     }
 }

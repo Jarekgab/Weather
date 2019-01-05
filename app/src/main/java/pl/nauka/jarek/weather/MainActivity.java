@@ -98,11 +98,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         lvList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 
-                Intent intent = new Intent(context, CityWeatherActivity.class);
+                final Intent intent = new Intent(context, CityWeatherActivity.class);
                 intent.putExtra(LIST_WEATHER_POSITION, position);
-                startActivity(intent);
+
+                if (Connectivity.isConnected(context)){
+                    city = null;
+                    url = null;
+
+                    swipeLayout.setRefreshing(true);
+                    city = cityNameList.get(position);
+                    url = UrlGenerator.getCurrentUrl(city);
+
+                    CurrentDataDownloader.getUrlData(url, context, new CurrentDataDownloader.CityWeatherResponseCallback() {
+                        @Override
+                        public void onSuccess(CityWeather data) {
+                            CityWeatherData.setCityWeather(position, data);        //nadpisywanie listy
+                            adapter = new WeatherListAdapter(context, CityWeatherData.getList());
+                            lvList.setAdapter(adapter);
+                            setRefreshingDelaySwipeLayout(1000);
+                            startActivity(intent);
+                        }
+
+                        @Override
+                        public void onError(Exception exception) {
+                            exception.printStackTrace();
+                            setRefreshingDelaySwipeLayout(500);
+                        }
+                    });
+
+                }else if(!Connectivity.isConnected(context)){
+                    Toast.makeText(context, "Brak połączenia", Toast.LENGTH_LONG).show();
+                    setRefreshingDelaySwipeLayout(1000);
+                }
             }
         });
 

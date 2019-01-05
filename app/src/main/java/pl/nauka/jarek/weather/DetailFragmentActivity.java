@@ -10,10 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import java.util.Calendar;
-
 import pl.nauka.jarek.weather.adapter.ForecastHourListAdapter;
+import pl.nauka.jarek.weather.common.FormatDate;
 import pl.nauka.jarek.weather.common.ListUtils;
 import pl.nauka.jarek.weather.common.StringFromResourcesByName;
 import pl.nauka.jarek.weather.data.CityWeatherData;
@@ -45,7 +43,6 @@ public class DetailFragmentActivity extends Fragment {
             TextView tvPressure;
             TextView tvCloudsAll;
             TextView tvHumidity;
-            TextView tvVisibility;
             TextView tvWindSpeed;
 
             //list
@@ -67,7 +64,6 @@ public class DetailFragmentActivity extends Fragment {
         holder.tvPressure = view.findViewById(R.id.tv_pressure);
         holder.tvCloudsAll = view.findViewById(R.id.tv_clouds_all);
         holder.tvHumidity = view.findViewById(R.id.tv_humidity);
-        holder.tvVisibility = view.findViewById(R.id.tv_visibility);
         holder.tvWindSpeed = view.findViewById(R.id.tv_wind_speed);
 
         //list
@@ -81,12 +77,14 @@ public class DetailFragmentActivity extends Fragment {
         //Pobieranie pogody dla wybranego miasta z listy
         CityWeather weather = CityWeatherData.getList().get(CityWeatherActivity.listPosition);
 
-        String icon = weather.getWeather().getIcon();  //TODO zrobić mape wywolan
+        String icon = weather.getWeather().getIcon();
         int weatherIconFromResource = WeatherIcon.getWeatherIconFromResource(icon);
         holder.ivWeatherIcon.setImageResource(weatherIconFromResource);
 
         //primary_weather_info.xml
-        holder.tvDate.setText(getCurrentlyDate());
+
+        //przypisanie aktualnej i sformatowanej daty
+        holder.tvDate.setText(FormatDate.getCurrentlyDate(getContext()));
 
         //zaokraglenie temp
         short temp = (short) Math.round(weather.getMain().getTemp());
@@ -106,40 +104,8 @@ public class DetailFragmentActivity extends Fragment {
         holder.tvPressure.setText(String.valueOf(weather.getMain().getPressure()) + " hPa");
         holder.tvCloudsAll.setText(String.valueOf(weather.getClouds().getAll()) + " %");
         holder.tvHumidity.setText(String.valueOf(weather.getMain().getHumidity()) + " %");
-        holder.tvVisibility.setText(String.valueOf(weather.getVisibility()) +  " m");
         holder.tvWindSpeed.setText(String.valueOf(weather.getWind().getSpeed()) + " m/s");
 
         return view;
-    }
-
-    private String getCurrentlyDate() {
-        Calendar calendar = Calendar.getInstance();
-
-        int monthInt = calendar.get(Calendar.MONTH) + 1;
-        String monthString = "";
-
-        if (monthInt == 1){monthString = "month_1";}
-        if (monthInt == 2){monthString = "month_2";}
-        if (monthInt == 3){monthString = "month_3";}
-        if (monthInt == 4){monthString = "month_4";}
-        if (monthInt == 5){monthString = "month_5";}
-        if (monthInt == 6){monthString = "month_6";}
-        if (monthInt == 7){monthString = "month_7";}
-        if (monthInt == 8){monthString = "month_8";}
-        if (monthInt == 9){monthString = "month_9";}
-        if (monthInt == 10){monthString = "month_10";}
-        if (monthInt == 11){monthString = "month_11";}
-        if (monthInt == 12){monthString = "month_12";}
-
-        //tłumaczenie nazw miesiecy
-        monthString = StringFromResourcesByName.getStringFromResourcesByName(monthString, getContext());
-
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        int minute = calendar.get(Calendar.MINUTE);
-        //TODO zmienic wyswietalnie minut. Dla 0-9 dodac "0" z przodu
-
-
-        return monthString + " " + day + ", " + hour + ":" + minute;
     }
 }

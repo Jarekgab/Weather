@@ -66,7 +66,7 @@ public class WeatherListAdapter extends BaseAdapter {
 
             CityWeather cityWeatherPos = list.get(position);
 
-            String icon = cityWeatherPos.getWeather().getIcon();  //TODO zrobić mape wywolan
+            String icon = cityWeatherPos.getWeather().getIcon();
             int weatherIconFromResource = WeatherIcon.getWeatherIconFromResource(icon);
             holder.ivWeatherIcon.setImageResource(weatherIconFromResource);
 

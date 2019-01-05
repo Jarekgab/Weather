@@ -17,27 +17,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="10dip">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:paddingLeft="10dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="0dp"
-                android:text="PROGNOZA DZIENNA"
-                android:textAppearance="@style/TextAppearance.AppCompat.Button"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="17sp"
-                tools:layout_editor_absoluteX="5dp"
-                tools:layout_editor_absoluteY="6dp" />
+            android:padding="10dp">
 
             <ListView
                 android:id="@+id/lv_forecast_day"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dip">
+                android:layout_marginTop="0dp">
 
             </ListView>
         </LinearLayout>

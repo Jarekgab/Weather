@@ -1,5 +1,6 @@
 package pl.nauka.jarek.weather;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -37,6 +38,8 @@ public class CityWeatherActivity extends AppCompatActivity {
         String cityName = CityWeatherData.getList().get(listPosition).getName();
         final String url = UrlGenerator.getForecastUrl(cityName);
 
+        final Intent intent = new Intent(this, MainActivity.class);
+
         if (Connectivity.isConnected(this)) {
             ForecastDataDownloader.getUrlData(url, this, new ForecastDataDownloader.CityWeatherResponseCallback() {
                 @Override
@@ -49,19 +52,17 @@ public class CityWeatherActivity extends AppCompatActivity {
 
                     TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
                     tabLayout.setupWithViewPager(mViewPager);
-
-                    //TODO Zapisywanie pobranego pliku
                 }
 
                 @Override
                 public void onError(Exception exception) {
                     exception.printStackTrace();
+                    startActivity(intent);
                 }
             });
         } else if (!Connectivity.isConnected(this)) {
             Toast.makeText(this, "Brak połączenia", Toast.LENGTH_LONG).show();
-
-            //TODO Pobieranie zapisanego pliku
+            startActivity(intent);
         }
     }
 
@@ -76,7 +77,6 @@ public class CityWeatherActivity extends AppCompatActivity {
         adapter.addFragment(new FourDaysFragmentActivity(), "4 DNI");
         viewPager.setAdapter(adapter);
     }
-
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {

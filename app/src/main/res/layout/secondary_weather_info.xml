@@ -16,6 +16,7 @@
         android:paddingBottom="5dp">
 
         <TextView
+            android:id="@+id/tv_secondary_heading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
@@ -142,47 +143,6 @@
                 android:gravity="right"
                 android:paddingRight="30dp"
                 android:text="90 %"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toTopOf="@+id/tv_temperature"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_weight="1"
-                android:fontFamily="sans-serif-condensed"
-                android:gravity="left"
-                android:text="Widoczność"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toTopOf="@+id/tv_temperature"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_visibility"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_weight="1"
-                android:fontFamily="sans-serif-condensed"
-                android:gravity="right"
-                android:paddingRight="30dp"
-                android:text="50 m"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toTopOf="@+id/tv_temperature"
