@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import pl.nauka.jarek.weather.common.FormatDate;
 import pl.nauka.jarek.weather.common.StringFromResourcesByName;
+import pl.nauka.jarek.weather.data.ForecastCityWeatherData;
 import pl.nauka.jarek.weather.data.WeatherIcon;
 
 public class TomorrowFragmentActivity extends Fragment {
@@ -59,8 +60,8 @@ public class TomorrowFragmentActivity extends Fragment {
         holder.tvHumidity = view.findViewById(R.id.tv_humidity);
         holder.tvWindSpeed = view.findViewById(R.id.tv_wind_speed);
 
-        //pobiranie danych pogodowych z listy na nastepny dzien na ta sama godzine
-        pl.nauka.jarek.weather.model.forecast.List tomorrow = CityWeatherActivity.list.get(8);
+        //pobieranie danych pogodowych z listy na nastepny dzien na ta sama godzine
+        pl.nauka.jarek.weather.model.forecast.List tomorrow = ForecastCityWeatherData.getList().get(8);
 
         String icon = tomorrow.getWeather().getIcon();
         int weatherIconFromResource = WeatherIcon.getWeatherIconFromResource(icon);

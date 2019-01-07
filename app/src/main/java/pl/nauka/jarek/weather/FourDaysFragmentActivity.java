@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import pl.nauka.jarek.weather.adapter.ForecastDayListAdapter;
 import pl.nauka.jarek.weather.common.ListUtils;
+import pl.nauka.jarek.weather.data.ForecastCityWeatherData;
 
 public class FourDaysFragmentActivity extends Fragment {
 
@@ -24,7 +25,7 @@ public class FourDaysFragmentActivity extends Fragment {
 
         lvForecastDay = view.findViewById(R.id.lv_forecast_day);
 
-        dayAdapter = new ForecastDayListAdapter(getContext(), CityWeatherActivity.list);
+        dayAdapter = new ForecastDayListAdapter(getContext(), ForecastCityWeatherData.getList());
         lvForecastDay.setAdapter(dayAdapter);
 
         ListUtils.setDynamicHeight(lvForecastDay);

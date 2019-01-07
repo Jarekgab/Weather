@@ -14,7 +14,8 @@ import pl.nauka.jarek.weather.adapter.ForecastHourListAdapter;
 import pl.nauka.jarek.weather.common.FormatDate;
 import pl.nauka.jarek.weather.common.ListUtils;
 import pl.nauka.jarek.weather.common.StringFromResourcesByName;
-import pl.nauka.jarek.weather.data.CityWeatherData;
+import pl.nauka.jarek.weather.data.CurrentCityWeatherData;
+import pl.nauka.jarek.weather.data.ForecastCityWeatherData;
 import pl.nauka.jarek.weather.data.WeatherIcon;
 import pl.nauka.jarek.weather.model.current.CityWeather;
 
@@ -69,13 +70,13 @@ public class DetailFragmentActivity extends Fragment {
         //list
         holder.lvForecastHour = view.findViewById(R.id.lv_forecast_hour);
 
-        hourAdapter = new ForecastHourListAdapter(getContext(), CityWeatherActivity.list);
+        hourAdapter = new ForecastHourListAdapter(getContext(), ForecastCityWeatherData.getList());
         holder.lvForecastHour.setAdapter(hourAdapter);
         ListUtils.setDynamicHeight(holder.lvForecastHour);
 
 
         //Pobieranie pogody dla wybranego miasta z listy
-        CityWeather weather = CityWeatherData.getList().get(CityWeatherActivity.listPosition);
+        CityWeather weather = CurrentCityWeatherData.getList().get(CityWeatherActivity.listPosition);
 
         String icon = weather.getWeather().getIcon();
         int weatherIconFromResource = WeatherIcon.getWeatherIconFromResource(icon);

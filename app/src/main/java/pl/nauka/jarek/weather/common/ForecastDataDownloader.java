@@ -115,7 +115,7 @@ public class ForecastDataDownloader {
                     responseCallback.onSuccess(data);
 
                 } catch (JSONException e) {
-                    Toast.makeText(context, "Błąd pobierania danych", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Błąd pobierania danych lub zapisu", Toast.LENGTH_LONG).show();
                     responseCallback.onError(e);
                 }
             }

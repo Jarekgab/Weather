@@ -90,7 +90,7 @@ public class CurrentDataDownloader {
                     responseCallback.onSuccess(city);
 
                 } catch (JSONException e) {
-                    Toast.makeText(context, "Błąd pobierania danych", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Błąd pobierania danych lub zapisu", Toast.LENGTH_LONG).show();
                     responseCallback.onError(e);
                 }
             }

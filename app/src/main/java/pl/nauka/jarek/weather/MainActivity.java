@@ -17,6 +17,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,11 +30,14 @@ import butterknife.ButterKnife;
 import pl.nauka.jarek.weather.adapter.WeatherListAdapter;
 import pl.nauka.jarek.weather.common.Connectivity;
 import pl.nauka.jarek.weather.common.CurrentDataDownloader;
+import pl.nauka.jarek.weather.common.ForecastDataDownloader;
 import pl.nauka.jarek.weather.common.SharedPreferencesSaver;
 import pl.nauka.jarek.weather.common.LettersConverter;
 import pl.nauka.jarek.weather.common.UrlGenerator;
-import pl.nauka.jarek.weather.data.CityWeatherData;
+import pl.nauka.jarek.weather.data.CurrentCityWeatherData;
+import pl.nauka.jarek.weather.data.ForecastCityWeatherData;
 import pl.nauka.jarek.weather.model.current.CityWeather;
+import pl.nauka.jarek.weather.model.forecast.ForecastCityWeather;
 import ru.whalemare.sheetmenu.SheetMenu;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -50,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public List<CityWeather> newList;
     private WeatherListAdapter adapter;
     public static String LIST_WEATHER_POSITION = "LIST_WEATHER_POSITION";
-
+    private Runnable runnable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         newCityNameList = SharedPreferencesSaver.loadCityNameList(getPreferences(MODE_PRIVATE));
 
         if (newList != null) {
-            CityWeatherData.changeCityWeather(newList);
+            CurrentCityWeatherData.setList(newList);
         }
 
         if (newCityNameList != null) {
@@ -93,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             cityNameList = newCityNameList;
         }
 
-        adapter = new WeatherListAdapter(context, CityWeatherData.getList());
+        adapter = new WeatherListAdapter(context, CurrentCityWeatherData.getList());
         lvList.setAdapter(adapter);
 
         lvList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -104,33 +109,50 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 intent.putExtra(LIST_WEATHER_POSITION, position);
 
                 if (Connectivity.isConnected(context)){
+                    setRefreshingDelaySwipeLayout2(true);
+
                     city = null;
                     url = null;
 
-                    swipeLayout.setRefreshing(true);
                     city = cityNameList.get(position);
                     url = UrlGenerator.getCurrentUrl(city);
 
                     CurrentDataDownloader.getUrlData(url, context, new CurrentDataDownloader.CityWeatherResponseCallback() {
                         @Override
                         public void onSuccess(CityWeather data) {
-                            CityWeatherData.setCityWeather(position, data);        //nadpisywanie listy
-                            adapter = new WeatherListAdapter(context, CityWeatherData.getList());
+                            CurrentCityWeatherData.setCityWeather(position, data);        //nadpisywanie listy
+                            adapter = new WeatherListAdapter(context, CurrentCityWeatherData.getList());
                             lvList.setAdapter(adapter);
-                            setRefreshingDelaySwipeLayout(1000);
-                            startActivity(intent);
+
+                            //Pobieranie nazwy miasta wybranej z listy
+                            String cityName = CurrentCityWeatherData.getList().get(position).getName();
+                            url = UrlGenerator.getForecastUrl(cityName);
+
+                            ForecastDataDownloader.getUrlData(url, context, new ForecastDataDownloader.CityWeatherResponseCallback() {
+                                @Override
+                                public void onSuccess(ForecastCityWeather data) {
+                                    ForecastCityWeatherData.setList(data.getList());
+                                    startActivity(intent);
+                                    setRefreshingDelaySwipeLayout2(false);
+                                }
+
+                                @Override
+                                public void onError(Exception exception) {
+                                    exception.printStackTrace();
+                                    setRefreshingDelaySwipeLayout2(false);
+                                }
+                            });
                         }
 
                         @Override
                         public void onError(Exception exception) {
                             exception.printStackTrace();
-                            setRefreshingDelaySwipeLayout(500);
+                            setRefreshingDelaySwipeLayout2(false);
                         }
                     });
 
                 }else if(!Connectivity.isConnected(context)){
                     Toast.makeText(context, "Brak połączenia", Toast.LENGTH_LONG).show();
-                    setRefreshingDelaySwipeLayout(1000);
                 }
             }
         });
@@ -165,22 +187,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         Toast.makeText(context, "Brak połączenia", Toast.LENGTH_LONG).show();
                     }
 
-                    if (CityWeatherData.getList().isEmpty()){
+                    if (CurrentCityWeatherData.getList().isEmpty()){
                         setRefreshingDelaySwipeLayout(0);
-                    }else if (!CityWeatherData.getList().isEmpty()){
+                    }else if (!CurrentCityWeatherData.getList().isEmpty()){
                         swipeLayout.setRefreshing(false);
                     }
                 }
             });
 
             // Kolory animacji
-
             swipeLayout.setColorSchemeColors(
-                    //Inne kolory
-//                getResources().getColor(android.R.color.holo_blue_bright),
-//                getResources().getColor(android.R.color.holo_green_light),
-//                getResources().getColor(android.R.color.holo_orange_light),
-                    getResources().getColor(android.R.color.holo_red_light)
+                    getResources().getColor(R.color.colorRed)
             );
         }
 
@@ -188,7 +205,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onPause() {
         super.onPause();
-        SharedPreferencesSaver.saveTo(CityWeatherData.getList(), cityNameList, getPreferences(MODE_PRIVATE));       //Zapisywanie list
+        SharedPreferencesSaver.saveTo(CurrentCityWeatherData.getList(), cityNameList, getPreferences(MODE_PRIVATE));       //Zapisywanie list
     }
 
     private void setRefreshingDelaySwipeLayout(int delay) {
@@ -202,6 +219,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }, delay); // Opóźnienie (delay) w ms
     }
 
+    private void setRefreshingDelaySwipeLayout2(boolean refreshing) {
+        Handler handler = new Handler();
+
+        if (refreshing == true) {
+            runnable = new Runnable() {
+                @Override
+                public void run() {
+                    swipeLayout.setRefreshing(true);
+                }
+            };
+            handler.post(runnable);
+        }
+
+        if (refreshing == false) {
+            swipeLayout.setRefreshing(false);
+            handler.removeCallbacks(runnable);
+        }
+    }
 
     private void showBottomMenu(final int position) {
         SheetMenu.with(context)
@@ -229,9 +264,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                         } else if (item.getItemId() == R.id.action_del) {
                             swipeLayout.setRefreshing(true);
-                            CityWeatherData.deleteCityWeather(position);
+                            CurrentCityWeatherData.deleteCityWeather(position);
                             cityNameList.remove(position);
-                            adapter = new WeatherListAdapter(context, CityWeatherData.getList());
+                            adapter = new WeatherListAdapter(context, CurrentCityWeatherData.getList());
                             lvList.setAdapter(adapter);
                             adapter.notifyDataSetChanged();
                             setRefreshingDelaySwipeLayout(1000);
@@ -245,8 +280,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         CurrentDataDownloader.getUrlData(url, context, new CurrentDataDownloader.CityWeatherResponseCallback() {
             @Override
             public void onSuccess(CityWeather data) {
-                CityWeatherData.setCityWeather(index, data);        //nadpisywanie listy
-                adapter = new WeatherListAdapter(context, CityWeatherData.getList());
+                CurrentCityWeatherData.setCityWeather(index, data);        //nadpisywanie listy
+                adapter = new WeatherListAdapter(context, CurrentCityWeatherData.getList());
                 lvList.setAdapter(adapter);
                 setRefreshingDelaySwipeLayout(1000);
             }
@@ -294,16 +329,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         final Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.add_item);
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
 
         Window window = dialog.getWindow();
         window.setGravity(Gravity.BOTTOM);
 
         final EditText etAddCity = (EditText) dialog.findViewById(R.id.et_add_city);
         Button bAddCity = dialog.findViewById(R.id.b_add_city);
+        bAddCity.requestFocus();
+
+//        InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+//        inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+
+//        if(!etAddCity.hasFocus()){
+//            inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+//        }
 
         bAddCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+//                inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 
                 city = LettersConverter.makeSmallLetters(etAddCity.getText().toString());
 
@@ -316,8 +362,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         @Override
                         public void onSuccess(CityWeather data) {
                             cityNameList.add(city);                //dodanie do listy z szukanymi nazwami miast
-                            CityWeatherData.addCityWeather(data);   //dodawanie do listy
-                            adapter = new WeatherListAdapter(context, CityWeatherData.getList());
+                            CurrentCityWeatherData.addCityWeather(data);   //dodawanie do listy
+                            adapter = new WeatherListAdapter(context, CurrentCityWeatherData.getList());
                             lvList.setAdapter(adapter);
                             setRefreshingDelaySwipeLayout(500);
                         }
@@ -340,6 +386,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
         dialog.show();
+
+//        if (dialog.getWindow() == null){
+//            inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+//        }
+
+
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
