@@ -1,5 +1,8 @@
 package pl.nauka.jarek.weather.common;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 public class UrlGenerator {
 
     private static final String FIRST_URL_CURRENT_WEATHER = "http://api.openweathermap.org/data/2.5/weather?q=";
@@ -9,15 +12,25 @@ public class UrlGenerator {
 
     public static String getCurrentUrl(String city){
 
-        String url = FIRST_URL_CURRENT_WEATHER + city + SECOND_URL + KEY;
-
+        String url = null;
+        try {
+            url = FIRST_URL_CURRENT_WEATHER + URLEncoder.encode(city, "UTF-8") + SECOND_URL + KEY;
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return null;
+        }
         return url;
     }
 
     public static String getForecastUrl(String city){
 
-        String url = FIRST_URL_FORECAST_WEATHER + city + SECOND_URL + KEY;
-
+        String url = null;
+        try {
+            url = FIRST_URL_FORECAST_WEATHER + URLEncoder.encode(city,"UTF-8") + SECOND_URL + KEY;
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return null;
+        }
         return url;
     }
 }

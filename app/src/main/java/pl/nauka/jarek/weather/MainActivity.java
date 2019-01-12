@@ -18,7 +18,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -109,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 intent.putExtra(LIST_WEATHER_POSITION, position);
 
                 if (Connectivity.isConnected(context)){
-                    setRefreshingDelaySwipeLayout2(true);
+                    swipeLayout.setRefreshing(true);
 
                     city = null;
                     url = null;
@@ -133,22 +132,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 public void onSuccess(ForecastCityWeather data) {
                                     ForecastCityWeatherData.setList(data.getList());
                                     startActivity(intent);
-                                    setRefreshingDelaySwipeLayout2(false);
+                                    swipeLayout.setRefreshing(false);
                                 }
 
                                 @Override
                                 public void onError(Exception exception) {
                                     exception.printStackTrace();
-                                    setRefreshingDelaySwipeLayout2(false);
-                                }
+                                    swipeLayout.setRefreshing(false);                                }
                             });
                         }
 
                         @Override
                         public void onError(Exception exception) {
                             exception.printStackTrace();
-                            setRefreshingDelaySwipeLayout2(false);
-                        }
+                            swipeLayout.setRefreshing(false);                        }
                     });
 
                 }else if(!Connectivity.isConnected(context)){
@@ -217,25 +214,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 swipeLayout.setRefreshing(false);
             }
         }, delay); // Opóźnienie (delay) w ms
-    }
-
-    private void setRefreshingDelaySwipeLayout2(boolean refreshing) {
-        Handler handler = new Handler();
-
-        if (refreshing == true) {
-            runnable = new Runnable() {
-                @Override
-                public void run() {
-                    swipeLayout.setRefreshing(true);
-                }
-            };
-            handler.post(runnable);
-        }
-
-        if (refreshing == false) {
-            swipeLayout.setRefreshing(false);
-            handler.removeCallbacks(runnable);
-        }
     }
 
     private void showBottomMenu(final int position) {
@@ -336,20 +314,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         final EditText etAddCity = (EditText) dialog.findViewById(R.id.et_add_city);
         Button bAddCity = dialog.findViewById(R.id.b_add_city);
-        bAddCity.requestFocus();
-
-//        InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-//        inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
-
-//        if(!etAddCity.hasFocus()){
-//            inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-//        }
 
         bAddCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-//                inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 
                 city = LettersConverter.makeSmallLetters(etAddCity.getText().toString());
 
@@ -386,11 +354,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
         dialog.show();
-
-//        if (dialog.getWindow() == null){
-//            inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-//        }
-
 
     }
 
