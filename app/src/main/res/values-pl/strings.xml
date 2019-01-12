@@ -8,6 +8,33 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
+    <!--Common-->
+    <string name="add_item">Podaj nazwę miasta</string>
+    <string name="choose_options">Wybierz opcje:</string>
+    <string name="action_ref">Odśwież wybraną pozycję</string>
+    <string name="action_del">Usuń wybraną pozycję</string>
+
+    <string name="current_data">Aktualne dane</string>
+    <string name="pressure">Ciśnienie</string>
+    <string name="partly_cloudy">Zachmurzenie</string>
+    <string name="humidity">Wilgotność</string>
+    <string name="wind">Wiatr</string>
+    <string name="day">Dzień</string>
+    <string name="night">Noc</string>
+
+    <string name="forecasted_data">Prognozwane dane</string>
+
+    <string name="today">Dzisiaj</string>
+    <string name="tomorrow">Jutro</string>
+    <string name="four_days">4 Dni</string>
+
+    <string name="side_nav_bar_description">Aplikacja pogodowa</string>
+    <string name="about_the_application">O aplikacji</string>
+    <string name="licenses">Licencje</string>
+    <string name="version">Wersja</string>
+    <string name="description">Opis</string>
+    <string name="description_of_the_application">Weather to aplikacja pogodowa wykorzystująca API OpenWeatherMap.</string>
+
     <!--https://openweathermap.org/weather-conditions-->
     <!--Group 2xx: Thunderstorm-->
     <string name="thunderstorm_with_light_rain">burza z lekkim deszczem</string>

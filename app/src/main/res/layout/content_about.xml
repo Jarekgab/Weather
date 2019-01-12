@@ -66,7 +66,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-medium"
-                            android:text="Wersja"
+                            android:text="@string/version"
                             android:textSize="14sp" />
 
                         <TextView
@@ -97,7 +97,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-medium"
-                            android:text="Licencje"
+                            android:text="@string/licenses"
                             android:textColor="@color/design_default_color_primary_dark"
                             android:textSize="16sp" />
 
@@ -125,7 +125,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-medium"
-                        android:text="Opis"
+                        android:text="@string/description"
                         android:textSize="14sp" />
 
 
@@ -135,7 +135,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:fontFamily="sans-serif-medium"
-                        android:text="Weather to aplikacja pogodowa wykorzystująca API OpenWeatherMap."
+                        android:text="@string/description_of_the_application"
                         android:textAlignment="viewStart"
                         android:textSize="16sp" />
 

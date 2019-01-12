@@ -40,9 +40,9 @@ public class CityWeatherActivity extends AppCompatActivity {
 
     private void setupViewPages(ViewPager viewPager) {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
-        adapter.addFragment(new DetailFragmentActivity(), "DZISIAJ");
-        adapter.addFragment(new TomorrowFragmentActivity(), "JUTRO");
-        adapter.addFragment(new FourDaysFragmentActivity(), "4 DNI");
+        adapter.addFragment(new DetailFragmentActivity(), String.valueOf(getResources().getText(R.string.today)));
+        adapter.addFragment(new TomorrowFragmentActivity(), String.valueOf(getResources().getText(R.string.tomorrow)));
+        adapter.addFragment(new FourDaysFragmentActivity(), String.valueOf(getResources().getText(R.string.four_days)));
         viewPager.setAdapter(adapter);
     }
 

@@ -7,7 +7,7 @@
         <item
             android:id="@+id/nav_info"
             android:icon="@android:drawable/ic_dialog_info"
-            android:title="O aplikacji" />
+            android:title="@string/about_the_application" />
     </group>
 
 </menu>

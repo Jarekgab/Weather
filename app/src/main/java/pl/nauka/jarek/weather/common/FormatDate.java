@@ -72,7 +72,7 @@ public class FormatDate {
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         //miesiac
-        int monthInt = calendar.get(Calendar.MONTH + 1);
+        int monthInt = calendar.get(Calendar.MONTH) + 1;
 
         String monthString = "";
 

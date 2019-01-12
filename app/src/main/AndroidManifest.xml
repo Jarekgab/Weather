@@ -32,7 +32,7 @@
         </activity>
         <activity
             android:name=".AboutActivity"
-            android:label="O aplikacji"
+            android:label="@string/about_the_application"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -41,7 +41,7 @@
         </activity>
         <activity
             android:name=".LicenseActivity"
-            android:label="Licencje"
+            android:label="@string/licenses"
             android:parentActivityName=".AboutActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

@@ -240,7 +240,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void showBottomMenu(final int position) {
         SheetMenu.with(context)
-                .setTitle("Wybierz opcje:")
+                .setTitle(String.valueOf(getResources().getText(R.string.choose_options)))
                 .setMenu(R.menu.bottom_menu)
                 .setClick(new MenuItem.OnMenuItemClickListener() {
                     @Override

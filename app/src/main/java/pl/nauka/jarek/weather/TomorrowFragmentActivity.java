@@ -72,8 +72,8 @@ public class TomorrowFragmentActivity extends Fragment {
         String data = dtTxt.substring(0, 10);
 
         //formatowanie daty
-        String dayOfWeek = FormatDate.getFormatDate(data, getContext());
-        holder.tvDate.setText(dayOfWeek);
+        String formatDate = FormatDate.getFormatDate(data, getContext());
+        holder.tvDate.setText(formatDate);
 
         //zaokraglenie temp
         short temp = (short) Math.round(tomorrow.getMain().getTemp());
@@ -81,8 +81,8 @@ public class TomorrowFragmentActivity extends Fragment {
         short tempLow = (short) Math.round(tomorrow.getMain().getTempMin());
 
         holder.tvTemperature.setText(String.valueOf(temp) + "°C");
-        holder.tvHightTemperature.setText("Dzień " + String.valueOf(tempHight) + "°C");
-        holder.tvLowTemperature.setText("Noc " + String.valueOf(tempLow) + "°C");
+        holder.tvHightTemperature.setText(getResources().getText(R.string.day) + " " + String.valueOf(tempHight) + "°C");
+        holder.tvLowTemperature.setText(getResources().getText(R.string.night) + " " + String.valueOf(tempLow) + "°C");
 
         String description = tomorrow.getWeather().getDescription();
         //zmiana "description" na odpowiednia postac stringa aby moc pobrac z Resources, dalej tłumaczenie
@@ -90,7 +90,7 @@ public class TomorrowFragmentActivity extends Fragment {
         holder.tvCityWeather.setText(translatedDescription);
 
         //secondary_weather_info.xml
-        holder.tvHeading.setText("PROGNOZOWANE DANE");
+        holder.tvHeading.setText(getResources().getText(R.string.forecasted_data));
         holder.tvPressure.setText(String.valueOf(tomorrow.getMain().getPressure() + " hPa"));
         holder.tvCloudsAll.setText(String.valueOf(tomorrow.getClouds().getAll()) + " %");
         holder.tvHumidity.setText(String.valueOf(tomorrow.getMain().getHumidity()) + " %");

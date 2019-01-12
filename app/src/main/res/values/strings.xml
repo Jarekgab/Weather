@@ -7,6 +7,33 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
+    <!--Common-->
+    <string name="add_item">Enter the city name</string>
+    <string name="choose_options">Choose options:</string>
+    <string name="action_ref">Refresh the selected item</string>
+    <string name="action_del">Delete the selected item</string>
+
+    <string name="current_data">Current data</string>
+    <string name="pressure">Pressure</string>
+    <string name="partly_cloudy">Partly cloudy</string>
+    <string name="humidity">Humidity</string>
+    <string name="wind">Wind</string>
+    <string name="day">Day</string>
+    <string name="night">Night</string>
+
+    <string name="forecasted_data">Forecasted data</string>
+
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="four_days">4 days</string>
+
+    <string name="side_nav_bar_description">Weather application</string>
+    <string name="about_the_application">About the application</string>
+    <string name="licenses">Licenses</string>
+    <string name="version">Version</string>
+    <string name="description">Description</string>
+    <string name="description_of_the_application">Weather is a weather application that uses the OpenWeatherMap API.</string>
+
     <!--https://openweathermap.org/weather-conditions-->
     <!--Group 2xx: Thunderstorm-->
     <string name="thunderstorm_with_light_rain">thunderstorm with light rain</string>

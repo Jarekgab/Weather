@@ -23,7 +23,7 @@
             android:fontFamily="sans-serif-condensed"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            android:text="Podaj nazwę miasta"
+            android:text="@string/add_item"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:textSize="19sp"

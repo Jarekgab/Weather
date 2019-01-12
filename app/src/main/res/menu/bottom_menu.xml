@@ -3,11 +3,11 @@
     <item
         android:id="@+id/action_ref"
         android:icon="@drawable/ic_refresh"
-        android:title="Odśwież wybraną pozycję"/>
+        android:title="@string/action_ref" />
 
     <item
         android:id="@+id/action_del"
         android:icon="@drawable/ic_del"
-        android:title="Usuń wybraną pozycję"/>
+        android:title="@string/action_del" />
 
 </menu>
