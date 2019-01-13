@@ -33,6 +33,7 @@ public class LicenseActivity extends AppCompatActivity {
         dataset.add(Licenses.fromGitHub("google/gson"));
         dataset.add(Licenses.fromGitHub("google/volley"));
         dataset.add(Licenses.fromGitHub("whalemare/sheetmenu"));
+        dataset.add(Licenses.fromGitHub("d-max/spots-dialog"));
 
         LicenseAdapter adapter = new LicenseAdapter(dataset);
         rvLicenses.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));

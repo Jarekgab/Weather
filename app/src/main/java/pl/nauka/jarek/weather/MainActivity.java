@@ -42,17 +42,16 @@ import ru.whalemare.sheetmenu.SheetMenu;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    Context context;
-
     ListView lvList;
     SwipeRefreshLayout swipeLayout;
-
     EditText etCitySearch;
-    public String url;
-    public String city;
-    public List<String> cityNameList;
+
+    Context context;
+    private String url;
+    private String city;
+    private List<String> cityNameList;
     private List<String> newCityNameList;
-    public List<CityWeather> newList;
+    private List<CityWeather> newList;
     private WeatherListAdapter adapter;
     public static String LIST_WEATHER_POSITION = "LIST_WEATHER_POSITION";
     private AlertDialog dialog;
@@ -236,7 +235,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 city = null;
                                 url = null;
 
-
                                 dialog = new SpotsDialog.Builder().
                                         setContext(context).
                                         setMessage(String.valueOf(getResources().getText(R.string.downloading_data))).
@@ -320,19 +318,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void showBottomDialog() {
 
-        final AlertDialog.Builder mBuilder = new AlertDialog.Builder(context);
-        final View mView = getLayoutInflater().inflate(R.layout.add_item, null);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        final View view = getLayoutInflater().inflate(R.layout.add_item, null);
 
-        mBuilder.setView(mView);
-        final AlertDialog addDialog = mBuilder.create();
+        builder.setView(view);
+        final AlertDialog addDialog = builder.create();
 
         addDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
 
         Window window = addDialog.getWindow();
         window.setGravity(Gravity.BOTTOM);
 
-        final EditText etAddCity = (EditText) mView.findViewById(R.id.et_add_city);
-        Button bAddCity = mView.findViewById(R.id.b_add_city);
+        final EditText etAddCity = (EditText) view.findViewById(R.id.et_add_city);
+        Button bAddCity = view.findViewById(R.id.b_add_city);
 
         bAddCity.setOnClickListener(new View.OnClickListener() {
             @Override
