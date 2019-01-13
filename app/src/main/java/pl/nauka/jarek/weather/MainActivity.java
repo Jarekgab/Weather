@@ -1,5 +1,6 @@
 package pl.nauka.jarek.weather;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -26,6 +27,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 import butterknife.ButterKnife;
+import dmax.dialog.SpotsDialog;
 import pl.nauka.jarek.weather.adapter.WeatherListAdapter;
 import pl.nauka.jarek.weather.common.Connectivity;
 import pl.nauka.jarek.weather.common.CurrentDataDownloader;
@@ -54,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public List<CityWeather> newList;
     private WeatherListAdapter adapter;
     public static String LIST_WEATHER_POSITION = "LIST_WEATHER_POSITION";
-    private Runnable runnable;
+    private AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         etCitySearch = findViewById(R.id.et_add_city);
         lvList = findViewById(R.id.lv_list);
         swipeLayout = findViewById(R.id.swipe_container);
-
 
         //Przywracanie zapisanych list
 
@@ -108,7 +109,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 intent.putExtra(LIST_WEATHER_POSITION, position);
 
                 if (Connectivity.isConnected(context)){
-                    swipeLayout.setRefreshing(true);
+                    dialog = new SpotsDialog.Builder().
+                            setContext(context).
+                            setMessage(String.valueOf(getResources().getText(R.string.downloading_data))).
+                            setTheme(R.style.Custom).build();
+                    dialog.show();
 
                     city = null;
                     url = null;
@@ -131,25 +136,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 @Override
                                 public void onSuccess(ForecastCityWeather data) {
                                     ForecastCityWeatherData.setList(data.getList());
+                                    dialog.dismiss();
                                     startActivity(intent);
-                                    swipeLayout.setRefreshing(false);
                                 }
 
                                 @Override
                                 public void onError(Exception exception) {
                                     exception.printStackTrace();
-                                    swipeLayout.setRefreshing(false);                                }
+                                    dialog.dismiss();
+                                }
                             });
                         }
 
                         @Override
                         public void onError(Exception exception) {
                             exception.printStackTrace();
-                            swipeLayout.setRefreshing(false);                        }
+                            dialog.dismiss();
+                        }
                     });
 
                 }else if(!Connectivity.isConnected(context)){
-                    Toast.makeText(context, "Brak połączenia", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, String.valueOf(getResources().getText(R.string.no_connection)), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -177,11 +184,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             url = UrlGenerator.getCurrentUrl(city);
 
                             final int index = i;
-                            refreshCWD(index);
+                            refreshCWD(index, false);
                         }
 
                     }else if (!Connectivity.isConnected(context)){
-                        Toast.makeText(context, "Brak połączenia", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, String.valueOf(getResources().getText(R.string.no_connection)), Toast.LENGTH_LONG).show();
                     }
 
                     if (CurrentCityWeatherData.getList().isEmpty()){
@@ -230,44 +237,53 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 city = null;
                                 url = null;
 
-                                swipeLayout.setRefreshing(true);
+
+                                dialog = new SpotsDialog.Builder().
+                                        setContext(context).
+                                        setMessage(String.valueOf(getResources().getText(R.string.downloading_data))).
+                                        setTheme(R.style.Custom).build();
+                                dialog.show();
                                 city = cityNameList.get(position);
                                 url = UrlGenerator.getCurrentUrl(city);
 
-                                refreshCWD(position);
+                                refreshCWD(position, true);
 
                             }else if(!Connectivity.isConnected(context)){
-                                Toast.makeText(context, "Brak połączenia", Toast.LENGTH_LONG).show();
+                                Toast.makeText(context, String.valueOf(getResources().getText(R.string.no_connection)), Toast.LENGTH_LONG).show();
                             }
 
                         } else if (item.getItemId() == R.id.action_del) {
-                            swipeLayout.setRefreshing(true);
                             CurrentCityWeatherData.deleteCityWeather(position);
                             cityNameList.remove(position);
                             adapter = new WeatherListAdapter(context, CurrentCityWeatherData.getList());
                             lvList.setAdapter(adapter);
                             adapter.notifyDataSetChanged();
-                            setRefreshingDelaySwipeLayout(1000);
                         }
                         return true;
                     }
                 }).show();
     }
 
-    private void refreshCWD(final int index) {
+    private void refreshCWD(final int index, final boolean dismissDialog) {
         CurrentDataDownloader.getUrlData(url, context, new CurrentDataDownloader.CityWeatherResponseCallback() {
             @Override
             public void onSuccess(CityWeather data) {
                 CurrentCityWeatherData.setCityWeather(index, data);        //nadpisywanie listy
                 adapter = new WeatherListAdapter(context, CurrentCityWeatherData.getList());
                 lvList.setAdapter(adapter);
-                setRefreshingDelaySwipeLayout(1000);
+
+                if (dismissDialog == true){
+                    dialog.dismiss();
+                }
             }
 
             @Override
             public void onError(Exception exception) {
                 exception.printStackTrace();
-                setRefreshingDelaySwipeLayout(1000);
+
+                if (dismissDialog == true){
+                    dialog.dismiss();
+                }
             }
         });
     }
@@ -305,15 +321,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void showBottomDialog() {
 
-        final Dialog dialog = new Dialog(context);
-        dialog.setContentView(R.layout.add_item);
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        final Dialog addDialog = new Dialog(context);
+        addDialog.setContentView(R.layout.add_item);
+        addDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
 
-        Window window = dialog.getWindow();
+        Window window = addDialog.getWindow();
         window.setGravity(Gravity.BOTTOM);
 
-        final EditText etAddCity = (EditText) dialog.findViewById(R.id.et_add_city);
-        Button bAddCity = dialog.findViewById(R.id.b_add_city);
+        final EditText etAddCity = (EditText) addDialog.findViewById(R.id.et_add_city);
+        Button bAddCity = addDialog.findViewById(R.id.b_add_city);
 
         bAddCity.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -322,9 +338,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 city = LettersConverter.makeSmallLetters(etAddCity.getText().toString());
 
                 if (!cityNameList.contains(city) && Connectivity.isConnected(context)){          //Nie dodawaj tych samych miast i gdy nie ma internetu
-                    swipeLayout.setRefreshing(true);
                     url = UrlGenerator.getCurrentUrl(city);
-                    dialog.dismiss();
+                    addDialog.dismiss();
+
+                    dialog = new SpotsDialog.Builder().
+                            setContext(context).
+                            setMessage(String.valueOf(getResources().getText(R.string.downloading_data))).
+                            setTheme(R.style.Custom).build();
+                    dialog.show();
 
                     CurrentDataDownloader.getUrlData(url, context, new CurrentDataDownloader.CityWeatherResponseCallback() {
                         @Override
@@ -333,28 +354,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             CurrentCityWeatherData.addCityWeather(data);   //dodawanie do listy
                             adapter = new WeatherListAdapter(context, CurrentCityWeatherData.getList());
                             lvList.setAdapter(adapter);
-                            setRefreshingDelaySwipeLayout(500);
+                            dialog.dismiss();
                         }
 
                         @Override
                         public void onError(Exception exception) {
                             exception.printStackTrace();
-                            setRefreshingDelaySwipeLayout(500);
+                            dialog.dismiss();
                         }
                     });
 
                 }else if (cityNameList.contains(city) && Connectivity.isConnected(context)){
-                    dialog.dismiss();
-                    Toast.makeText(context, "Miasto o podanej nazwie jest już na liście", Toast.LENGTH_LONG).show();
+                    addDialog.dismiss();
+                    Toast.makeText(context, String.valueOf(getResources().getText(R.string.duplicated_name)), Toast.LENGTH_LONG).show();
 
                 }else if (!Connectivity.isConnected(context)){
-                    dialog.dismiss();
-                    Toast.makeText(context, "Brak połączenia", Toast.LENGTH_LONG).show();
+                    addDialog.dismiss();
+                    Toast.makeText(context, String.valueOf(getResources().getText(R.string.no_connection)), Toast.LENGTH_LONG).show();
                 }
             }
         });
-        dialog.show();
-
+        addDialog.show();
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

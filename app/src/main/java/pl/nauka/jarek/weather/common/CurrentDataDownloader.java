@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
-
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.RequestQueue;
@@ -15,13 +14,11 @@ import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.UnsupportedEncodingException;
-
+import pl.nauka.jarek.weather.R;
 import pl.nauka.jarek.weather.model.current.CityWeather;
 import pl.nauka.jarek.weather.model.current.Clouds;
 import pl.nauka.jarek.weather.model.current.Coord;
@@ -53,7 +50,7 @@ public class CurrentDataDownloader {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.e("JG", error.getLocalizedMessage(), error);
-                        Toast.makeText(context, "Błąd pobierania danych", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, R.string.data_download_error, Toast.LENGTH_LONG).show();
                         responseCallback.onError(error);
                     }
                 }

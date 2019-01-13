@@ -35,6 +35,11 @@
     <string name="description">Opis</string>
     <string name="description_of_the_application">Weather to aplikacja pogodowa wykorzystująca API OpenWeatherMap.</string>
 
+    <string name="downloading_data">Pobieranie danych</string>
+    <string name="no_connection">Brak połączenia</string>
+    <string name="duplicated_name">Miasto o podanej nazwie jest już na liście</string>
+    <string name="data_download_error">Błąd pobierania danych</string>
+
     <!--https://openweathermap.org/weather-conditions-->
     <!--Group 2xx: Thunderstorm-->
     <string name="thunderstorm_with_light_rain">burza z lekkim deszczem</string>

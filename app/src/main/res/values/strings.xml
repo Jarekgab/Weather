@@ -34,6 +34,11 @@
     <string name="description">Description</string>
     <string name="description_of_the_application">Weather is a weather application that uses the OpenWeatherMap API.</string>
 
+    <string name="downloading_data">Downloading data</string>
+    <string name="no_connection">No connection</string>
+    <string name="duplicated_name">The city with the given name is already on the list</string>
+    <string name="data_download_error">Data download error</string>
+
     <!--https://openweathermap.org/weather-conditions-->
     <!--Group 2xx: Thunderstorm-->
     <string name="thunderstorm_with_light_rain">thunderstorm with light rain</string>
