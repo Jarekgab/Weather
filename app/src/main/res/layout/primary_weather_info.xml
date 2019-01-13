@@ -50,16 +50,20 @@
 
         <TextView
             android:id="@+id/tv_date"
-            android:layout_width="wrap_content"
+            android:layout_width="115dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="5dp"
             android:gravity="center_vertical"
-            android:text="Styczeń 14, Poniedziałek"
+            android:text="Październik 14, Poniedziałek"
+            android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
             android:textColor="@color/common_google_signin_btn_text_dark_default"
             app:layout_constraintBottom_toTopOf="@+id/tv_temperature"
-            app:layout_constraintEnd_toEndOf="@+id/tv_temperature"
-            app:layout_constraintStart_toStartOf="@+id/tv_temperature" />
+            app:layout_constraintStart_toStartOf="@+id/tv_hight_temperature"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread_inside" />
 
         <ImageView
             android:id="@+id/iv_weather_icon"
@@ -75,17 +79,16 @@
         <TextView
             android:id="@+id/tv_temperature"
             android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="50dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="30dp"
             android:fontFamily="sans-serif-condensed"
-            android:gravity="center_vertical|center"
+            android:gravity="center"
             android:text="-20°C"
             android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:textSize="50dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_date" />
 
         <TextView
             android:id="@+id/tv_city_weather"

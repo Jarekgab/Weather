@@ -39,6 +39,8 @@
     <string name="duplicated_name">The city with the given name is already on the list</string>
     <string name="data_download_error">Data download error</string>
 
+    <string name="add">Add</string>
+
     <!--https://openweathermap.org/weather-conditions-->
     <!--Group 2xx: Thunderstorm-->
     <string name="thunderstorm_with_light_rain">thunderstorm with light rain</string>

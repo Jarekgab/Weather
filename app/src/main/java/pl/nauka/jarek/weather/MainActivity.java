@@ -1,7 +1,6 @@
 package pl.nauka.jarek.weather;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -321,15 +320,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void showBottomDialog() {
 
-        final Dialog addDialog = new Dialog(context);
-        addDialog.setContentView(R.layout.add_item);
+        final AlertDialog.Builder mBuilder = new AlertDialog.Builder(context);
+        final View mView = getLayoutInflater().inflate(R.layout.add_item, null);
+
+        mBuilder.setView(mView);
+        final AlertDialog addDialog = mBuilder.create();
+
         addDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
 
         Window window = addDialog.getWindow();
         window.setGravity(Gravity.BOTTOM);
 
-        final EditText etAddCity = (EditText) addDialog.findViewById(R.id.et_add_city);
-        Button bAddCity = addDialog.findViewById(R.id.b_add_city);
+        final EditText etAddCity = (EditText) mView.findViewById(R.id.et_add_city);
+        Button bAddCity = mView.findViewById(R.id.b_add_city);
 
         bAddCity.setOnClickListener(new View.OnClickListener() {
             @Override
