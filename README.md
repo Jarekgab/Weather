@@ -16,6 +16,11 @@ Możesz zainstalować aplikację kożystając z pliku [APK](apk) tego projektu n
 * informacje o licencjach bibliotek open source użytych w aplikacji.
 
 ## Użyte biblioteki
+* [Google GSON](https://github.com/google/gson),
+* [Google Volley](https://github.com/google/volley),
+* [Sheetmenu](https://github.com/whalemare/sheetmenu),
+* [Spots progress dialog](https://github.com/d-max/spots-dialog),
+* [Firebase crashlytics](https://firebase.google.com/).
 
 
 ## Zrzuty ekranu
