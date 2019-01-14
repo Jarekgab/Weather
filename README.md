@@ -2,28 +2,31 @@
 
 ## Opis
 
-*Weather* jest aplikacją pogodową dostępną na Androida. Dane pogodowe dostępne w aplikacji są pobierane z serwisu pogodowego [OpenWeatherMap](https://openweathermap.org/).
+*Weather* jest aplikacją pogodową dostępną na Androida. Dane pogodowe dostępne w aplikacji są pobierane z serwisu pogodowego [OpenWeatherMap](https://openweathermap.org/) poprzez [API JSON](https://openweathermap.org/api).
 
-Możesz uruchomić plik [APK](Jarekgab/Weather/apk) tego projektu na dowolnym telefonie z Androidem i pracować nad tym projektem za pomocą Android Studio.
+Możesz zainstalować aplikację kożystając z pliku [APK](apk) tego projektu na telefonie z Androidem (min SDK 19) i pracować nad tym projektem za pomocą Android Studio.
 
-## Możliwości aplikacji
+## Funkcje aplikacji
 
 * dodawanie dowolnego miasta do listy pogodowej (dane poglądowe),
 * możliwość sprawdzenia aktualnej pogody dla wybranego miasta:
   * szczegółowe dane pogodowe na: **DZISIAJ**,  
-  * szczegółowe dane pogodowe na: ***JUTRO***,
-  * prognoza pogody na: ***4 DNI***,    
-* informacje o licencjach użytych w aplikacji.
+  * szczegółowe dane pogodowe na: **JUTRO**,
+  * prognoza pogody na: **4 DNI**,    
+* informacje o licencjach bibliotek open source użytych w aplikacji.
+
+## Użyte biblioteki
+
 
 ## Zrzuty ekranu
 
-![PNG_1][1]
+<div>
+  <img src="https://github.com/Jarekgab/Weather/blob/master/screenshots/Screenshot_1.png" alt="PNG_1" height="700dp">
+</div>
 
 
 
 
-
-[1]:  Weather/screenshots/Screenshot_1.png
 
 
 
