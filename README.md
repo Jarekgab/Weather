@@ -21,26 +21,26 @@ Możesz zainstalować aplikację kożystając z pliku [APK](apk) tego projektu n
 ## Zrzuty ekranu
 
 <div>
-    <img src="https://github.com/Jarekgab/Weather/blob/master/screenshots/Screenshot_1.png" alt="PNG_1" height="500dp">  
-    <img src="https://github.com/Jarekgab/Weather/blob/master/screenshots/Screenshot_2.png"     alt="PNG_2" height="500dp">
-    <img src="https://github.com/Jarekgab/Weather/blob/master/screenshots/Screenshot_3.png" alt="PNG_3" height="500dp">
+    <img src="https://github.com/Jarekgab/Weather/blob/master/screenshots/Screenshot_1.png" alt="PNG_1" height="400dp">  
+    <img src="https://github.com/Jarekgab/Weather/blob/master/screenshots/Screenshot_2.png"     alt="PNG_2" height="400dp">
+    <img src="https://github.com/Jarekgab/Weather/blob/master/screenshots/Screenshot_3.png" alt="PNG_3" height="400dp">
 </div>
 
 ## 
 
 <div>
-    <img src="https://github.com/Jarekgab/Weather/blob/master/screenshots/Screenshot_4.png" alt="PNG_4" height="500dp">
-    <img src="https://github.com/Jarekgab/Weather/blob/master/screenshots/Screenshot_5.png" alt="PNG_5" height="500dp">
-    <img src="https://github.com/Jarekgab/Weather/blob/master/screenshots/Screenshot_6.png" alt="PNG_6" height="500dp">
+    <img src="https://github.com/Jarekgab/Weather/blob/master/screenshots/Screenshot_4.png" alt="PNG_4" height="400dp">
+    <img src="https://github.com/Jarekgab/Weather/blob/master/screenshots/Screenshot_5.png" alt="PNG_5" height="400dp">
+    <img src="https://github.com/Jarekgab/Weather/blob/master/screenshots/Screenshot_6.png" alt="PNG_6" height="400dp">
 </div>
 
 ##
 
 <div>
-    <img src="https://github.com/Jarekgab/Weather/blob/master/screenshots/Screenshot_7.png" alt="PNG_7" height="500dp">
-    <img src="https://github.com/Jarekgab/Weather/blob/master/screenshots/Screenshot_8.png" alt="PNG_8" height="500dp">
-    <img src="https://github.com/Jarekgab/Weather/blob/master/screenshots/Screenshot_9.png" alt="PNG_9" height="500dp">
-    <img src="https://github.com/Jarekgab/Weather/blob/master/screenshots/Screenshot_10.png" alt="PNG_10" height="500dp">
+    <img src="https://github.com/Jarekgab/Weather/blob/master/screenshots/Screenshot_7.png" alt="PNG_7" height="400dp">
+    <img src="https://github.com/Jarekgab/Weather/blob/master/screenshots/Screenshot_8.png" alt="PNG_8" height="400dp">
+    <img src="https://github.com/Jarekgab/Weather/blob/master/screenshots/Screenshot_9.png" alt="PNG_9" height="400dp">
+    <img src="https://github.com/Jarekgab/Weather/blob/master/screenshots/Screenshot_10.png" alt="PNG_10" height="400dp">
 </div>
 
 
