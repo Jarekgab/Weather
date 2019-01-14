@@ -29,6 +29,7 @@ Możesz zainstalować aplikację kożystając z pliku [APK](apk) tego projektu n
     <img src="https://github.com/Jarekgab/Weather/blob/master/screenshots/Screenshot_1.png" alt="PNG_1" height="360dp">  
     <img src="https://github.com/Jarekgab/Weather/blob/master/screenshots/Screenshot_2.png"     alt="PNG_2" height="360dp">
     <img src="https://github.com/Jarekgab/Weather/blob/master/screenshots/Screenshot_3.png" alt="PNG_3" height="360dp">
+    <img src="https://github.com/Jarekgab/Weather/blob/master/screenshots/Screenshot_11.png" alt="PNG_11" height="360dp">
 </div>
 
 ## 
