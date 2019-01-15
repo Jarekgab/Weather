@@ -4,7 +4,7 @@
 
 *Weather* jest aplikacją pogodową dostępną na Androida. Dane pogodowe dostępne w aplikacji są pobierane z serwisu pogodowego [OpenWeatherMap](https://openweathermap.org/) poprzez [API JSON](https://openweathermap.org/api).
 
-Możesz zainstalować aplikację kożystając z pliku [APK](apk) tego projektu na telefonie z Androidem (min SDK 19) i pracować nad tym projektem za pomocą Android Studio.
+Możesz zainstalować aplikację korzystając z pliku [APK](apk) tego projektu na telefonie z Androidem (min SDK 19) i pracować nad tym projektem za pomocą Android Studio.
 
 ## Funkcje aplikacji
 
