@@ -13,7 +13,8 @@ Możesz zainstalować aplikację kożystając z pliku [APK](apk) tego projektu n
   * szczegółowe dane pogodowe na: **DZISIAJ**,  
   * szczegółowe dane pogodowe na: **JUTRO**,
   * prognoza pogody na: **4 DNI**,    
-* informacje o licencjach bibliotek open source użytych w aplikacji.
+* informacje o licencjach bibliotek open source użytych w aplikacji,
+* aplikacja jest przetłumaczona również na język angielski.
 
 ## Użyte biblioteki
 * [Google GSON](https://github.com/google/gson),
