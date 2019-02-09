@@ -39,10 +39,10 @@
 
             <TextView
                 android:id="@+id/tv_city_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="24dp"
                 android:layout_marginStart="10dp"
-                android:text="Poznań"
+                android:text="Siemianowice Sląskie"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                 android:textColor="@color/common_google_signin_btn_text_dark_default"
                 android:textSize="18sp"
