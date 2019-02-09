@@ -8,13 +8,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-
 import pl.nauka.jarek.weather.R;
 import pl.nauka.jarek.weather.common.StringFromResourcesByName;
 import pl.nauka.jarek.weather.data.WeatherIcon;
@@ -22,17 +19,16 @@ import pl.nauka.jarek.weather.data.WeatherIcon;
 public class ForecastDayListAdapter extends BaseAdapter {
 
     private Context context;
-    private List<pl.nauka.jarek.weather.model.forecast.List> list;
-    private int number = 8;
+    private java.util.List<pl.nauka.jarek.weather.model.forecast.List> list;
 
-    public ForecastDayListAdapter(Context context, List<pl.nauka.jarek.weather.model.forecast.List> list) {
+    public ForecastDayListAdapter(Context context, java.util.List<pl.nauka.jarek.weather.model.forecast.List> list) {
         this.context = context;
         this.list = list;
     }
 
     @Override
     public int getCount() {
-        return 4;
+        return list.size();
     }
 
     @Override
@@ -67,13 +63,7 @@ public class ForecastDayListAdapter extends BaseAdapter {
         holder.tvDescription = convertView.findViewById(R.id.tv_description);
         holder.tvTemperature = convertView.findViewById(R.id.tv_temperature);
 
-        pl.nauka.jarek.weather.model.forecast.List day = list.get(number);
-        number = number + 8;
-
-        //zabezpiecza przed przekroczeniem wielkosci listy
-        if (number >= 40) {
-            number = 8;
-        }
+        pl.nauka.jarek.weather.model.forecast.List day = list.get(position);
 
         String icon = day.getWeather().getIcon();
         int weatherIconFromResource = WeatherIcon.getWeatherIconFromResource(icon);

@@ -13,6 +13,7 @@ import pl.nauka.jarek.weather.common.FormatDate;
 import pl.nauka.jarek.weather.common.StringFromResourcesByName;
 import pl.nauka.jarek.weather.data.ForecastCityWeatherData;
 import pl.nauka.jarek.weather.data.WeatherIcon;
+import pl.nauka.jarek.weather.model.forecast.List;
 
 public class TomorrowFragmentActivity extends Fragment {
 
@@ -60,15 +61,29 @@ public class TomorrowFragmentActivity extends Fragment {
         holder.tvHumidity = view.findViewById(R.id.tv_humidity);
         holder.tvWindSpeed = view.findViewById(R.id.tv_wind_speed);
 
-        //pobieranie danych pogodowych z listy na nastepny dzien na ta sama godzine
-        pl.nauka.jarek.weather.model.forecast.List tomorrow = ForecastCityWeatherData.getList().get(8);
+        //pobieranie danych pogodowych z listy na nastepny dzien
+        String tomorrowDateInDay = FormatDate.getDataOn(1) + " 15:00:00";
+        String tomorrowDateInNight = FormatDate.getDataOn(2) + " 03:00:00";
 
-        String icon = tomorrow.getWeather().getIcon();
+        List tomorrowInDay = null;
+        List tomorrowInNight = null;
+
+        for (int i = 0; i < ForecastCityWeatherData.getList().size(); i++) {
+            if (ForecastCityWeatherData.getList().get(i).getDtTxt().equals(tomorrowDateInDay) && tomorrowInDay == null){
+                tomorrowInDay = ForecastCityWeatherData.getList().get(i);
+            }
+
+            if (ForecastCityWeatherData.getList().get(i).getDtTxt().equals(tomorrowDateInNight) && tomorrowInNight == null){
+                tomorrowInNight = ForecastCityWeatherData.getList().get(i);
+            }
+        }
+
+        String icon = tomorrowInDay.getWeather().getIcon();
         int weatherIconFromResource = WeatherIcon.getWeatherIconFromResource(icon);
         holder.ivWeatherIcon.setImageResource(weatherIconFromResource);
 
         //primary_weather_info.xml
-        String dtTxt = String.valueOf(tomorrow.getDtTxt());
+        String dtTxt = String.valueOf(tomorrowInDay.getDtTxt());
         String data = dtTxt.substring(0, 10);
 
         //formatowanie daty
@@ -76,25 +91,25 @@ public class TomorrowFragmentActivity extends Fragment {
         holder.tvDate.setText(formatDate);
 
         //zaokraglenie temp
-        short temp = (short) Math.round(tomorrow.getMain().getTemp());
-        short tempHight = (short) Math.round(tomorrow.getMain().getTempMax());
-        short tempLow = (short) Math.round(tomorrow.getMain().getTempMin());
+        short temp = (short) Math.round(tomorrowInDay.getMain().getTemp());
+        short tempHight = (short) Math.round(tomorrowInDay.getMain().getTempMax());
+        short tempLow = (short) Math.round(tomorrowInNight.getMain().getTempMin());
 
         holder.tvTemperature.setText(String.valueOf(temp) + "°C");
         holder.tvHightTemperature.setText(getResources().getText(R.string.day) + " " + String.valueOf(tempHight) + "°C");
         holder.tvLowTemperature.setText(getResources().getText(R.string.night) + " " + String.valueOf(tempLow) + "°C");
 
-        String description = tomorrow.getWeather().getDescription();
+        String description = tomorrowInDay.getWeather().getDescription();
         //zmiana "description" na odpowiednia postac stringa aby moc pobrac z Resources, dalej tłumaczenie
         String translatedDescription = StringFromResourcesByName.getStringFromResourcesByName(description, getContext());
         holder.tvCityWeather.setText(translatedDescription);
 
         //secondary_weather_info.xml
         holder.tvHeading.setText(getResources().getText(R.string.forecasted_data));
-        holder.tvPressure.setText(String.valueOf(tomorrow.getMain().getPressure() + " hPa"));
-        holder.tvCloudsAll.setText(String.valueOf(tomorrow.getClouds().getAll()) + " %");
-        holder.tvHumidity.setText(String.valueOf(tomorrow.getMain().getHumidity()) + " %");
-        holder.tvWindSpeed.setText(String.valueOf(tomorrow.getWind().getSpeed()) + " m/s");
+        holder.tvPressure.setText(String.valueOf(tomorrowInDay.getMain().getPressure() + " hPa"));
+        holder.tvCloudsAll.setText(String.valueOf(tomorrowInDay.getClouds().getAll()) + " %");
+        holder.tvHumidity.setText(String.valueOf(tomorrowInDay.getMain().getHumidity()) + " %");
+        holder.tvWindSpeed.setText(String.valueOf(tomorrowInDay.getWind().getSpeed()) + " m/s");
 
         return view;
     }

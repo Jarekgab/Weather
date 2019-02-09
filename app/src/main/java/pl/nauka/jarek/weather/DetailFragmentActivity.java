@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import java.util.ArrayList;
 import pl.nauka.jarek.weather.adapter.ForecastHourListAdapter;
 import pl.nauka.jarek.weather.common.FormatDate;
 import pl.nauka.jarek.weather.common.ListUtils;
@@ -18,6 +19,7 @@ import pl.nauka.jarek.weather.data.CurrentCityWeatherData;
 import pl.nauka.jarek.weather.data.ForecastCityWeatherData;
 import pl.nauka.jarek.weather.data.WeatherIcon;
 import pl.nauka.jarek.weather.model.current.CityWeather;
+import pl.nauka.jarek.weather.model.forecast.List;
 
 public class DetailFragmentActivity extends Fragment {
 
@@ -31,7 +33,6 @@ public class DetailFragmentActivity extends Fragment {
         class ViewHolder {
 
             //primary_weather_info.xml
-
             TextView tvDate;
             TextView tvTemperature;
             TextView tvHightTemperature;
@@ -40,7 +41,6 @@ public class DetailFragmentActivity extends Fragment {
             ImageView ivWeatherIcon;
 
             //secondary_weather_info.xml
-
             TextView tvPressure;
             TextView tvCloudsAll;
             TextView tvHumidity;
@@ -70,13 +70,33 @@ public class DetailFragmentActivity extends Fragment {
         //list
         holder.lvForecastHour = view.findViewById(R.id.lv_forecast_hour);
 
-        hourAdapter = new ForecastHourListAdapter(getContext(), ForecastCityWeatherData.getList());
+        java.util.List<List> hourList = new ArrayList<>();
+        hourList.add(ForecastCityWeatherData.getList().get(0));
+        hourList.add(ForecastCityWeatherData.getList().get(1));
+        hourList.add(ForecastCityWeatherData.getList().get(2));
+        hourList.add(ForecastCityWeatherData.getList().get(3));
+        hourList.add(ForecastCityWeatherData.getList().get(4));
+        hourList.add(ForecastCityWeatherData.getList().get(5));
+        hourList.add(ForecastCityWeatherData.getList().get(6));
+        hourList.add(ForecastCityWeatherData.getList().get(7));
+        hourList.add(ForecastCityWeatherData.getList().get(8));
+
+        hourAdapter = new ForecastHourListAdapter(getContext(), hourList);
         holder.lvForecastHour.setAdapter(hourAdapter);
         ListUtils.setDynamicHeight(holder.lvForecastHour);
 
-
         //Pobieranie pogody dla wybranego miasta z listy
         CityWeather weather = CurrentCityWeatherData.getList().get(CityWeatherActivity.listPosition);
+
+        //Pobieranie wartości temperatury w nocy
+        String tomorrowDateInNight = FormatDate.getDataOn(1) + " 03:00:00";
+        List weatherInNight = null;
+
+        for (int i = 0; i < ForecastCityWeatherData.getList().size(); i++) {
+            if (ForecastCityWeatherData.getList().get(i).getDtTxt().equals(tomorrowDateInNight) && weatherInNight == null){
+                weatherInNight = ForecastCityWeatherData.getList().get(i);
+            }
+        }
 
         String icon = weather.getWeather().getIcon();
         int weatherIconFromResource = WeatherIcon.getWeatherIconFromResource(icon);
@@ -90,7 +110,7 @@ public class DetailFragmentActivity extends Fragment {
         //zaokraglenie temp
         short temp = (short) Math.round(weather.getMain().getTemp());
         short tempHight = (short) Math.round(weather.getMain().getTempMax());
-        short tempLow = (short) Math.round(weather.getMain().getTempMin());
+        short tempLow = (short) Math.round(weatherInNight.getMain().getTempMin());
 
         holder.tvTemperature.setText(String.valueOf(temp) + "°C");
         holder.tvHightTemperature.setText(getResources().getText(R.string.day) + " " + String.valueOf(tempHight) + "°C");

@@ -7,9 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import java.util.List;
-
 import pl.nauka.jarek.weather.R;
 import pl.nauka.jarek.weather.common.StringFromResourcesByName;
 import pl.nauka.jarek.weather.data.WeatherIcon;

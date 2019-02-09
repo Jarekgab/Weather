@@ -6,7 +6,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
 import pl.nauka.jarek.weather.R;
 
 public class FormatDate {
@@ -42,6 +41,29 @@ public class FormatDate {
         }else {
             return monthString + " " + day + ", " + hour + ":" + minute;
         }
+    }
+
+    public static String getDataOn(int plusDay){
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH) + plusDay;
+
+        String monthString;
+        String dayString;
+
+        if (month >= 1 && month <= 9){
+            monthString = "0" + month;
+        }else {
+            monthString = String.valueOf(month);
+        }
+
+        if (day >= 1 && day <= 9){
+            dayString = "0" + day;
+        }else {
+            dayString = String.valueOf(day);
+        }
+        return year + "-" + monthString + "-" + dayString;
     }
 
     public static String getFormatDate(String data, Context context) {
