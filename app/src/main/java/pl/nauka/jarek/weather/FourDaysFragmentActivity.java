@@ -30,7 +30,6 @@ public class FourDaysFragmentActivity extends Fragment {
 
         //pobieranie danych pogodowych z listy na nastepne dni
         java.util.List<List> fourDaysList = new ArrayList<>();
-
         String dayOne = FormatDate.getDataOn(1) + " 15:00:00";
         String dayTwo = FormatDate.getDataOn(2) + " 15:00:00";
         String dayThree = FormatDate.getDataOn(3) + " 15:00:00";
